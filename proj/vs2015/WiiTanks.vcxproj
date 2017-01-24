@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\mathLibrary.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7CD622AF-69B8-4D7B-9E10-3FC691CEDC98}</ProjectGuid>
     <RootNamespace>WiiTanks</RootNamespace>
