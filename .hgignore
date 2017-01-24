@@ -1,0 +1,6 @@
+syntax: glob
+bin/
+*.opendb
+*.sdf
+proj/vs2015/obj/
+proj/vs2013/obj/
