@@ -257,6 +257,9 @@ namespace UG
 	/// @param a_uiDestinationFactor the current blend mode that is used by the destination image.
 	UGFWAPI void			GetSpriteBlendMode( int a_uiSpriteID, unsigned int& a_uiSourceFactor, unsigned int& a_uiDestinationFactor);
 
+	UGFWAPI void			SetSpriteTexture(int a_iSpriteID, const char* a_pSpriteTextureName);
+	UGFWAPI void			GetSpriteTexture(int a_iSpriteID, char* a_pSpriteTextureName);
+
 #pragma endregion
 #pragma region Font Rendering functionality
 	/// @brief This function is used to display text output to the screen.  This text is renedered as series of simple sprites who's texture is an area of a font character sheet.
@@ -274,6 +277,9 @@ namespace UG
 
 	UGFWAPI void			ClearScreen();
 	UGFWAPI void			SetBackgroundColor(SColour a_bgColor);
+
+	UGFWAPI unsigned int	LoadTexture(const char* a_TextureName);
+	UGFWAPI void			GetTextureSize(const char* a_TextureName, unsigned int& a_width, unsigned int& a_height);
 	//////////////////////////////////////////////////////////////////////////
 	/// @brief GetDeltaTime() a function to get the amount of time that has passed since the last time the CPU was polled
 	///	@return the amount of time that has passed in seconds since the CPU was last polled.

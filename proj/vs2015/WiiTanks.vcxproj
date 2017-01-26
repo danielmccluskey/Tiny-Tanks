@@ -20,14 +20,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\Matrix3x3.cpp" />
+    <ClCompile Include="..\..\source\Matrix4x4.cpp" />
+    <ClCompile Include="..\..\source\Vector2.cpp" />
+    <ClCompile Include="..\..\source\Vector3.cpp" />
+    <ClCompile Include="..\..\source\Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\mathLibrary.h" />
+    <ClInclude Include="..\..\include\MathUtil.h" />
+    <ClInclude Include="..\..\include\Matrix3x3.h" />
+    <ClInclude Include="..\..\include\Matrix4x4.h" />
+    <ClInclude Include="..\..\include\Vector2.h" />
+    <ClInclude Include="..\..\include\Vector3.h" />
+    <ClInclude Include="..\..\include\Vector4.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7CD622AF-69B8-4D7B-9E10-3FC691CEDC98}</ProjectGuid>
     <RootNamespace>WiiTanks</RootNamespace>
-    <TargetPlatformVersion>10.0.10069.0</TargetPlatformVersion>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
