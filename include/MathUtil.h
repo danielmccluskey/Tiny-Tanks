@@ -57,6 +57,15 @@ const float SetClampValue(float a_fVal, float a_fLowerBound, float a_fUpperBound
 		return a_fVal;
 	}
 }
+//Function to interpolate between two points
+//a_fVal1 is the first value.
+//a_fVal2 is the second value.
+//a_fLerpAmount is the distance between the two points. If 0, then returned value will be Value 1. If 2, then the returned value will be Value 2.
+//REMINDER TO CLAMP BETWEEN 0 AND 1 ################################################################
+const float SetLerpValue(float a_fVal1, float a_fVal2, float a_fLerpAmount)
+{
+	return (a_fVal1 + ((a_fVal2 - a_fVal1)*a_fLerpAmount));
+}
 
 
 #endif // _MATHLIBARY_H_
