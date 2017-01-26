@@ -72,10 +72,14 @@ const float SetSlerpValue()
 {
 	return 0;
 }
-
-const float SetSmoothstep(float a_fVal1, float a_fVal2, float a_fPoint)
+//Function to smoothly interpolate between two points using a polynomial
+//a_LeftVal is the starting point or the left edge
+//a_RightVal is the end point or the right edge.
+//a_fPoint is the distance between the two points (Clamped).
+const float SetSmoothstep(float a_fLeftVal, float a_fRightVal, float a_fPoint)
 {
-	a_fPoint = SetClampValue((a_fPoint - );
-	return 0;
+	a_fPoint = SetClampValue((a_fPoint - a_fLeftVal)/(a_fRightVal - a_fLeftVal), 0.0f, 1.0f);
+	a_fPoint = (a_fPoint * a_fPoint * (3 - 2 * a_fPoint));
+	return a_fPoint;
 }
 #endif // _MATHLIBARY_H_
