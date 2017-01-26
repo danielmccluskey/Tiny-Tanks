@@ -68,4 +68,14 @@ const float SetLerpValue(float a_fVal1, float a_fVal2, float a_fLerpAmount)
 }
 
 
+const float SetSlerpValue()
+{
+	return 0;
+}
+
+const float SetSmoothstep(float a_fVal1, float a_fVal2, float a_fPoint)
+{
+	a_fPoint = SetClampValue((a_fPoint - );
+	return 0;
+}
 #endif // _MATHLIBARY_H_
