@@ -57,7 +57,7 @@ const float SetClampValue(float a_fVal, float a_fLowerBound, float a_fUpperBound
 		return a_fVal;
 	}
 }
-//Function to interpolate between two points
+//Function to interpolate between two points - Equation from WikiPedia https://en.wikipedia.org/wiki/Linear_interpolation
 //a_fVal1 is the first value.
 //a_fVal2 is the second value.
 //a_fLerpAmount is the distance between the two points. If 0, then returned value will be Value 1. If 2, then the returned value will be Value 2.
@@ -72,7 +72,7 @@ const float SetSlerpValue()
 {
 	return 0;
 }
-//Function to smoothly interpolate between two points using a polynomial
+//Function to smoothly interpolate between two points using a polynomial - Equation from WikiPedia https://en.wikipedia.org/wiki/Smoothstep
 //a_LeftVal is the starting point or the left edge
 //a_RightVal is the end point or the right edge.
 //a_fPoint is the distance between the two points (Clamped).

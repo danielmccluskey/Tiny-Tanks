@@ -1,0 +1,11 @@
+﻿  main.cpp
+c:\users\data2\desktop\uni\ct4019 - jamie\pong 3\source\main.cpp(49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data2\desktop\uni\ct4019 - jamie\pong 3\source\main.cpp(54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data2\desktop\uni\ct4019 - jamie\pong 3\source\main.cpp(55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data2\desktop\uni\ct4019 - jamie\pong 3\source\main.cpp(72): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data2\desktop\uni\ct4019 - jamie\pong 3\source\main.cpp(224): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\data2\desktop\uni\ct4019 - jamie\pong 3\source\main.cpp(235): warning C4189: 'paddleDir': local variable is initialized but not referenced
+  Pong.vcxproj -> C:\Users\Data2\Desktop\Uni\CT4019 - Jamie\Pong 3\proj\vs2015\..\..\bin\x64\Debug\Pong.exe
+  Pong.vcxproj -> ..\..\bin\x64\Debug\Pong.pdb (Full PDB)
+  xcopy "C:\Users\Data2\Desktop\Uni\CT4019 - Jamie\Pong 3\scripts\..\resources\"*.* "C:\Users\Data2\Desktop\Uni\CT4019 - Jamie\Pong 3\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
+  0 File(s) copied
