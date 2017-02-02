@@ -34,7 +34,7 @@ int iSpeed = 1;
 int main(int argv, char* argc[])
 {
 
-	if (UG::Create(iScreenWidth, iScreenHeight, false, "Pong", 100, 100))
+	if (UG::Create(iScreenWidth, iScreenHeight, false, "Wii Tanks", 100, 100))
 	{
 
 		UG::SetBackgroundColor(UG::SColour(0x2A, 0x57, 0x66, 0xFF));
