@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\MapGenerator.cpp" />
     <ClCompile Include="..\..\source\Matrix3x3.cpp" />
     <ClCompile Include="..\..\source\Matrix4x4.cpp" />
     <ClCompile Include="..\..\source\Vector2.cpp" />
@@ -27,6 +28,8 @@
     <ClCompile Include="..\..\source\Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\CustomEnum.h" />
+    <ClInclude Include="..\..\include\MapGenerator.h" />
     <ClInclude Include="..\..\include\MathUtil.h" />
     <ClInclude Include="..\..\include\Matrix3x3.h" />
     <ClInclude Include="..\..\include\Matrix4x4.h" />
