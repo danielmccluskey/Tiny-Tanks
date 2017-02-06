@@ -1,6 +1,7 @@
 #include "UGFW.h"
 #include "Enumerations.h"
 #include "Vector2.h"
+#include "MapGenerator.h"
 //#include <iostream>
 //#include <sstream>
 //#include <iomanip>
@@ -41,8 +42,8 @@ int main(int argv, char* argc[])
 		UG::AddFont("./fonts/invaders.fnt");
 
 		Tank newTank;
-		
-		
+		MapGenerator MapGen;
+		MapGen.GenerateCollisionMap("./maps/lvl_1.txt");
 		do
 		{
 			if (UG::IsKeyDown(UG::KEY_W))

@@ -17,6 +17,10 @@ public:
 	int	iTileX;
 	int iTileY;
 
+	int iLevelMap[384];
+	int iCollisionMap[384];
+
+	void GenerateCollisionMap(char* a_cLevelPath);//Function to generate the collision map from a certain level map.
 	int GetTile(int a_iX, int a_iY);//Function to get a tile from the tilemap at given X,Y Pos
 	void SetTile(char* a_cImagePath, int a_iTileX, int a_iTileY);//Sets the tile at the given X,Y Pos to given image by creating a sprite
 	void DrawMap();//Draws all the sprites
