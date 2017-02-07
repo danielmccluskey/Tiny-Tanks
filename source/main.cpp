@@ -41,7 +41,7 @@ int main(int argv, char* argc[])
 		UG::SetBackgroundColor(UG::SColour(0x2A, 0x57, 0x66, 0xFF));
 		UG::AddFont("./fonts/invaders.fnt");
 
-		Tank newTank;
+		//Tank newTank;
 		MapGenerator *MapGen = new MapGenerator[384];
 		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
 
@@ -49,11 +49,24 @@ int main(int argv, char* argc[])
 		{
 			if (UG::IsKeyDown(UG::KEY_W))
 			{
-				newTank.pos += Vector2(0.0f, iSpeed);
+				//newTank.pos += Vector2(0.0f, iSpeed);
 				MapGen[0].UnLoadLevel(MapGen);
+				MapGen[0].LoadLevel("./maps/lvl_2.txt", MapGen);
+			}
+			if (UG::IsKeyDown(UG::KEY_D))
+			{
+				//newTank.pos += Vector2(0.0f, iSpeed);
+				MapGen[0].UnLoadLevel(MapGen);
+				MapGen[0].LoadLevel("./maps/lvl_2.txt", MapGen);
+			}
+			if (UG::IsKeyDown(UG::KEY_S))
+			{
+				//newTank.pos += Vector2(0.0f, iSpeed);
+				MapGen[0].UnLoadLevel(MapGen);
+				MapGen[0].LoadLevel("./maps/lvl_3.txt", MapGen);
 			}
 
-			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
+			//UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
 
 			UG::ClearScreen();
 			UG::SetFont(nullptr);

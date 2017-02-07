@@ -1,8 +1,8 @@
 //==============================================================================================================================
 // Project: Wii Tanks
-// File: MapCreation.cpp
+// File: MapGenerator.cpp
 // Author: Daniel McCluskey
-// Date Created: 17/10/16
+// Date Created: 07/02/17
 // Brief: This is the file that contains the code that draws the Level and generates the Collision maps from text files.
 // Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
 //==============================================================================================================================
@@ -13,7 +13,6 @@
 #include "stdlib.h"
 #include <iostream>
 #include <fstream>
-#include <string>
 
 void MapGenerator::DrawLevelTiles(MapGenerator *a_pPosition)
 {
