@@ -1,8 +1,7 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   MapGenerator.cpp
-c:\users\data-3\desktop\ct4019\wiitanks\source\mapgenerator.cpp(53): warning C4458: declaration of 'iSpriteID' hides class member
-  c:\users\data-3\desktop\ct4019\wiitanks\include\mapgenerator.h(29): note: see declaration of 'MapGenerator::iSpriteID'
 c:\users\data-3\desktop\ct4019\wiitanks\source\mapgenerator.cpp(55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks\source\mapgenerator.cpp(57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   WiiTanks.vcxproj -> C:\Users\Data-3\Desktop\CT4019\WiiTanks\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
   xcopy "C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\"*.* "C:\Users\Data-3\Desktop\CT4019\WiiTanks\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 

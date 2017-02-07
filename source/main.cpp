@@ -7,8 +7,8 @@
 //#include <iomanip>
 
 //Screen sizes
-int iScreenWidth = 1280;
-int iScreenHeight = 720;
+int iScreenWidth = 768;
+int iScreenHeight = 512;
 
 //Co-ords of the Center of the screen
 float fCenterX = iScreenWidth*0.5f;
@@ -42,13 +42,15 @@ int main(int argv, char* argc[])
 		UG::AddFont("./fonts/invaders.fnt");
 
 		Tank newTank;
-		MapGenerator MapGen;
-		MapGen.GenerateCollisionMap("./maps/lvl_1.txt");
+		MapGenerator *MapGen = new MapGenerator[384];
+		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
+
 		do
 		{
 			if (UG::IsKeyDown(UG::KEY_W))
 			{
 				newTank.pos += Vector2(0.0f, iSpeed);
+				MapGen[0].UnLoadLevel(MapGen);
 			}
 
 			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);

@@ -13,20 +13,29 @@
 class MapGenerator
 {
 public:
-	//Variables to hold the current position in the map
-	int	iTileX;
-	int iTileY;
+	
+	~MapGenerator()
+	{
+	}
 
 	int iLevelMap[384];
 	int iCollisionMap[384];
 
-	void GenerateCollisionMap(char* a_cLevelPath);//Function to generate the collision map from a certain level map.
+	void LoadLevel(char* a_cLevelPath, MapGenerator *a_pPosition);//Function to generate the collision map from a certain level map.
 	int GetTile(int a_iX, int a_iY);//Function to get a tile from the tilemap at given X,Y Pos
-	void SetTile(char* a_cImagePath, int a_iTileX, int a_iTileY);//Sets the tile at the given X,Y Pos to given image by creating a sprite
-	void DrawMap();//Draws all the sprites
+	void SetTile(char* a_cImagePath, int a_iTileX, int a_iTileY, MapGenerator *a_pCurrentTile);//Sets the tile at the given X,Y Pos to given image by creating a sprite
+	void UnLoadLevel(MapGenerator *a_pPosition);
+	void DrawLevelTiles(MapGenerator *a_pPosition);//Draws all the sprites
+
+	MapGenerator& GetMapPosition(MapGenerator *a_pPosition, int a_iX, int a_iY);
 
 private:
 	int iSpriteID = 0;//Sprite ID
+
+	int iTileWidth = 32;
+	//Variables to hold the current position in the map
+	int	iTileX;
+	int iTileY;
 
 };
 
