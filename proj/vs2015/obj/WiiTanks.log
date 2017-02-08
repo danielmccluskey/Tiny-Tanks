@@ -1,41 +1,10 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-UG Basic Framework.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(stb_image_aug.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(SOIL.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(image_helper.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(image_DXT.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(glew.obj) : warning LNK4099: PDB 'glew_static.pdb' was not found with 'UG Basic Framework.lib(glew.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glew_static.pdb'; linking object as if no debug info
-UG Basic Framework.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(wgl_context.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(winmm_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(winmm_joystick.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_window.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_tls.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_tls.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_time.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_monitor.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_init.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(window.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(monitor.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(input.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(init.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(context.obj)' or at 'C:\Users\Data-3\Desktop\CT4019\WiiTanks\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
+  main.cpp
+c:\users\data-3\desktop\ct4019\wiitanks\include\mathutil.h(7): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\data-3\desktop\ct4019\wiitanks\source\main.cpp(53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks\source\main.cpp(57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks\source\main.cpp(70): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   WiiTanks.vcxproj -> C:\Users\Data-3\Desktop\CT4019\WiiTanks\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
   xcopy "C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\"*.* "C:\Users\Data-3\Desktop\CT4019\WiiTanks\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\appData.xml
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\fonts\arial.fnt
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\fonts\arial_0.png
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\fonts\invaders.fnt
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\fonts\invaders_0.png
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\images\Ball.png
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\images\bluePaddle.png
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\images\redPaddle.png
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\images\spriteSheet.png
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\images\maps\box1.png
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\images\maps\floor1.png
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\maps\currentCollision.txt
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\maps\lvl_1.txt
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\maps\lvl_2.txt
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\maps\lvl_3.txt
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\shaders\default.fsh
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\shaders\default.vsh
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\shaders\spriteInstance.fsh
-  C:\Users\Data-3\Desktop\CT4019\WiiTanks\scripts\..\resources\shaders\spriteInstance.vsh
-  19 File(s) copied
+  0 File(s) copied

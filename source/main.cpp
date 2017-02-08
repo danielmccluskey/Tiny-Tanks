@@ -1,6 +1,6 @@
 #include "UGFW.h"
 #include "Enumerations.h"
-#include "Vector2.h"
+#include "MathUtil.h"
 #include "MapGenerator.h"
 //#include <iostream>
 //#include <sstream>
@@ -18,12 +18,13 @@ struct Tank
 {
 	Tank()
 	{
-		iSpriteID = UG::CreateSprite("./images/ball.png", 100, 100, true);//Create the sprite
+		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 64, 32, true);//Create the sprite
 		UG::DrawSprite(iSpriteID);	//Draws it
 		pos.dX = fCenterX;
 		pos.dY = fCenterY;
 	};
 	int iSpriteID = 0;
+	int iRotDeg = 0;
 	Vector2 pos;
 	
 };
@@ -41,7 +42,7 @@ int main(int argv, char* argc[])
 		UG::SetBackgroundColor(UG::SColour(0x2A, 0x57, 0x66, 0xFF));
 		UG::AddFont("./fonts/invaders.fnt");
 
-		//Tank newTank;
+		Tank newTank;
 		MapGenerator *MapGen = new MapGenerator[384];
 		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
 
@@ -49,31 +50,40 @@ int main(int argv, char* argc[])
 		{
 			if (UG::IsKeyDown(UG::KEY_W))
 			{
-				//newTank.pos += Vector2(0.0f, iSpeed);
-				MapGen[0].UnLoadLevel(MapGen);
-				MapGen[0].LoadLevel("./maps/lvl_2.txt", MapGen);
-			}
-			if (UG::IsKeyDown(UG::KEY_D))
-			{
-				//newTank.pos += Vector2(0.0f, iSpeed);
-				MapGen[0].UnLoadLevel(MapGen);
-				MapGen[0].LoadLevel("./maps/lvl_2.txt", MapGen);
+				newTank.pos += GetForwardVector(newTank.iRotDeg);				
 			}
 			if (UG::IsKeyDown(UG::KEY_S))
 			{
-				//newTank.pos += Vector2(0.0f, iSpeed);
-				MapGen[0].UnLoadLevel(MapGen);
-				MapGen[0].LoadLevel("./maps/lvl_3.txt", MapGen);
+				newTank.pos -= GetForwardVector(newTank.iRotDeg);
+			}
+			if (UG::IsKeyDown(UG::KEY_D))
+			{
+				UG::RotateSprite(newTank.iSpriteID, -1);
+				newTank.iRotDeg -= 1;
+			}
+			if (UG::IsKeyDown(UG::KEY_A))
+			{
+				UG::RotateSprite(newTank.iSpriteID, 1);
+				newTank.iRotDeg += 1;				
 			}
 
-			//UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
+			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
+
+
+			static float spriteArray[16];
+			UG::GetSpriteMatrix(newTank.iSpriteID, spriteArray);
+
 
 			UG::ClearScreen();
 			UG::SetFont(nullptr);
 
 		} while (UG::Process());
 
+		MapGen[0].UnLoadLevel(MapGen);
+		delete[] MapGen;
 		UG::Dispose();
+
+		
 
 
 	}

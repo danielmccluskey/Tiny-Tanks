@@ -1,13 +1,30 @@
 #ifndef _MATHLIBARY_H_
 #define _MATHLIBARY_H_
+#include <cmath>
+#include "Vector2.h"
 
 
 const float fPI = 3.14159265359; //Defining PI
 const float f2PI = (2 * fPI); //Defining Double PI
 const float fHALF_PI = (fPI / 2); //Defining Half of PI
 
-const float RadiansToDegrees(float a_Rad) { return ((a_Rad * 180.0f) / fPI); }; //Function to convert the given Radians to Degrees
-const float DegreesToRadians(float a_Deg) { return ((a_Deg * fPI) / 180.0f); }; //Function to convert the given Degrees to Radians
+const float RadiansToDegrees(float a_fRad) { return ((a_fRad * 180.0f) / fPI); }; //Function to convert the given Radians to Degrees
+const float DegreesToRadians(float a_fDeg) { return ((a_fDeg * fPI) / 180.0f); }; //Function to convert the given Degrees to Radians
+
+
+const float AABBTest(float a_fDeg)
+{
+	return 0;
+}
+
+Vector2 GetForwardVector(float a_fDeg)
+{
+	float x = 0;
+	float y = 0;
+	x = cos(DegreesToRadians(a_fDeg));
+	y = sin(DegreesToRadians(a_fDeg));
+	return Vector2(x, y);
+}
 
 //Function to get the greatest value from two given variables
 //a_fVal1 is the first value.

@@ -60,7 +60,7 @@ void MapGenerator::SetTile(char* a_cImagePath, int a_iTileX, int a_iTileY, MapGe
 
 int MapGenerator::GetTile(int a_iX, int a_iY)
 {
-	return iLevelMap[(a_iY*int(fMapWidth)) + a_iX];
+	return iLevelMap[(a_iY*iMapWidth) + a_iX];
 }
 MapGenerator& MapGenerator::GetMapPosition(MapGenerator *a_pPosition, int a_iX, int a_iY)
 {
