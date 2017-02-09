@@ -3,10 +3,29 @@
 #include <cmath>
 #include "Vector2.h"
 
+/*SpriteMatrix
+[0] = Scales X Axis
+[1] = Skews +RightUp -RightDown
+[2] = Crops Sprites X axis +Right -Left
+[3] = ?????
+[4] = Skews -Left +Right
+[5] = Scales Y Axis
+[6] = ?????
+[7] =
+[8] =
+[9] =
+[10] =
+[11] =
+[12] = XPOS
+[13] = YPOS
+*/
+
+static float fSpriteMatrix[16];//Variable to temporarly hold the Sprite Matrix in some functions such as the SetRotation functions.
 
 const float fPI = 3.14159265359; //Defining PI
 const float f2PI = (2 * fPI); //Defining Double PI
 const float fHALF_PI = (fPI / 2); //Defining Half of PI
+const float f2HALF_PI = (fHALF_PI / 2);
 
 const float RadiansToDegrees(float a_fRad) { return ((a_fRad * 180.0f) / fPI); }; //Function to convert the given Radians to Degrees
 const float DegreesToRadians(float a_fDeg) { return ((a_fDeg * fPI) / 180.0f); }; //Function to convert the given Degrees to Radians
@@ -17,14 +36,58 @@ const float AABBTest(float a_fDeg)
 	return 0;
 }
 
-Vector2 GetForwardVector(float a_fDeg)
+
+namespace DANM //Incase other includes use the same function names as my functions
 {
-	float x = 0;
-	float y = 0;
-	x = cos(DegreesToRadians(a_fDeg));
-	y = sin(DegreesToRadians(a_fDeg));
-	return Vector2(x, y);
+
+	//Gets the Angle between two Vector2 co-ordinates. Mainly Used for rotating tank turret.
+	//Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
+	const float GetBearingRad(Vector2 &a_V1, Vector2 &a_V2)
+	{
+		float fXChange = int(a_V2.dX - a_V1.dX);
+		float fYChange = int(a_V2.dY - a_V1.dY);
+		return atan2(fXChange, fYChange);
+	}
+	//Gets the Angle between two Vector2 co-ordinates. Mainly Used for rotating tank turret.
+	//Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
+	const float GetBearingDeg(Vector2 &a_V1, Vector2 &a_V2)
+	{
+		float fXChange = (a_V2.dX - a_V1.dX);
+		float fYChange = (a_V2.dY - a_V1.dY);
+		return atan2(fXChange, fYChange)*(180 / fPI);
+	}
+
+	//Sets the rotation to a certain angle instead of incrementing it like UG::SetSpriteRotation does.
+	//Used from Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	void SetRotationRad(float a_fRad, int a_iSpriteID)
+	{
+		UG::GetSpriteMatrix(a_iSpriteID, fSpriteMatrix);
+		fSpriteMatrix[0] = sin(a_fRad + fHALF_PI);
+		fSpriteMatrix[1] = cos(a_fRad + fHALF_PI);
+		fSpriteMatrix[4] = sin(a_fRad);
+		fSpriteMatrix[5] = cos(a_fRad);
+		UG::SetSpriteMatrix(a_iSpriteID, fSpriteMatrix);
+	}
+	//Sets the rotation to a certain angle instead of incrementing it like UG::SetSpriteRotation does.
+	//Used from Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	void SetRotationDeg(float a_fDeg, int a_iSpriteID)
+	{
+		SetRotationRad((DegreesToRadians(a_fDeg)), a_iSpriteID);
+	}
+	Vector2 GetForwardVector(float a_fDeg)
+	{
+		float x = 0;
+		float y = 0;
+		x = cos(DegreesToRadians(a_fDeg));
+		y = sin(DegreesToRadians(a_fDeg));
+		return Vector2(x, y);
+	}
 }
+
+
+
+
+
 
 //Function to get the greatest value from two given variables
 //a_fVal1 is the first value.
