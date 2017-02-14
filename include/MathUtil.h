@@ -1,6 +1,8 @@
 #ifndef _MATHLIBARY_H_
 #define _MATHLIBARY_H_
 #include <cmath>
+#include "stdlib.h"
+#include <iostream>
 #include "Vector2.h"
 
 /*SpriteMatrix
@@ -46,15 +48,15 @@ namespace DANM //Incase other includes use the same function names as my functio
 	{
 		float fXChange = int(a_V2.dX - a_V1.dX);
 		float fYChange = int(a_V2.dY - a_V1.dY);
-		return atan2(fXChange, fYChange);
+		return atan2(fYChange, fXChange);
 	}
 	//Gets the Angle between two Vector2 co-ordinates. Mainly Used for rotating tank turret.
 	//Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
 	const float GetBearingDeg(Vector2 &a_V1, Vector2 &a_V2)
 	{
-		float fXChange = (a_V2.dX - a_V1.dX);
-		float fYChange = (a_V2.dY - a_V1.dY);
-		return atan2(fXChange, fYChange)*(180 / fPI);
+		float fXChange = (a_V1.dX - a_V2.dX);
+		float fYChange = (a_V1.dY - a_V2.dY);
+		return atan2(fYChange, fXChange)*(180 / fPI);
 	}
 
 	//Sets the rotation to a certain angle instead of incrementing it like UG::SetSpriteRotation does.

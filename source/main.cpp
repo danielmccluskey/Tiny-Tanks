@@ -34,13 +34,26 @@ struct Tank
 	{
 		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 32, 64, true);//Create the sprite
 		UG::DrawSprite(iSpriteID);	//Draws it
-		pos.dX = fCenterX;
-		pos.dY = fCenterY;
+		pos = Vector2(fCenterX, fCenterY);
 	};
 	int iSpriteID = 0;
 	int iRotDeg = 0;
 	Vector2 pos;
 	
+};
+
+struct Bullet
+{
+	Bullet()
+	{
+		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 32, 32, true);//Create the sprite
+		UG::DrawSprite(iSpriteID);	//Draws it
+		pos = Vector2(0, 0);
+		Velocity = Vector2(0,0);
+	};
+	int iSpriteID = 0;
+	Vector2 pos;
+	Vector2 Velocity;
 };
 
 
@@ -63,6 +76,8 @@ int main(int argv, char* argc[])
 		Turret newTurret;
 		MapGenerator *MapGen = new MapGenerator[384];
 		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
+
+		Bullet newBullet;
 
 		do
 		{
@@ -87,12 +102,23 @@ int main(int argv, char* argc[])
 			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
 			UG::MoveSprite(newTurret.iSpriteID, newTank.pos.dX, newTank.pos.dY);
 
-			Vector2 mousePos;
-			UG::GetMousePos(mousePos.dX, mousePos.dY);
+			Vector2 mousePos;//New Vector2 to hold Mouse position.
+			UG::GetMousePos(mousePos.dX, mousePos.dY);//Gets the mouse position.
+			mousePos.dY = iScreenHeight - mousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
 
 			
+
+			if (UG::GetMouseButtonDown(0))
+			{
+				
+				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newTurret.pos, mousePos)) + 180);
+				newBullet.pos = newTank.pos;
+			}
 			
-			DANM::SetRotationRad(-(DANM::GetBearingRad(newTurret.pos, mousePos)), newTurret.iSpriteID);
+			DANM::SetRotationDeg(-(DANM::GetBearingDeg(newTurret.pos, mousePos))+90, newTurret.iSpriteID);
+
+			newBullet.pos += newBullet.Velocity;
+			UG::MoveSprite(newBullet.iSpriteID, newBullet.pos.dX, newBullet.pos.dY);
 			UG::ClearScreen();
 			UG::SetFont(nullptr);
 
