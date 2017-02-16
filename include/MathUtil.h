@@ -7,6 +7,7 @@
 #include "Vector2.h"
 #include "Vector4.h"
 #include "CustomEnum.h"
+#include "PlayerTank.h"
 
 /*SpriteMatrix
 [0] = Scales X Axis
@@ -40,6 +41,16 @@ const float AABBTest(float a_fDeg);
 
 namespace DANM //Incase other includes use the same function names as my functions
 {
+	//Function that returns the width of the given sprite.
+	const float GetSpriteWidth(int a_iSpriteWidth, int a_iSpriteHeight, float a_fRad);
+	//Function to return the height of a given sprite.
+	const float GetSpriteHeight(int a_iSpriteWidth, int a_iSpriteHeight, float a_fRad);
+	//Function to Get just the Xpos of a sprite.
+	//Used from Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	const float GetSpriteXPos(int a_uiSpriteID);
+	//Function to Get just the Ypos of a sprite.
+	//Used from Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	const float GetSpriteYPos(int a_uiSpriteID);
 
 	//Gets the Angle between two Vector2 co-ordinates. Mainly Used for rotating tank turret.
 	//Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
@@ -56,7 +67,6 @@ namespace DANM //Incase other includes use the same function names as my functio
 	void SetRotationDeg(float a_fDeg, int a_iSpriteID);
 	Vector2 GetForwardVector(float a_fDeg);
 
-	Vector4 GetVertices(float fRotation, int iWidth, int iHeight);
 
 }
 
@@ -98,4 +108,33 @@ const float Smoothstep(float a_fLeftVal, float a_fRightVal, float a_fPoint);
 //a_RightVal is the end point or the right edge.
 //a_fPoint is the distance between the two points (Clamped).
 const float Smootherstep(float a_fLeftVal, float a_fRightVal, float a_fPoint);
+
+
+struct Vertices
+{
+	Vertices(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad)
+	{
+
+		vTopLeft = Vector2(
+			(DANM::GetSpriteXPos(a_iSpriteID) - (DANM::GetSpriteWidth(a_iWidth, a_iHeight, a_fRad)) / 2),
+			(DANM::GetSpriteYPos(a_iSpriteID) + (DANM::GetSpriteHeight(a_iWidth, a_iHeight, a_fRad)) / 2)
+		);
+		vTopRight = Vector2(
+			(DANM::GetSpriteXPos(a_iSpriteID) + (DANM::GetSpriteWidth(a_iWidth, a_iHeight, a_fRad)) / 2),
+			(DANM::GetSpriteYPos(a_iSpriteID) + (DANM::GetSpriteHeight(a_iWidth, a_iHeight, a_fRad)) / 2)
+		);
+		vBotLeft = Vector2(
+			(DANM::GetSpriteXPos(a_iSpriteID) - (DANM::GetSpriteWidth(a_iWidth, a_iHeight, a_fRad)) / 2),
+			(DANM::GetSpriteYPos(a_iSpriteID) - (DANM::GetSpriteHeight(a_iWidth, a_iHeight, a_fRad)) / 2)
+		);
+		vBotRight = Vector2(
+			(DANM::GetSpriteXPos(a_iSpriteID) + (DANM::GetSpriteWidth(a_iWidth, a_iHeight, a_fRad)) / 2),
+			(DANM::GetSpriteYPos(a_iSpriteID) - (DANM::GetSpriteHeight(a_iWidth, a_iHeight, a_fRad)) / 2)
+		);
+	}
+	Vector2 vTopLeft;
+	Vector2 vTopRight;
+	Vector2 vBotLeft;
+	Vector2 vBotRight;
+};
 #endif // _MATHUTIL_H_

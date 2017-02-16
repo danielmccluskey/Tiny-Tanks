@@ -2,6 +2,8 @@
 #include "MathUtil.h"
 #include "MapGenerator.h"
 #include "PlayerTank.h"
+#include "stdlib.h"
+#include <iostream>
 //#include <iostream>
 //#include <sstream>
 //#include <iomanip>
@@ -33,7 +35,7 @@ struct Bullet
 {
 	Bullet()
 	{
-		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 32, 32, true);//Create the sprite
+		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
 		UG::DrawSprite(iSpriteID);	//Draws it
 		pos = Vector2(0, 0);
 		Velocity = Vector2(0,0);
@@ -70,6 +72,9 @@ int main(int argv, char* argc[])
 		Turret newTurret;
 
 		Bullet newBullet;
+		Bullet newBullet1;
+		Bullet newBullet2;
+		Bullet newBullet3;
 
 		do
 		{
@@ -94,6 +99,9 @@ int main(int argv, char* argc[])
 				newBullet.pos = newTank.pos;
 			}
 			
+			Vertices Test(newTank.iSpriteID, newTank.iSpriteHeight, newTank.iSpriteWidth, DegreesToRadians(newTank.iRotDeg+90));
+			std::cout << "XPos" << Test.vTopLeft.dX << std::endl;
+			std::cout << "YPos" << Test.vTopLeft.dY << std::endl << std::endl;
 
 
 			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
@@ -101,7 +109,10 @@ int main(int argv, char* argc[])
 			DANM::SetRotationDeg(-(DANM::GetBearingDeg(newTurret.pos, mousePos))+90, newTurret.iSpriteID);
 
 			newBullet.pos += newBullet.Velocity;
-			UG::MoveSprite(newBullet.iSpriteID, newBullet.pos.dX, newBullet.pos.dY);
+			UG::MoveSprite(newBullet.iSpriteID, Test.vTopLeft.dX, Test.vTopLeft.dY);
+			UG::MoveSprite(newBullet1.iSpriteID, Test.vTopRight.dX, Test.vTopRight.dY);
+			UG::MoveSprite(newBullet2.iSpriteID, Test.vBotLeft.dX, Test.vBotLeft.dY);
+			UG::MoveSprite(newBullet3.iSpriteID, Test.vBotRight.dX, Test.vBotRight.dY);
 			UG::ClearScreen();
 			UG::SetFont(nullptr);
 

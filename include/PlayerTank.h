@@ -28,9 +28,13 @@ public:
 
 	}
 
-private:
+
+
 	int iSpriteWidth = 32;
 	int iSpriteHeight = 64;
+
+private:
+	
 
 	int iTileRight;
 };

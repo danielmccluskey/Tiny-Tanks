@@ -30,7 +30,32 @@ const float AABBTest(float a_fDeg)
 
 namespace DANM //Incase other includes use the same function names as my functions
 {
-
+	//Function that returns the width of the given sprite.
+	//Equation from Stack overflow - http://stackoverflow.com/a/6657768
+	const float GetSpriteWidth(int a_iSpriteWidth, int a_iSpriteHeight, float a_fRad)
+	{
+		return ((a_iSpriteWidth * abs(cos(a_fRad))) + (a_iSpriteHeight * abs(sin(a_fRad))));
+	}
+	//Function to return the height of a given sprite.
+	//Equation from Stack overflow - http://stackoverflow.com/a/6657768
+	const float GetSpriteHeight(int a_iSpriteWidth, int a_iSpriteHeight, float a_fRad)
+	{
+		return ((a_iSpriteWidth * abs(sin(a_fRad))) + (a_iSpriteHeight * abs(cos(a_fRad))));
+	}
+	//Function to Get just the Xpos of a sprite.
+	//Used from Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	const float GetSpriteXPos(int a_uiSpriteID)
+	{
+		UG::GetSpriteMatrix(a_uiSpriteID, fSpriteMatrix);
+		return fSpriteMatrix[12];
+	}
+	//Function to Get just the Ypos of a sprite.
+	//Used from Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	const float GetSpriteYPos(int a_uiSpriteID)
+	{
+		UG::GetSpriteMatrix(a_uiSpriteID, fSpriteMatrix);
+		return fSpriteMatrix[13];
+	}
 	//Gets the Angle between two Vector2 co-ordinates. Mainly Used for rotating tank turret.
 	//Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
 	const float GetBearingRad(Vector2 &a_V1, Vector2 &a_V2)
@@ -50,17 +75,17 @@ namespace DANM //Incase other includes use the same function names as my functio
 
 	//Sets the rotation to a certain angle instead of incrementing it like UG::SetSpriteRotation does.
 	//Used from Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	//Will Convert to 4x4 Matrix later.
 	void SetRotationRad(float a_fRad, int a_iSpriteID)
 	{
 		UG::GetSpriteMatrix(a_iSpriteID, fSpriteMatrix);
-		fSpriteMatrix[0] = sin(a_fRad + fHALF_PI);
-		fSpriteMatrix[1] = cos(a_fRad + fHALF_PI);
+		fSpriteMatrix[0] = cos(a_fRad);
+		fSpriteMatrix[1] = -sin(a_fRad);
 		fSpriteMatrix[4] = sin(a_fRad);
 		fSpriteMatrix[5] = cos(a_fRad);
 		UG::SetSpriteMatrix(a_iSpriteID, fSpriteMatrix);
 	}
-	//Sets the rotation to a certain angle instead of incrementing it like UG::SetSpriteRotation does.
-	//Used from Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	//Sets the rotation to a certain angle in Degrees instead of incrementing it like UG::SetSpriteRotation does.
 	void SetRotationDeg(float a_fDeg, int a_iSpriteID)
 	{
 		SetRotationRad((DegreesToRadians(a_fDeg)), a_iSpriteID);

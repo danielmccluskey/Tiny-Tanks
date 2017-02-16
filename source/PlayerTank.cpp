@@ -28,7 +28,16 @@ void PlayerTank::MoveTank()
 	{
 		iRotDeg += 1;
 	}
-	DANM::SetRotationDeg(-(iRotDeg), iSpriteID);
+
+	if (iRotDeg >= 360)
+	{
+		iRotDeg = 0;
+	}
+	else if (iRotDeg < 0)
+	{
+		iRotDeg = 359;
+	}
+	DANM::SetRotationDeg(-(iRotDeg)+90, iSpriteID);
 	
 }
 void PlayerTank::GetSurroundingTiles()
