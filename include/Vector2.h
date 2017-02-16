@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _VECTOR2_H_
+#define _VECTOR2_H_
+
 class Vector2
 {
 public:
@@ -22,3 +24,4 @@ public:
 private:
 	
 };
+#endif //_VECTOR2_H_

@@ -1,7 +1,7 @@
-#include "UGFW.h"
 #include "Enumerations.h"
 #include "MathUtil.h"
 #include "MapGenerator.h"
+#include "PlayerTank.h"
 //#include <iostream>
 //#include <sstream>
 //#include <iomanip>
@@ -27,19 +27,6 @@ struct Turret
 	Vector2 pos;
 
 
-};
-struct Tank
-{
-	Tank()
-	{
-		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 32, 64, true);//Create the sprite
-		UG::DrawSprite(iSpriteID);	//Draws it
-		pos = Vector2(fCenterX, fCenterY);
-	};
-	int iSpriteID = 0;
-	int iRotDeg = 0;
-	Vector2 pos;
-	
 };
 
 struct Bullet
@@ -72,34 +59,26 @@ int main(int argv, char* argc[])
 		UG::SetBackgroundColor(UG::SColour(0x2A, 0x57, 0x66, 0xFF));
 		UG::AddFont("./fonts/invaders.fnt");
 
-		Tank newTank;
-		Turret newTurret;
+		
+
+		
 		MapGenerator *MapGen = new MapGenerator[384];
 		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
+
+		PlayerTank newTank;
+		newTank.CreateTank(fCenterX, fCenterY);
+		Turret newTurret;
 
 		Bullet newBullet;
 
 		do
 		{
-			if (UG::IsKeyDown(UG::KEY_W))
-			{
-				newTank.pos += DANM::GetForwardVector(newTank.iRotDeg);
-			}
-			if (UG::IsKeyDown(UG::KEY_S))
-			{
-				newTank.pos -= DANM::GetForwardVector(newTank.iRotDeg);
-			}
-			if (UG::IsKeyDown(UG::KEY_D))
-			{
-				newTank.iRotDeg -= 1;
-			}
-			if (UG::IsKeyDown(UG::KEY_A))
-			{
-				newTank.iRotDeg += 1;					
-			}
-			DANM::SetRotationDeg(-(newTank.iRotDeg), newTank.iSpriteID);
+			newTank.MoveTank();
+
+
+			
 			newTurret.pos = newTank.pos;
-			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
+			
 			UG::MoveSprite(newTurret.iSpriteID, newTank.pos.dX, newTank.pos.dY);
 
 			Vector2 mousePos;//New Vector2 to hold Mouse position.
@@ -115,6 +94,10 @@ int main(int argv, char* argc[])
 				newBullet.pos = newTank.pos;
 			}
 			
+
+
+			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
+
 			DANM::SetRotationDeg(-(DANM::GetBearingDeg(newTurret.pos, mousePos))+90, newTurret.iSpriteID);
 
 			newBullet.pos += newBullet.Velocity;

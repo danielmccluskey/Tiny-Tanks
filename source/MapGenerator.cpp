@@ -7,9 +7,8 @@
 // Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
 //==============================================================================================================================
 
-#include "UGFW.h"
 #include "MapGenerator.h"
-#include "CustomEnum.h"
+#include "MathUtil.h"
 #include "stdlib.h"
 #include <iostream>
 #include <fstream>
@@ -52,7 +51,7 @@ void MapGenerator::SetTile(char* a_cImagePath, int a_iTileX, int a_iTileY, MapGe
 
 	//Creates, moves and draws the sprite
 	pCurrentTile.iSpriteID = UG::CreateSprite(a_cImagePath, iTileWidth, iTileWidth, true);
-	UG::SetSpriteLayer(pCurrentTile.iSpriteID, 1);
+	//UG::SetSpriteLayer(pCurrentTile.iSpriteID, 1);
 	UG::MoveSprite(pCurrentTile.iSpriteID, iRealTileX, iRealTileY);
 	UG::DrawSprite(pCurrentTile.iSpriteID);
 }
