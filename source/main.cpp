@@ -66,6 +66,7 @@ int main(int argv, char* argc[])
 		MapGenerator *MapGen = new MapGenerator[384];
 		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
 
+
 		PlayerTank newTank;
 		newTank.CreateTank(fCenterX, fCenterY);
 		Turret newTurret;
@@ -75,6 +76,8 @@ int main(int argv, char* argc[])
 		Bullet newBullet2;
 		Bullet newBullet3;
 		Bullet newBullet4;
+
+		newTank.UpdateCollisionMap();
 
 		do
 		{
@@ -100,8 +103,8 @@ int main(int argv, char* argc[])
 			}
 			
 			Vertices Test(newTank.iSpriteID, newTank.iSpriteHeight, newTank.iSpriteWidth, DegreesToRadians(newTank.iRotDeg+90));
-			std::cout << "XPos" << Test.vTopLeft.dX << std::endl;
-			std::cout << "YPos" << Test.vTopLeft.dY << std::endl << std::endl;
+
+			newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
 
 
 			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);

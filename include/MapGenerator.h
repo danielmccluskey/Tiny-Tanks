@@ -20,6 +20,7 @@ public:
 
 	int iLevelMap[384];
 	int iCollisionMap[384];
+	int iTileWidth = 32;
 
 	void LoadLevel(char* a_cLevelPath, MapGenerator *a_pPosition);//Function to generate the collision map from a certain level map.
 	int GetTile(int a_iX, int a_iY);//Function to get a tile from the tilemap at given X,Y Pos
@@ -32,7 +33,7 @@ public:
 private:
 	int iSpriteID = 0;//Sprite ID
 
-	int iTileWidth = 32;
+	
 	//Variables to hold the current position in the map
 	int	iTileX;
 	int iTileY;
