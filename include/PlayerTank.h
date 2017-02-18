@@ -31,7 +31,7 @@ public:
 
 
 	int iSpriteWidth = 32;
-	int iSpriteHeight = 64;
+	int iSpriteHeight = 32;
 
 private:
 	

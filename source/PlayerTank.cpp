@@ -3,7 +3,7 @@
 #include "Enumerations.h"
 void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 {
-	iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 32, 64, true);//Create the sprite
+	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite
 	//UG::SetSpriteLayer(iSpriteID, 4);
 	UG::DrawSprite(iSpriteID);	//Draws it
 	pos = Vector2(a_fCenterX, a_fCenterY);

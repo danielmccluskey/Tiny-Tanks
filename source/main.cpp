@@ -19,7 +19,7 @@ struct Turret
 {
 	Turret()
 	{
-		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 80, true);//Create the sprite
+		iSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
 		UG::DrawSprite(iSpriteID);	//Draws it
 		pos.dX = fCenterX;
 		pos.dY = fCenterY;
@@ -62,7 +62,6 @@ int main(int argv, char* argc[])
 		UG::AddFont("./fonts/invaders.fnt");
 
 		
-
 		
 		MapGenerator *MapGen = new MapGenerator[384];
 		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
@@ -75,6 +74,7 @@ int main(int argv, char* argc[])
 		Bullet newBullet1;
 		Bullet newBullet2;
 		Bullet newBullet3;
+		Bullet newBullet4;
 
 		do
 		{
@@ -109,7 +109,9 @@ int main(int argv, char* argc[])
 			DANM::SetRotationDeg(-(DANM::GetBearingDeg(newTurret.pos, mousePos))+90, newTurret.iSpriteID);
 
 			newBullet.pos += newBullet.Velocity;
-			UG::MoveSprite(newBullet.iSpriteID, Test.vTopLeft.dX, Test.vTopLeft.dY);
+			UG::MoveSprite(newBullet.iSpriteID, newBullet.pos.dX, newBullet.pos.dY);
+
+			UG::MoveSprite(newBullet4.iSpriteID, Test.vTopLeft.dX, Test.vTopLeft.dY);
 			UG::MoveSprite(newBullet1.iSpriteID, Test.vTopRight.dX, Test.vTopRight.dY);
 			UG::MoveSprite(newBullet2.iSpriteID, Test.vBotLeft.dX, Test.vBotLeft.dY);
 			UG::MoveSprite(newBullet3.iSpriteID, Test.vBotRight.dX, Test.vBotRight.dY);
