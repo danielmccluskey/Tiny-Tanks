@@ -99,7 +99,10 @@ int main(int argv, char* argc[])
 			{
 				
 				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newTurret.pos, mousePos)) + 180);
+
 				newBullet.pos = newTank.pos;
+				newBullet.pos += Vector2(newBullet.Velocity.dX * 40, newBullet.Velocity.dY * 40);
+ 
 			}
 			
 			Vertices Test(newTank.iSpriteID, newTank.iSpriteHeight, newTank.iSpriteWidth, DegreesToRadians(newTank.iRotDeg+90));

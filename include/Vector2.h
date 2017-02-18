@@ -20,6 +20,7 @@ public:
 	void operator-=(const Vector2 &a_v1);
 	double operator+(const Vector2 &a_v1);
 	double operator-(const Vector2 &a_v1);
+	double operator*(float a_fScalar);
 	 
 private:
 	

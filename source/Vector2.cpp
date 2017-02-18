@@ -40,3 +40,7 @@ void Vector2::operator-=(const Vector2 &a_v1)
 	dX -= a_v1.dX;
 	dY -= a_v1.dY;
 }
+double Vector2::operator*(float a_fScalar)
+{
+	return (dX * a_fScalar && dY * a_fScalar);
+}

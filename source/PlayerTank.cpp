@@ -9,20 +9,20 @@ void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite
 	//UG::SetSpriteLayer(iSpriteID, 4);
 	UG::DrawSprite(iSpriteID);	//Draws it
-	pos = Vector2(a_fCenterX, a_fCenterY);
+	pos = Vector2(300, 300);
 	UG::MoveSprite(iSpriteID, a_fCenterX, a_fCenterY);
 };
 
+//Function to handle the movement of the tank.
 void PlayerTank::MoveTank()
 {
-	if (UG::IsKeyDown(UG::KEY_W))
-	{
-		pos += DANM::GetForwardVector(iRotDeg);
-	}
-	if (UG::IsKeyDown(UG::KEY_S))
-	{
-		pos -= DANM::GetForwardVector(iRotDeg);
-	}
+	//Function that checks the corner positions of the sprite to see if they are colliding with the map
+	CollisionDetection(0, 90, pTopRight, pBotLeft);
+	CollisionDetection(90, 180, pTopLeft, pBotRight);
+	CollisionDetection(180, 270, pBotLeft, pTopRight);
+	CollisionDetection(270, 359, pBotRight, pTopLeft);
+
+	
 	if (UG::IsKeyDown(UG::KEY_D))
 	{
 		iRotDeg -= 1;
@@ -43,6 +43,21 @@ void PlayerTank::MoveTank()
 	DANM::SetRotationDeg(-(iRotDeg)+90, iSpriteID);
 	
 }
+void PlayerTank::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards)
+{
+	
+	if (iRotDeg >= a_iLowerBound && iRotDeg <= a_iUpperBound)
+	{
+		if (UG::IsKeyDown(UG::KEY_W) && a_vForwards.dZ == 0)
+		{
+			pos += DANM::GetForwardVector(iRotDeg);
+		}
+		if (UG::IsKeyDown(UG::KEY_S) && a_vBackwards.dZ == 0)
+		{
+			pos -= DANM::GetForwardVector(iRotDeg);
+		}
+	}
+}
 void PlayerTank::UpdateCollisionMap()
 {
 	std::ifstream pCollision;//Creates an input fstream member
@@ -61,9 +76,21 @@ void PlayerTank::GetSurroundingTiles(int a_iTileWidth)
 		pCorners.vTopLeft.dY,
 		GetTile(a_iTileWidth, pCorners.vTopLeft)
 	);
-	pTopRight;
-	pBotLeft;
-	pBotRight;
+	pTopRight = Vector3(
+		pCorners.vTopLeft.dX,
+		pCorners.vTopLeft.dY,
+		GetTile(a_iTileWidth, pCorners.vTopRight)
+	);
+	pBotLeft = Vector3(
+		pCorners.vTopLeft.dX,
+		pCorners.vTopLeft.dY,
+		GetTile(a_iTileWidth, pCorners.vBotLeft)
+	);
+	pBotRight = Vector3(
+		pCorners.vTopLeft.dX,
+		pCorners.vTopLeft.dY,
+		GetTile(a_iTileWidth, pCorners.vBotRight)
+	);
 }
 
 int PlayerTank::GetTile(int a_iTileWidth, Vector2 a_vPos)
