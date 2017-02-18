@@ -40,14 +40,19 @@ public:
 
 	Vector2 pos;
 
-private:
-	
 	//Vector3's to hold positional and collision values for each corner of the sprite
 	// Vector (XPos, YPos, CurrentTile)
 	Vector3 pTopLeft;
 	Vector3 pTopRight;
 	Vector3 pBotLeft;
 	Vector3 pBotRight;
+	Vector3 pFront;
+	Vector3 pBack;
+
+private:
+	
+	
+
 };
 
 #endif //_PLAYERTANK_H_

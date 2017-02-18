@@ -48,7 +48,7 @@ void PlayerTank::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector
 	
 	if (iRotDeg >= a_iLowerBound && iRotDeg <= a_iUpperBound)
 	{
-		if (UG::IsKeyDown(UG::KEY_W) && a_vForwards.dZ == 0)
+		if (UG::IsKeyDown(UG::KEY_W) && a_vForwards.dZ == 0 && pFront.dZ == 0)
 		{
 			pos += DANM::GetForwardVector(iRotDeg);
 		}
@@ -70,26 +70,38 @@ void PlayerTank::UpdateCollisionMap()
 }
 void PlayerTank::GetSurroundingTiles(int a_iTileWidth)
 {
-	Vertices pCorners(iSpriteID, iSpriteHeight, iSpriteWidth, DegreesToRadians(iRotDeg));
+	Vertices pCorners(iSpriteID, iSpriteHeight, iSpriteWidth, DegreesToRadians(iRotDeg+90));
 	pTopLeft = Vector3(
 		pCorners.vTopLeft.dX,
 		pCorners.vTopLeft.dY,
 		GetTile(a_iTileWidth, pCorners.vTopLeft)
 	);
 	pTopRight = Vector3(
-		pCorners.vTopLeft.dX,
-		pCorners.vTopLeft.dY,
+		pCorners.vTopRight.dX,
+		pCorners.vTopRight.dY,
 		GetTile(a_iTileWidth, pCorners.vTopRight)
 	);
 	pBotLeft = Vector3(
-		pCorners.vTopLeft.dX,
-		pCorners.vTopLeft.dY,
+		pCorners.vBotLeft.dX,
+		pCorners.vBotLeft.dY,
 		GetTile(a_iTileWidth, pCorners.vBotLeft)
 	);
 	pBotRight = Vector3(
-		pCorners.vTopLeft.dX,
-		pCorners.vTopLeft.dY,
+		pCorners.vBotRight.dX,
+		pCorners.vBotRight.dY,
 		GetTile(a_iTileWidth, pCorners.vBotRight)
+	);
+	pFront = Vector3(
+		pCorners.vFront.dX,
+		pCorners.vFront.dY,
+		GetTile(a_iTileWidth, pCorners.vFront)
+		
+	);
+
+	pBack = Vector3(
+		pCorners.vBack.dX,
+		pCorners.vBack.dY,
+		GetTile(a_iTileWidth, pCorners.vBack)
 	);
 }
 
@@ -97,6 +109,6 @@ int PlayerTank::GetTile(int a_iTileWidth, Vector2 a_vPos)
 {
 	int a_iX = (a_vPos.dX / a_iTileWidth);
 	int a_iY = (a_vPos.dY / a_iTileWidth);
-	std::cout << iCollisionMap[(a_iY * iMapWidth) + a_iX] << std::endl;
+	
 	return iCollisionMap[(a_iY * iMapWidth) + a_iX];
 }

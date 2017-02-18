@@ -115,7 +115,6 @@ struct Vertices
 {
 	Vertices(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad)
 	{
-
 		vTopLeft = Vector2(
 			(DANM::GetSpriteXPos(a_iSpriteID) - (DANM::GetSpriteWidth(a_iWidth, a_iHeight, a_fRad)) / 2),
 			(DANM::GetSpriteYPos(a_iSpriteID) + (DANM::GetSpriteHeight(a_iWidth, a_iHeight, a_fRad)) / 2)
@@ -132,10 +131,16 @@ struct Vertices
 			(DANM::GetSpriteXPos(a_iSpriteID) + (DANM::GetSpriteWidth(a_iWidth, a_iHeight, a_fRad)) / 2),
 			(DANM::GetSpriteYPos(a_iSpriteID) - (DANM::GetSpriteHeight(a_iWidth, a_iHeight, a_fRad)) / 2)
 		);
+		vFront = Vector2(
+			(DANM::GetSpriteXPos(a_iSpriteID) + cos(a_fRad - fHALF_PI) * 20), 
+			(DANM::GetSpriteYPos(a_iSpriteID) + sin(a_fRad - fHALF_PI) * 20)
+		);
 	}
 	Vector2 vTopLeft;
 	Vector2 vTopRight;
 	Vector2 vBotLeft;
 	Vector2 vBotRight;
+	Vector2 vFront;
+	Vector2 vBack;
 };
 #endif // _MATHUTIL_H_

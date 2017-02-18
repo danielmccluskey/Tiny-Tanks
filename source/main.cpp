@@ -64,7 +64,7 @@ int main(int argv, char* argc[])
 		
 		
 		MapGenerator *MapGen = new MapGenerator[384];
-		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
+		MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
 
 
 		PlayerTank newTank;
@@ -107,7 +107,7 @@ int main(int argv, char* argc[])
 			
 			Vertices Test(newTank.iSpriteID, newTank.iSpriteHeight, newTank.iSpriteWidth, DegreesToRadians(newTank.iRotDeg+90));
 
-			newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
+			
 
 
 			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
@@ -117,12 +117,15 @@ int main(int argv, char* argc[])
 			newBullet.pos += newBullet.Velocity;
 			UG::MoveSprite(newBullet.iSpriteID, newBullet.pos.dX, newBullet.pos.dY);
 
-			UG::MoveSprite(newBullet4.iSpriteID, Test.vTopLeft.dX, Test.vTopLeft.dY);
-			UG::MoveSprite(newBullet1.iSpriteID, Test.vTopRight.dX, Test.vTopRight.dY);
-			UG::MoveSprite(newBullet2.iSpriteID, Test.vBotLeft.dX, Test.vBotLeft.dY);
-			UG::MoveSprite(newBullet3.iSpriteID, Test.vBotRight.dX, Test.vBotRight.dY);
+			newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
+
+			UG::MoveSprite(newBullet4.iSpriteID, newTank.pTopLeft.dX, newTank.pTopLeft.dY);
+			UG::MoveSprite(newBullet1.iSpriteID, newTank.pTopRight.dX, newTank.pTopRight.dY);
+			UG::MoveSprite(newBullet2.iSpriteID, newTank.pBotLeft.dX, newTank.pBotLeft.dY);
+			UG::MoveSprite(newBullet3.iSpriteID, newTank.pFront.dX, newTank.pFront.dY);
+			
 			UG::ClearScreen();
-			UG::SetFont(nullptr);
+			UG::SetFont(nullptr);//
 
 		} while (UG::Process());
 
