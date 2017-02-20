@@ -1,32 +1,14 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  MapGenerator.cpp
-c:\users\data-3\desktop\ct4019\wiitanks2\include\mathutil.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mapgenerator.cpp(53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mapgenerator.cpp(55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  Compiling...
   main.cpp
 c:\users\data-3\desktop\ct4019\wiitanks2\include\mathutil.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(90): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(108): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(113): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(118): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(122): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(100): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(118): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(123): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(124): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  PlayerTank.cpp
-c:\users\data-3\desktop\ct4019\wiitanks2\include\mathutil.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(9): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(110): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(111): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  MathUtil.cpp
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(128): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(132): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(133): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(134): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(135): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   WiiTanks.vcxproj -> C:\Users\Data-3\Desktop\CT4019\WiiTanks2\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
   xcopy "C:\Users\Data-3\Desktop\CT4019\WiiTanks2\scripts\..\resources\"*.* "C:\Users\Data-3\Desktop\CT4019\WiiTanks2\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 

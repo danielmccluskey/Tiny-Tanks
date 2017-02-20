@@ -46,9 +46,10 @@ struct Bullet
 };
 
 
-
+void test(int a_iSpriteIDStart, int a_iSpriteIDPlayer, Bullet& ayy);
 
 int iSpeed = 1;
+PlayerTank RayCastTest;
 
 
 
@@ -62,6 +63,13 @@ int main(int argv, char* argc[])
 		UG::AddFont("./fonts/invaders.fnt");
 
 		
+		int ayiSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
+		UG::DrawSprite(ayiSpriteID);	//Draws it
+		UG::MoveSprite(ayiSpriteID, fCenterX, fCenterY);
+
+
+
+
 		
 		MapGenerator *MapGen = new MapGenerator[384];
 		MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
@@ -76,8 +84,10 @@ int main(int argv, char* argc[])
 		Bullet newBullet2;
 		Bullet newBullet3;
 		Bullet newBullet4;
+		Bullet newBullet5;
 
 		newTank.UpdateCollisionMap();
+		RayCastTest.UpdateCollisionMap();
 
 		do
 		{
@@ -108,7 +118,7 @@ int main(int argv, char* argc[])
 			Vertices Test(newTank.iSpriteID, newTank.iSpriteHeight, newTank.iSpriteWidth, DegreesToRadians(newTank.iRotDeg+90));
 
 			
-
+			test(ayiSpriteID, newTank.iSpriteID, newBullet5);
 
 			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
 
@@ -124,6 +134,33 @@ int main(int argv, char* argc[])
 			UG::MoveSprite(newBullet2.iSpriteID, newTank.pBotLeft.dX, newTank.pBotLeft.dY);
 			UG::MoveSprite(newBullet3.iSpriteID, newTank.pFront.dX, newTank.pFront.dY);
 			
+
+
+
+
+			for (float i = 0; i < 1; i += (1.f/32.f))
+			{
+				RayCastTest.pos.dX = Lerp(50, DANM::GetSpriteXPos(newTank.iSpriteID), i);
+				RayCastTest.pos.dY = Lerp(50, DANM::GetSpriteYPos(newTank.iSpriteID), i);
+				std::cout << "x: " << RayCastTest.pos.dX << std::endl;
+				std::cout << "y: " << RayCastTest.pos.dY << std::endl;
+				//Vector2(300, 300);
+				UG::MoveSprite(RayCastTest.iSpriteID, float(RayCastTest.pos.dX), float(RayCastTest.pos.dY));
+				UG::MoveSprite(newBullet5.iSpriteID, float(RayCastTest.pos.dX), float(RayCastTest.pos.dY));
+				int iTileTypes = RayCastTest.GetTile(32, RayCastTest.pos);
+
+				std::cout << "tile: " << iTileTypes << std::endl << std::endl;
+				if (iTileTypes == 1)
+				{
+					std::cout << "AYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY" << std::endl;
+					break;
+				}
+			}
+
+
+
+
+
 			UG::ClearScreen();
 			UG::SetFont(nullptr);//
 
@@ -140,3 +177,10 @@ int main(int argv, char* argc[])
 	return 0;
 }
 
+void test(int a_iSpriteIDStart, int a_iSpriteIDPlayer, Bullet& ayy)
+{
+	
+	
+	
+	
+}
