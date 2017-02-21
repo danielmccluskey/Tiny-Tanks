@@ -1,12 +1,21 @@
 #ifndef _PLAYERTANK_H_
 #define _PLAYERTANK_H_
 #include "MathUtil.h"
+struct Turret
+{
+	Turret()
+	{
+		iSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
+		UG::DrawSprite(iSpriteID);	//Draws it
+		UG::SetSpriteLayer(iSpriteID, 10);
+	};
+	int iSpriteID = 0;
+	int iRotDeg = 0;
+};
+
 class PlayerTank
 {
 public:
-	double dX;
-	double dY;
-
 	PlayerTank() {}
 	~PlayerTank() {}
 	//Function to create the tank sprite for the player.
@@ -21,16 +30,6 @@ public:
 	int GetTile(int a_iTileWidth, Vector2 a_vPos);
 	void UpdateCollisionMap();
 	void CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards);
-	
-	
-	
-
-
-	
-
-
-	
-
 
 	int iSpriteID;
 	int iRotDeg = 0;
@@ -38,8 +37,14 @@ public:
 	int iSpriteHeight = 32;
 	int iCollisionMap[iMapHeight*iMapWidth];
 
+	Turret sTurret;
+
 	Vector2 pos;
 
+	
+
+private:
+	
 	//Vector3's to hold positional and collision values for each corner of the sprite
 	// Vector (XPos, YPos, CurrentTile)
 	Vector3 pTopLeft;
@@ -49,10 +54,8 @@ public:
 	Vector3 pFront;
 	Vector3 pBack;
 
-private:
-	
-	
-
 };
+
+
 
 #endif //_PLAYERTANK_H_

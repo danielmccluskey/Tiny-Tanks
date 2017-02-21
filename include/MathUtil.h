@@ -68,6 +68,8 @@ namespace DANM //Incase other includes use the same function names as my functio
 	void SetRotationDeg(float a_fDeg, int a_iSpriteID);
 	Vector2 GetForwardVector(float a_fDeg);
 
+	bool RayCast(int a_iSpriteIDEnemy, int a_iSpriteIDPlayer);
+
 
 }
 

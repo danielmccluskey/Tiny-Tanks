@@ -11,6 +11,7 @@ void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 	UG::DrawSprite(iSpriteID);	//Draws it
 	pos = Vector2(300, 300);
 	UG::MoveSprite(iSpriteID, a_fCenterX, a_fCenterY);
+	UG::SetSpriteLayer(iSpriteID, 9);
 };
 
 //Function to handle the movement of the tank.
@@ -40,7 +41,11 @@ void PlayerTank::MoveTank()
 	{
 		iRotDeg = 359;
 	}
+
+
 	DANM::SetRotationDeg(-(iRotDeg)+90, iSpriteID);
+	UG::MoveSprite(iSpriteID, pos.dX, pos.dY);
+	UG::MoveSprite(sTurret.iSpriteID, pos.dX, pos.dY);
 	
 }
 void PlayerTank::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards)

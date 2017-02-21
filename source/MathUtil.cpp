@@ -103,6 +103,25 @@ namespace DANM //Incase other includes use the same function names as my functio
 	{
 		return Vector4(0, 0, 0, 0);
 	}
+	bool RayCast(int a_iSpriteIDEnemy, int a_iSpriteIDPlayer)
+	{
+		PlayerTank RayCaster;
+		for (float i = 0; i < 1; i += (1.f / iMapWidth))
+		{
+
+			RayCaster.pos.dX = Lerp(DANM::GetSpriteXPos(a_iSpriteIDEnemy), DANM::GetSpriteXPos(a_iSpriteIDPlayer), i);
+			RayCaster.pos.dY = Lerp(DANM::GetSpriteYPos(a_iSpriteIDEnemy), DANM::GetSpriteYPos(a_iSpriteIDPlayer), i);
+			UG::MoveSprite(RayCaster.iSpriteID, RayCaster.pos.dX, RayCaster.pos.dY);
+			int iTileTypes = RayCaster.GetTile(32, RayCaster.pos);
+
+			if (iTileTypes == 1)
+			{
+				return false;
+				break;
+			}
+		}
+		return true;
+	}
 
 }
 

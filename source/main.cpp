@@ -15,21 +15,7 @@ int iScreenHeight = 512;
 //Co-ords of the Center of the screen
 float fCenterX = iScreenWidth*0.5f;
 float fCenterY = iScreenHeight*0.5f;
-struct Turret
-{
-	Turret()
-	{
-		iSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
-		UG::DrawSprite(iSpriteID);	//Draws it
-		pos.dX = fCenterX;
-		pos.dY = fCenterY;
-	};
-	int iSpriteID = 0;
-	int iRotDeg = 0;
-	Vector2 pos;
 
-
-};
 
 struct Bullet
 {
@@ -46,7 +32,6 @@ struct Bullet
 };
 
 
-void test(int a_iSpriteIDStart, int a_iSpriteIDPlayer, Bullet& ayy);
 
 int iSpeed = 1;
 PlayerTank RayCastTest;
@@ -63,9 +48,7 @@ int main(int argv, char* argc[])
 		UG::AddFont("./fonts/invaders.fnt");
 
 		
-		int ayiSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
-		UG::DrawSprite(ayiSpriteID);	//Draws it
-		UG::MoveSprite(ayiSpriteID, fCenterX, fCenterY);
+		
 
 
 
@@ -89,73 +72,48 @@ int main(int argv, char* argc[])
 		newTank.UpdateCollisionMap();
 		RayCastTest.UpdateCollisionMap();
 
+		int ayiSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
+		UG::DrawSprite(ayiSpriteID);	//Draws it
+		UG::MoveSprite(ayiSpriteID, fCenterX, fCenterY);
+
 		do
 		{
 			newTank.MoveTank();
 
-
-			
-			newTurret.pos = newTank.pos;
-			
-			UG::MoveSprite(newTurret.iSpriteID, newTank.pos.dX, newTank.pos.dY);
-
 			Vector2 mousePos;//New Vector2 to hold Mouse position.
 			UG::GetMousePos(mousePos.dX, mousePos.dY);//Gets the mouse position.
 			mousePos.dY = iScreenHeight - mousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
+			
+			float ayyy[16];
+			UG::GetSpriteMatrix(newTank.sTurret.iSpriteID, ayyy);
+			
+
+			
 
 			
 
 			if (UG::GetMouseButtonDown(0))
 			{
 				
-				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newTurret.pos, mousePos)) + 180);
-
+				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newTank.pos, mousePos)) + 180);
 				newBullet.pos = newTank.pos;
 				newBullet.pos += Vector2(newBullet.Velocity.dX * 40, newBullet.Velocity.dY * 40);
  
 			}
-			
-			Vertices Test(newTank.iSpriteID, newTank.iSpriteHeight, newTank.iSpriteWidth, DegreesToRadians(newTank.iRotDeg+90));
 
-			
-			test(ayiSpriteID, newTank.iSpriteID, newBullet5);
-
-			UG::MoveSprite(newTank.iSpriteID, newTank.pos.dX, newTank.pos.dY);
-
-			DANM::SetRotationDeg(-(DANM::GetBearingDeg(newTurret.pos, mousePos))+90, newTurret.iSpriteID);
+			DANM::SetRotationDeg(-(DANM::GetBearingDeg(newTank.pos, mousePos))+90, newTank.sTurret.iSpriteID);
 
 			newBullet.pos += newBullet.Velocity;
 			UG::MoveSprite(newBullet.iSpriteID, newBullet.pos.dX, newBullet.pos.dY);
 
 			newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
 
-			UG::MoveSprite(newBullet4.iSpriteID, newTank.pTopLeft.dX, newTank.pTopLeft.dY);
-			UG::MoveSprite(newBullet1.iSpriteID, newTank.pTopRight.dX, newTank.pTopRight.dY);
-			UG::MoveSprite(newBullet2.iSpriteID, newTank.pBotLeft.dX, newTank.pBotLeft.dY);
-			UG::MoveSprite(newBullet3.iSpriteID, newTank.pFront.dX, newTank.pFront.dY);
 			
 
 
 
 
-			for (float i = 0; i < 1; i += (1.f/32.f))
-			{
-				RayCastTest.pos.dX = Lerp(50, DANM::GetSpriteXPos(newTank.iSpriteID), i);
-				RayCastTest.pos.dY = Lerp(50, DANM::GetSpriteYPos(newTank.iSpriteID), i);
-				std::cout << "x: " << RayCastTest.pos.dX << std::endl;
-				std::cout << "y: " << RayCastTest.pos.dY << std::endl;
-				//Vector2(300, 300);
-				UG::MoveSprite(RayCastTest.iSpriteID, float(RayCastTest.pos.dX), float(RayCastTest.pos.dY));
-				UG::MoveSprite(newBullet5.iSpriteID, float(RayCastTest.pos.dX), float(RayCastTest.pos.dY));
-				int iTileTypes = RayCastTest.GetTile(32, RayCastTest.pos);
-
-				std::cout << "tile: " << iTileTypes << std::endl << std::endl;
-				if (iTileTypes == 1)
-				{
-					std::cout << "AYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY" << std::endl;
-					break;
-				}
-			}
+			
 
 
 
@@ -175,12 +133,4 @@ int main(int argv, char* argc[])
 
 	}
 	return 0;
-}
-
-void test(int a_iSpriteIDStart, int a_iSpriteIDPlayer, Bullet& ayy)
-{
-	
-	
-	
-	
 }
