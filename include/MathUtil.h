@@ -70,6 +70,7 @@ namespace DANM //Incase other includes use the same function names as my functio
 
 	bool RayCast(int a_iSpriteIDEnemy, int a_iSpriteIDPlayer);
 
+	Vector2 GetMousePosition();
 
 }
 
@@ -113,9 +114,9 @@ const float Smoothstep(float a_fLeftVal, float a_fRightVal, float a_fPoint);
 const float Smootherstep(float a_fLeftVal, float a_fRightVal, float a_fPoint);
 
 
-struct Vertices
+struct AABB
 {
-	Vertices(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad)
+	AABB(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad)
 	{
 		vTopLeft = Vector2(
 			(DANM::GetSpriteXPos(a_iSpriteID) - (DANM::GetSpriteWidth(a_iWidth, a_iHeight, a_fRad)) / 2),

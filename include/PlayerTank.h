@@ -18,16 +18,18 @@ class PlayerTank
 public:
 	PlayerTank() {}
 	~PlayerTank() {}
+	
+
+	//Function to handle the movement of the tank.
+	int GetTile(int a_iTileWidth, Vector2 a_vPos);
 	//Function to create the tank sprite for the player.
 	//a_fX = xPos of tank spawn location.
 	//a_fY = yPos of tank spawn location.
 	void CreateTank(float a_fX, float a_fY);
 
-	//Function to handle the movement of the tank.
+	//Function that moves the tank
 	void MoveTank();
-
-	void GetSurroundingTiles(int a_iTileWidth);
-	int GetTile(int a_iTileWidth, Vector2 a_vPos);
+	void GetSurroundingTiles(int a_iTileWidth);	
 	void UpdateCollisionMap();
 	void CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards);
 
@@ -38,10 +40,7 @@ public:
 	int iCollisionMap[iMapHeight*iMapWidth];
 
 	Turret sTurret;
-
-	Vector2 pos;
-
-	
+	Vector2 pos;	
 
 private:
 	

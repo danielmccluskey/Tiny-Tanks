@@ -15,6 +15,8 @@ const int iMapWidth = 24;
 const int iMapHeight = 16;
 
 
+
+
 typedef enum GameStates //Enumeration for the different gamestates
 {
 	SPLASH,

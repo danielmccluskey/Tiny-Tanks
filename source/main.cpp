@@ -46,77 +46,32 @@ int main(int argv, char* argc[])
 
 		UG::SetBackgroundColor(UG::SColour(0x2A, 0x57, 0x66, 0xFF));
 		UG::AddFont("./fonts/invaders.fnt");
-
 		
-		
-
-
-
-
-		
+		//Creates a new Map array and Loads a level from a text file.
 		MapGenerator *MapGen = new MapGenerator[384];
 		MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
 
-
+		//Creates a new Player sprite.
 		PlayerTank newTank;
 		newTank.CreateTank(fCenterX, fCenterY);
-		Turret newTurret;
-
-		Bullet newBullet;
-		Bullet newBullet1;
-		Bullet newBullet2;
-		Bullet newBullet3;
-		Bullet newBullet4;
-		Bullet newBullet5;
-
 		newTank.UpdateCollisionMap();
-		RayCastTest.UpdateCollisionMap();
 
-		int ayiSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
-		UG::DrawSprite(ayiSpriteID);	//Draws it
-		UG::MoveSprite(ayiSpriteID, fCenterX, fCenterY);
+		Bullet newBullet;		
 
 		do
 		{
+			newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
 			newTank.MoveTank();
 
-			Vector2 mousePos;//New Vector2 to hold Mouse position.
-			UG::GetMousePos(mousePos.dX, mousePos.dY);//Gets the mouse position.
-			mousePos.dY = iScreenHeight - mousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
-			
-			float ayyy[16];
-			UG::GetSpriteMatrix(newTank.sTurret.iSpriteID, ayyy);
-			
-
-			
-
-			
-
 			if (UG::GetMouseButtonDown(0))
-			{
-				
-				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newTank.pos, mousePos)) + 180);
+			{				
+				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newTank.pos, DANM::GetMousePosition())) + 180);
 				newBullet.pos = newTank.pos;
 				newBullet.pos += Vector2(newBullet.Velocity.dX * 40, newBullet.Velocity.dY * 40);
- 
-			}
-
-			DANM::SetRotationDeg(-(DANM::GetBearingDeg(newTank.pos, mousePos))+90, newTank.sTurret.iSpriteID);
+ 			}
 
 			newBullet.pos += newBullet.Velocity;
 			UG::MoveSprite(newBullet.iSpriteID, newBullet.pos.dX, newBullet.pos.dY);
-
-			newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
-
-			
-
-
-
-
-			
-
-
-
 
 
 			UG::ClearScreen();
@@ -127,9 +82,6 @@ int main(int argv, char* argc[])
 		MapGen[0].UnLoadLevel(MapGen);
 		delete[] MapGen;
 		UG::Dispose();
-
-		
-
 
 	}
 	return 0;

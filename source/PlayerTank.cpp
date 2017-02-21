@@ -46,6 +46,7 @@ void PlayerTank::MoveTank()
 	DANM::SetRotationDeg(-(iRotDeg)+90, iSpriteID);
 	UG::MoveSprite(iSpriteID, pos.dX, pos.dY);
 	UG::MoveSprite(sTurret.iSpriteID, pos.dX, pos.dY);
+	DANM::SetRotationDeg(-(DANM::GetBearingDeg(pos, DANM::GetMousePosition())) + 90, sTurret.iSpriteID);
 	
 }
 void PlayerTank::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards)
@@ -75,7 +76,7 @@ void PlayerTank::UpdateCollisionMap()
 }
 void PlayerTank::GetSurroundingTiles(int a_iTileWidth)
 {
-	Vertices pCorners(iSpriteID, iSpriteHeight, iSpriteWidth, DegreesToRadians(iRotDeg+90));
+	AABB pCorners(iSpriteID, iSpriteHeight, iSpriteWidth, DegreesToRadians(iRotDeg+90));
 	pTopLeft = Vector3(
 		pCorners.vTopLeft.dX,
 		pCorners.vTopLeft.dY,

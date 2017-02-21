@@ -103,6 +103,8 @@ namespace DANM //Incase other includes use the same function names as my functio
 	{
 		return Vector4(0, 0, 0, 0);
 	}
+
+	//Function to cast a ray at a sprite from anotherto see if they can see each other.
 	bool RayCast(int a_iSpriteIDEnemy, int a_iSpriteIDPlayer)
 	{
 		PlayerTank RayCaster;
@@ -121,6 +123,16 @@ namespace DANM //Incase other includes use the same function names as my functio
 			}
 		}
 		return true;
+	}
+
+	Vector2 GetMousePosition()
+	{
+		Vector2 vMousePos;//New Vector2 to hold Mouse position.
+		UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position.
+		int iScrX, iScrY;
+		UG::GetScreenSize(iScrX, iScrY);
+		vMousePos.dY = iScrY - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
+		return vMousePos;
 	}
 
 }
