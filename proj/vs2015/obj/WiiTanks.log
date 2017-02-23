@@ -1,36 +1,9 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   main.cpp
 c:\users\data-3\desktop\ct4019\wiitanks2\include\mathutil.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(68): warning C4239: nonstandard extension used: 'argument': conversion from 'Vector2' to 'Vector2 &'
-  c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(68): note: A non-const reference may only be bound to an lvalue
-c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  PlayerTank.cpp
-c:\users\data-3\desktop\ct4019\wiitanks2\include\mathutil.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(9): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(48): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(49): warning C4239: nonstandard extension used: 'argument': conversion from 'Vector2' to 'Vector2 &'
-  c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(49): note: A non-const reference may only be bound to an lvalue
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(79): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(116): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\playertank.cpp(117): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-  Compiling...
-  MathUtil.cpp
-c:\users\data-3\desktop\ct4019\wiitanks2\include\mathutil.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mathutil.cpp(63): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mathutil.cpp(64): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mathutil.cpp(71): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mathutil.cpp(72): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mathutil.cpp(116): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  MapGenerator.cpp
-c:\users\data-3\desktop\ct4019\wiitanks2\include\mathutil.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mapgenerator.cpp(53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\desktop\ct4019\wiitanks2\source\mapgenerator.cpp(55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(77): warning C4239: nonstandard extension used: 'argument': conversion from 'Vector2' to 'Vector2 &'
+  c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(77): note: A non-const reference may only be bound to an lvalue
+c:\users\data-3\desktop\ct4019\wiitanks2\source\main.cpp(90): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   WiiTanks.vcxproj -> C:\Users\Data-3\Desktop\CT4019\WiiTanks2\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
   xcopy "C:\Users\Data-3\Desktop\CT4019\WiiTanks2\scripts\..\resources\"*.* "C:\Users\Data-3\Desktop\CT4019\WiiTanks2\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 

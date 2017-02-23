@@ -2,6 +2,7 @@
 #include "MathUtil.h"
 #include "MapGenerator.h"
 #include "PlayerTank.h"
+#include "Enemy.h"
 #include "stdlib.h"
 #include <iostream>
 //#include <iostream>
@@ -56,6 +57,11 @@ int main(int argv, char* argc[])
 		newTank.CreateTank(fCenterX, fCenterY);
 		newTank.UpdateCollisionMap();
 
+		//Enemy Test
+		Enemy newEnemy;
+		newEnemy.CreateTank(40, 40);
+		newEnemy.UpdateCollisionMap();
+
 		Bullet newBullet;		
 
 		do
@@ -63,12 +69,22 @@ int main(int argv, char* argc[])
 			newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
 			newTank.MoveTank();
 
+			newEnemy.GetSurroundingTiles(MapGen[0].iTileWidth);
+			newEnemy.MoveTank(newTank);
+
 			if (UG::GetMouseButtonDown(0))
 			{				
 				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newTank.pos, DANM::GetMousePosition())) + 180);
 				newBullet.pos = newTank.pos;
 				newBullet.pos += Vector2(newBullet.Velocity.dX * 40, newBullet.Velocity.dY * 40);
  			}
+
+			if (DANM::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
+			{
+				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newEnemy.pos, newTank.pos)) + 180);
+				newBullet.pos = newEnemy.pos;
+				newBullet.pos += Vector2(newBullet.Velocity.dX * 40, newBullet.Velocity.dY * 40);
+			}
 
 			newBullet.pos += newBullet.Velocity;
 			UG::MoveSprite(newBullet.iSpriteID, newBullet.pos.dX, newBullet.pos.dY);

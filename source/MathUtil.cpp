@@ -105,23 +105,25 @@ namespace DANM //Incase other includes use the same function names as my functio
 	}
 
 	//Function to cast a ray at a sprite from anotherto see if they can see each other.
-	bool RayCast(int a_iSpriteIDEnemy, int a_iSpriteIDPlayer)
+	bool RayCast(int a_iSpriteIDEnemy, int a_iSpriteIDPlayer, int a_iCollisionMap[])
 	{
 		PlayerTank RayCaster;
+		RayCaster.UpdateCollisionMap();
 		for (float i = 0; i < 1; i += (1.f / iMapWidth))
 		{
 
 			RayCaster.pos.dX = Lerp(DANM::GetSpriteXPos(a_iSpriteIDEnemy), DANM::GetSpriteXPos(a_iSpriteIDPlayer), i);
 			RayCaster.pos.dY = Lerp(DANM::GetSpriteYPos(a_iSpriteIDEnemy), DANM::GetSpriteYPos(a_iSpriteIDPlayer), i);
-			UG::MoveSprite(RayCaster.iSpriteID, RayCaster.pos.dX, RayCaster.pos.dY);
 			int iTileTypes = RayCaster.GetTile(32, RayCaster.pos);
 
 			if (iTileTypes == 1)
 			{
+				std::cout << "NOT SEEN" << std::endl;
 				return false;
 				break;
 			}
 		}
+		std::cout << "SEEN" << std::endl;
 		return true;
 	}
 

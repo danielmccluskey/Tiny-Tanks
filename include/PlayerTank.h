@@ -37,7 +37,7 @@ public:
 	int iRotDeg = 0;
 	int iSpriteWidth = 32;
 	int iSpriteHeight = 32;
-	int iCollisionMap[iMapHeight*iMapWidth];
+	int iCollisionMap[(iMapHeight*iMapWidth)];
 
 	Turret sTurret;
 	Vector2 pos;	
