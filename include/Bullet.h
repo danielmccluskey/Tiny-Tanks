@@ -8,7 +8,7 @@
 //==============================================================================================================================
 #ifndef _BULLET_H_
 #define _BULLET_H_
-
+#include "MathUtil.h"
 
 class Bullet
 {
@@ -25,8 +25,11 @@ public:
 
 	int iSpeed;
 	float iLifeTime;
-
-	
+	void CreateBullet(Vector2 a_fStart, Vector2 a_fTarget);
+	void MoveBullet(int a_iCollisionMap[]);
+	void DestroyBullets();
+	Vector2 vVelocity;
+	Vector2 vPos;
 
 private:
 	

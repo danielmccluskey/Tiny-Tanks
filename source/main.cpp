@@ -62,7 +62,7 @@ int main(int argv, char* argc[])
 		newEnemy.CreateTank(40, 40);
 		newEnemy.UpdateCollisionMap();
 
-		Bullet newBullet;		
+		Bullet *BulletArray = new Bullet[384];
 
 		do
 		{
@@ -74,20 +74,16 @@ int main(int argv, char* argc[])
 
 			if (UG::GetMouseButtonDown(0))
 			{				
-				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newTank.pos, DANM::GetMousePosition())) + 180);
-				newBullet.pos = newTank.pos;
-				newBullet.pos += Vector2(newBullet.Velocity.dX * 40, newBullet.Velocity.dY * 40);
+				new Bullet a;
+
  			}
 
 			if (DANM::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
 			{
-				newBullet.Velocity = DANM::GetForwardVector((DANM::GetBearingDeg(newEnemy.pos, newTank.pos)) + 180);
-				newBullet.pos = newEnemy.pos;
-				newBullet.pos += Vector2(newBullet.Velocity.dX * 40, newBullet.Velocity.dY * 40);
+				
 			}
 
-			newBullet.pos += newBullet.Velocity;
-			UG::MoveSprite(newBullet.iSpriteID, newBullet.pos.dX, newBullet.pos.dY);
+			
 
 
 			UG::ClearScreen();
