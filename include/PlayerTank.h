@@ -41,6 +41,7 @@ public:
 
 	Turret sTurret;
 	Vector2 pos;	
+	Vector2 MousePos;
 
 private:
 	

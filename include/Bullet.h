@@ -25,9 +25,13 @@ public:
 
 	int iSpeed;
 	float iLifeTime;
-	void CreateBullet(Vector2 a_fStart, Vector2 a_fTarget);
-	void MoveBullet(int a_iCollisionMap[]);
-	void DestroyBullets();
+	bool bIsActive = false;
+
+	void CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget);
+	void MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[]);
+	void DestroyBullets(Bullet& a_pBullet);
+	int GetTile(int a_iCollisionMap[], Vector2 a_vPos);
+	void UpdateBullets(Bullet *a_pBullet, int a_iCollisionMap[]);
 	Vector2 vVelocity;
 	Vector2 vPos;
 

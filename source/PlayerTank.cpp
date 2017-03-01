@@ -42,11 +42,11 @@ void PlayerTank::MoveTank()
 		iRotDeg = 359;
 	}
 
-
+	MousePos = DANM::GetMousePosition();
 	DANM::SetRotationDeg(-(iRotDeg)+90, iSpriteID);
 	UG::MoveSprite(iSpriteID, pos.dX, pos.dY);
 	UG::MoveSprite(sTurret.iSpriteID, pos.dX, pos.dY);
-	DANM::SetRotationDeg(-(DANM::GetBearingDeg(pos, DANM::GetMousePosition())) + 90, sTurret.iSpriteID);
+	DANM::SetRotationDeg(-(DANM::GetBearingDeg(pos, MousePos)- 90), sTurret.iSpriteID);
 	
 }
 void PlayerTank::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards)

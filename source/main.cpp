@@ -3,6 +3,7 @@
 #include "MapGenerator.h"
 #include "PlayerTank.h"
 #include "Enemy.h"
+#include "Bullet.h"
 #include "stdlib.h"
 #include <iostream>
 //#include <iostream>
@@ -18,19 +19,19 @@ float fCenterX = iScreenWidth*0.5f;
 float fCenterY = iScreenHeight*0.5f;
 
 
-struct Bullet
-{
-	Bullet()
-	{
-		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
-		UG::DrawSprite(iSpriteID);	//Draws it
-		pos = Vector2(0, 0);
-		Velocity = Vector2(0,0);
-	};
-	int iSpriteID = 0;
-	Vector2 pos;
-	Vector2 Velocity;
-};
+//struct Bullet
+//{
+//	Bullet()
+//	{
+//		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
+//		UG::DrawSprite(iSpriteID);	//Draws it
+//		pos = Vector2(0, 0);
+//		Velocity = Vector2(0,0);
+//	};
+//	int iSpriteID = 0;
+//	Vector2 pos;
+//	Vector2 Velocity;
+//};
 
 
 
@@ -50,7 +51,7 @@ int main(int argv, char* argc[])
 		
 		//Creates a new Map array and Loads a level from a text file.
 		MapGenerator *MapGen = new MapGenerator[384];
-		MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
+		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
 
 		//Creates a new Player sprite.
 		PlayerTank newTank;
@@ -62,7 +63,9 @@ int main(int argv, char* argc[])
 		newEnemy.CreateTank(40, 40);
 		newEnemy.UpdateCollisionMap();
 
-		Bullet *BulletArray = new Bullet[384];
+		Bullet *BulletArray = new Bullet[20];
+
+		
 
 		do
 		{
@@ -74,8 +77,7 @@ int main(int argv, char* argc[])
 
 			if (UG::GetMouseButtonDown(0))
 			{				
-				new Bullet a;
-
+				BulletArray[0].CreateBullet(BulletArray, newTank.pos, newTank.MousePos);
  			}
 
 			if (DANM::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
@@ -84,10 +86,10 @@ int main(int argv, char* argc[])
 			}
 
 			
-
+			BulletArray[0].UpdateBullets(BulletArray ,newTank.iCollisionMap);
 
 			UG::ClearScreen();
-			UG::SetFont(nullptr);//
+			UG::SetFont(nullptr);
 
 		} while (UG::Process());
 

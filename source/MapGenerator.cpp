@@ -78,11 +78,11 @@ void MapGenerator::LoadLevel(char* a_cLevelPath, MapGenerator *a_pPosition)
 		LEVELMAP >> iLevelMap[i];//Stores current tile type into array.
 		switch (iLevelMap[i])
 		{
-		case 2:
-			iCollisionMap[i] = 1;
-			break;
 		case 4:
 			iCollisionMap[i] = 0;
+			break;
+		default:
+			iCollisionMap[i] = 1;
 			break;
 		}
 		COLLISIONMAP << iCollisionMap[i] << " ";//Stores current collision value into a file.
