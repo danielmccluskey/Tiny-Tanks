@@ -9,8 +9,8 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 			a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
 			UG::DrawSprite(a_pBullet[i].iSpriteID);	//Draws it	
 			UG::SetSpriteLayer(a_pBullet[i].iSpriteID, 9);
-
-			a_pBullet[i].vVelocity = DANM::GetForwardVector((DANM::GetBearingDeg(a_fStart, a_fTarget)) + 180);
+			a_pBullet[i].fAngle = DANM::GetBearingDeg(a_fStart, a_fTarget) + 180;
+			a_pBullet[i].vVelocity = DANM::GetForwardVector(a_pBullet[i].fAngle);
 			a_pBullet[i].vPos = a_fStart;
 			a_pBullet[i].vPos += Vector2(a_pBullet[i].vVelocity.dX * 40, a_pBullet[i].vVelocity.dY * 40);
 			UG::MoveSprite(a_pBullet[i].iSpriteID, a_pBullet[i].vPos.dX, a_pBullet[i].vPos.dY);
@@ -23,6 +23,21 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 
 void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 {
+	if (GetTile(a_iCollisionMap, a_pBullet.vPos) == 1)
+	{
+		std::cout << a_pBullet.fAngle << std::endl;
+		if ((a_pBullet.fAngle >= 0 && a_pBullet.fAngle < 90) || (a_pBullet.fAngle >= 180 && a_pBullet.fAngle < 270))
+		{
+			a_pBullet.vVelocity.dX *= -1;
+		}
+		if ((a_pBullet.fAngle >= 90 && a_pBullet.fAngle < 180) || (a_pBullet.fAngle >= 270 && a_pBullet.fAngle < 360))
+		{
+			a_pBullet.vVelocity.dY *= -1;
+		}
+		
+
+	}
+
 	a_pBullet.vPos += a_pBullet.vVelocity;
 	UG::MoveSprite(a_pBullet.iSpriteID, a_pBullet.vPos.dX, a_pBullet.vPos.dY);
 	
@@ -42,6 +57,7 @@ void Bullet::DestroyBullets(Bullet& a_pBullet)
 	{
 		a_pBullet.bIsActive = false;
 		UG::StopDrawingSprite(a_pBullet.iSpriteID);//Stops drawing that.
+		UG::DestroySprite(a_pBullet.iSpriteID);//Destroys that.
 	}
 	else
 	{

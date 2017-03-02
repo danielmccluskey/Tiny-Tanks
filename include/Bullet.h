@@ -26,6 +26,7 @@ public:
 	int iSpeed;
 	float iLifeTime;
 	bool bIsActive = false;
+	float fAngle;
 
 	void CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget);
 	void MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[]);

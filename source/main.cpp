@@ -51,7 +51,7 @@ int main(int argv, char* argc[])
 		
 		//Creates a new Map array and Loads a level from a text file.
 		MapGenerator *MapGen = new MapGenerator[384];
-		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
+		MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
 
 		//Creates a new Player sprite.
 		PlayerTank newTank;
@@ -82,11 +82,33 @@ int main(int argv, char* argc[])
 
 			if (DANM::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
 			{
-				
+			//	BulletArray[0].CreateBullet(BulletArray, newEnemy.pos, newTank.pos);
 			}
+			BulletArray[0].UpdateBullets(BulletArray, newTank.iCollisionMap);
 
+
+			//Debug
+			if (UG::IsKeyDown(UG::KEY_1))
+			{
+				MapGen[0].UnLoadLevel(MapGen);
+				MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
+			}
+			if (UG::IsKeyDown(UG::KEY_2))
+			{
+				MapGen[0].UnLoadLevel(MapGen);
+				MapGen[0].LoadLevel("./maps/lvl_2.txt", MapGen);
+			}
+			if (UG::IsKeyDown(UG::KEY_3))
+			{
+				MapGen[0].UnLoadLevel(MapGen);
+				MapGen[0].LoadLevel("./maps/lvl_3.txt", MapGen);
+			}
+			if (UG::IsKeyDown(UG::KEY_4))
+			{
+				MapGen[0].UnLoadLevel(MapGen);
+				MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
+			}
 			
-			BulletArray[0].UpdateBullets(BulletArray ,newTank.iCollisionMap);
 
 			UG::ClearScreen();
 			UG::SetFont(nullptr);
