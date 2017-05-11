@@ -1,5 +1,5 @@
 #include "PlayerTank.h"
-#include "MathUtil.h"
+#include "OtherFunctions.h"
 #include "Enumerations.h"
 #include "stdlib.h"
 #include <iostream>

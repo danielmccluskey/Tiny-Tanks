@@ -1,6 +1,6 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
-#include "MathUtil.h"
+#include "OtherFunctions.h"
 struct EnemyTurret
 {
 	EnemyTurret()

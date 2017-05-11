@@ -8,7 +8,7 @@
 //==============================================================================================================================
 #ifndef _BULLET_H_
 #define _BULLET_H_
-#include "MathUtil.h"
+#include "OtherFunctions.h"
 
 class Bullet
 {

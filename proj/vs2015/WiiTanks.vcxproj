@@ -23,26 +23,16 @@
     <ClCompile Include="..\..\source\Enemy.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\MapGenerator.cpp" />
-    <ClCompile Include="..\..\source\MathUtil.cpp" />
-    <ClCompile Include="..\..\source\Matrix3x3.cpp" />
-    <ClCompile Include="..\..\source\Matrix4x4.cpp" />
+    <ClCompile Include="..\..\source\OtherFunctions.cpp" />
     <ClCompile Include="..\..\source\PlayerTank.cpp" />
-    <ClCompile Include="..\..\source\Vector2.cpp" />
-    <ClCompile Include="..\..\source\Vector3.cpp" />
-    <ClCompile Include="..\..\source\Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bullet.h" />
     <ClInclude Include="..\..\include\CustomEnum.h" />
     <ClInclude Include="..\..\include\Enemy.h" />
     <ClInclude Include="..\..\include\MapGenerator.h" />
-    <ClInclude Include="..\..\include\MathUtil.h" />
-    <ClInclude Include="..\..\include\Matrix3x3.h" />
-    <ClInclude Include="..\..\include\Matrix4x4.h" />
+    <ClInclude Include="..\..\include\OtherFunctions.h" />
     <ClInclude Include="..\..\include\PlayerTank.h" />
-    <ClInclude Include="..\..\include\Vector2.h" />
-    <ClInclude Include="..\..\include\Vector3.h" />
-    <ClInclude Include="..\..\include\Vector4.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7CD622AF-69B8-4D7B-9E10-3FC691CEDC98}</ProjectGuid>
@@ -138,7 +128,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)../../lib\vs2015\$(Platform)\$(Configuration);$(SolutionDir)../../deps/UoG/lib/vs2015/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>UG Basic Framework.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MathLibrary.dll;UG Basic Framework.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>../../scripts\copyResourcesToBuildDirectory.bat "$(ProjectDir)$(Outdir)"</Command>

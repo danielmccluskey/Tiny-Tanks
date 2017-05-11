@@ -1,5 +1,5 @@
 #include "Enemy.h"
-#include "MathUtil.h"
+#include "OtherFunctions.h"
 #include "Enumerations.h"
 #include "stdlib.h"
 #include <iostream>

@@ -8,7 +8,7 @@
 //==============================================================================================================================
 
 #include "MapGenerator.h"
-#include "MathUtil.h"
+#include "OtherFunctions.h"
 #include "stdlib.h"
 #include <iostream>
 #include <fstream>

@@ -1,6 +1,6 @@
 #ifndef _PLAYERTANK_H_
 #define _PLAYERTANK_H_
-#include "MathUtil.h"
+#include "OtherFunctions.h"
 struct Turret
 {
 	Turret()
