@@ -59,35 +59,35 @@ int main(int argv, char* argc[])
 		//Creates a new Player sprite.
 		PlayerTank newTank;
 		newTank.CreateTank(fCenterX, fCenterY);
-		newTank.UpdateCollisionMap();
+		//newTank.UpdateCollisionMap();
 
-		//Enemy Test
-		Enemy newEnemy;
-		newEnemy.CreateTank(40, 40);
-		newEnemy.UpdateCollisionMap();
+		////Enemy Test
+		//Enemy newEnemy;
+		//newEnemy.CreateTank(40, 40);
+		//newEnemy.UpdateCollisionMap();
 
-		Bullet *BulletArray = new Bullet[20];
+		//Bullet *BulletArray = new Bullet[20];
 
 		
 
 		do
 		{
-			newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
+			//newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
 			newTank.MoveTank();
 
-			newEnemy.GetSurroundingTiles(MapGen[0].iTileWidth);
+			//newEnemy.GetSurroundingTiles(MapGen[0].iTileWidth);
 			//newEnemy.MoveTank(newTank);
 
 			if (UG::GetMouseButtonDown(0))
 			{				
-				BulletArray[0].CreateBullet(BulletArray, newTank.pos, newTank.MousePos);
+				//BulletArray[0].CreateBullet(BulletArray, newTank.pos, newTank.MousePos);
  			}
 
-			if (OtherFunctions::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
-			{
-			//	BulletArray[0].CreateBullet(BulletArray, newEnemy.pos, newTank.pos);
-			}
-			BulletArray[0].UpdateBullets(BulletArray, newTank.iCollisionMap);
+			//if (OtherFunctions::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
+			//{
+			////	BulletArray[0].CreateBullet(BulletArray, newEnemy.pos, newTank.pos);
+			//}
+			//BulletArray[0].UpdateBullets(BulletArray, newTank.iCollisionMap);
 
 
 			//Debug

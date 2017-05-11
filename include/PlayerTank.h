@@ -1,19 +1,12 @@
 #ifndef _PLAYERTANK_H_
 #define _PLAYERTANK_H_
-#include "CustomEnum.h"
-#include "OtherFunctions.h"
-#include "Vector3.h"
-
-
-struct Turret;
-
+#include "Vector2.h"
 class PlayerTank
 {
 public:
 	PlayerTank() {}
 	~PlayerTank() {}
-	
-
+	friend class Vector2;
 	//Function to handle the movement of the tank.
 	int GetTile(int a_iTileWidth, Vector2 a_vPos);
 	//Function to create the tank sprite for the player.
@@ -23,30 +16,25 @@ public:
 
 	//Function that moves the tank
 	void MoveTank();
-	void GetSurroundingTiles(int a_iTileWidth);	
+	void GetSurroundingTiles(int a_iTileWidth);
 	void UpdateCollisionMap();
-	void CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards);
 
 	int iSpriteID;
 	int iRotDeg = 0;
 	int iSpriteWidth = 32;
 	int iSpriteHeight = 32;
-	int iCollisionMap[(iMapHeight*iMapWidth)];
 
-	Turret sTurret;
-	Vector2 pos;	
-	Vector2 MousePos;
+	Vector2 vPos;
+	Vector2 vVelocity;
+	Vector2 vMousePos;
+
+	float fSpriteyMatrix[16];
+
+	
 
 private:
 	
-	//Vector3's to hold positional and collision values for each corner of the sprite
-	// Vector (XPos, YPos, CurrentTile)
-	Vector3 pTopLeft;
-	Vector3 pTopRight;
-	Vector3 pBotLeft;
-	Vector3 pBotRight;
-	Vector3 pFront;
-	Vector3 pBack;
+	
 
 };
 

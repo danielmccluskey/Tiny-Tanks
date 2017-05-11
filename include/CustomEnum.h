@@ -11,8 +11,11 @@
 #define _CUSTOMENUM_H_
 const float fMapWidth = 24;
 const float fMapHeight = 16;
+const float fTileWidth = 32;
 const int iMapWidth = 24;
 const int iMapHeight = 16;
+
+
 
 
 

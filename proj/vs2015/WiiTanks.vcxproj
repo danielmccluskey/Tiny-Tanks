@@ -23,7 +23,6 @@
     <ClCompile Include="..\..\source\Enemy.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\MapGenerator.cpp" />
-    <ClCompile Include="..\..\source\OtherFunctions.cpp" />
     <ClCompile Include="..\..\source\PlayerTank.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +30,6 @@
     <ClInclude Include="..\..\include\CustomEnum.h" />
     <ClInclude Include="..\..\include\Enemy.h" />
     <ClInclude Include="..\..\include\MapGenerator.h" />
-    <ClInclude Include="..\..\include\OtherFunctions.h" />
     <ClInclude Include="..\..\include\PlayerTank.h" />
   </ItemGroup>
   <ItemGroup>

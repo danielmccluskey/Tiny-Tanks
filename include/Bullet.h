@@ -8,7 +8,6 @@
 //==============================================================================================================================
 #ifndef _BULLET_H_
 #define _BULLET_H_
-#include "Vector2.h"
 class Bullet
 {
 public:
@@ -16,7 +15,6 @@ public:
 	~Bullet()
 	{
 	}
-	friend class Vector2;
 	int iSpriteID = 0;//Sprite ID
 
 
@@ -32,8 +30,6 @@ public:
 	void DestroyBullets(Bullet& a_pBullet);
 	int GetTile(int a_iCollisionMap[], Vector2 a_vPos);
 	void UpdateBullets(Bullet *a_pBullet, int a_iCollisionMap[]);
-	Vector2 vVelocity;
-	Vector2 vPos;
 
 private:
 	
