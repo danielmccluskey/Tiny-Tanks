@@ -1,4 +1,6 @@
 #include "Bullet.h"
+#include "UGFW.h"
+#include "OtherFunctions.h"
 
 void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget)
 {

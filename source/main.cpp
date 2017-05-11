@@ -6,7 +6,6 @@
 #include "Bullet.h"
 #include "stdlib.h"
 #include <iostream>
-#include "../deps/DanMMathLib/DanMMathLibraryStatic.lib"
 
 
 //#include <iostream>

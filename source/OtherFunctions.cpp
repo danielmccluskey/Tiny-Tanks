@@ -1,6 +1,15 @@
 #include "OtherFunctions.h"
-
-
+#include <cmath>
+#include "stdlib.h"
+#include <iostream>
+#include "UGFW.h"
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
+#include "MathUtil.h"
+#include "CustomEnum.h"
+#include "PlayerTank.h"
+#include "Matrix4x4.h"
 
 /*SpriteMatrix
 [0] = Scales X Axis
@@ -79,11 +88,15 @@ namespace DANM //Incase other includes use the same function names as my functio
 	void SetRotationRad(float a_fRad, int a_iSpriteID)
 	{
 		UG::GetSpriteMatrix(a_iSpriteID, fSpriteMatrix);
-		fSpriteMatrix[0] = cos(a_fRad);
+		Matrix4x4 oSpriteMatrix(fSpriteMatrix);
+		oSpriteMatrix.RotateZ(a_fRad);
+		/*fSpriteMatrix[0] = cos(a_fRad);
 		fSpriteMatrix[1] = -sin(a_fRad);
 		fSpriteMatrix[4] = sin(a_fRad);
-		fSpriteMatrix[5] = cos(a_fRad);
-		UG::SetSpriteMatrix(a_iSpriteID, fSpriteMatrix);
+		fSpriteMatrix[5] = cos(a_fRad);*/
+		UG::SetSpriteMatrix(a_iSpriteID, oSpriteMatrix.GetMatrix());
+
+
 	}
 	//Sets the rotation to a certain angle in Degrees instead of incrementing it like UG::SetSpriteRotation does.
 	void SetRotationDeg(float a_fDeg, int a_iSpriteID)

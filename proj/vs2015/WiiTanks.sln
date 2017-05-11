@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WiiTanks", "WiiTanks.vcxproj", "{7CD622AF-69B8-4D7B-9E10-3FC691CEDC98}"
+	ProjectSection(ProjectDependencies) = postProject
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C} = {68A15960-265D-4A7F-98B9-3EC2B7313F2C}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DanMMathLibraryStatic", "..\..\..\library\DanMMathLibraryStatic\DanMMathLibraryStatic\DanMMathLibraryStatic.vcxproj", "{68A15960-265D-4A7F-98B9-3EC2B7313F2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{7CD622AF-69B8-4D7B-9E10-3FC691CEDC98}.Release|x64.Build.0 = Release|x64
 		{7CD622AF-69B8-4D7B-9E10-3FC691CEDC98}.Release|x86.ActiveCfg = Release|Win32
 		{7CD622AF-69B8-4D7B-9E10-3FC691CEDC98}.Release|x86.Build.0 = Release|Win32
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C}.Debug|x64.ActiveCfg = Debug|x64
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C}.Debug|x64.Build.0 = Debug|x64
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C}.Debug|x86.ActiveCfg = Debug|Win32
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C}.Debug|x86.Build.0 = Debug|Win32
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C}.Release|x64.ActiveCfg = Release|x64
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C}.Release|x64.Build.0 = Release|x64
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C}.Release|x86.ActiveCfg = Release|Win32
+		{68A15960-265D-4A7F-98B9-3EC2B7313F2C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

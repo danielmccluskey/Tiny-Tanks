@@ -1,14 +1,7 @@
 #ifndef _OTHERFUNCTIONS_H_
 #define _OTHERFUNCTIONS_H_
-#include <cmath>
-#include "stdlib.h"
-#include <iostream>
-#include "UGFW.h"
 #include "Vector2.h"
-#include "Vector3.h"
-#include "Vector4.h"
-#include "CustomEnum.h"
-#include "PlayerTank.h"
+
 
 /*SpriteMatrix
 [0] = Scales X Axis
@@ -29,16 +22,6 @@
 
 static float fSpriteMatrix[16];//Variable to temporarly hold the Sprite Matrix in some functions such as the SetRotation functions.
 
-const float fPI = 3.14159265359; //Defining PI
-const float f2PI = (2 * fPI); //Defining Double PI
-const float fHALF_PI = (fPI / 2); //Defining Half of PI
-const float f2HALF_PI = (fHALF_PI / 2);
-
-const float RadiansToDegrees(float a_fRad); //Function to convert the given Radians to Degrees
-const float DegreesToRadians(float a_fDeg); //Function to convert the given Degrees to Radians
-
-
-const float AABBTest(float a_fDeg);
 
 namespace DANM //Incase other includes use the same function names as my functions
 {
