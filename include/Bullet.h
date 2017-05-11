@@ -8,8 +8,7 @@
 //==============================================================================================================================
 #ifndef _BULLET_H_
 #define _BULLET_H_
-#include "OtherFunctions.h"
-
+#include "Vector2.h"
 class Bullet
 {
 public:
@@ -17,7 +16,7 @@ public:
 	~Bullet()
 	{
 	}
-
+	friend class Vector2;
 	int iSpriteID = 0;//Sprite ID
 
 

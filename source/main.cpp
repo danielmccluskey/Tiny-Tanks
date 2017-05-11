@@ -4,6 +4,7 @@
 #include "PlayerTank.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "UGFW.h"
 #include "stdlib.h"
 #include <iostream>
 
@@ -75,14 +76,14 @@ int main(int argv, char* argc[])
 			newTank.MoveTank();
 
 			newEnemy.GetSurroundingTiles(MapGen[0].iTileWidth);
-			newEnemy.MoveTank(newTank);
+			//newEnemy.MoveTank(newTank);
 
 			if (UG::GetMouseButtonDown(0))
 			{				
 				BulletArray[0].CreateBullet(BulletArray, newTank.pos, newTank.MousePos);
  			}
 
-			if (DANM::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
+			if (OtherFunctions::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
 			{
 			//	BulletArray[0].CreateBullet(BulletArray, newEnemy.pos, newTank.pos);
 			}

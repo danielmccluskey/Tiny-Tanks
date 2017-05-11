@@ -1,17 +1,11 @@
 #ifndef _PLAYERTANK_H_
 #define _PLAYERTANK_H_
+#include "CustomEnum.h"
 #include "OtherFunctions.h"
-struct Turret
-{
-	Turret()
-	{
-		iSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
-		UG::DrawSprite(iSpriteID);	//Draws it
-		UG::SetSpriteLayer(iSpriteID, 10);
-	};
-	int iSpriteID = 0;
-	int iRotDeg = 0;
-};
+#include "Vector3.h"
+
+
+struct Turret;
 
 class PlayerTank
 {

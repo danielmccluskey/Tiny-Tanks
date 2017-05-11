@@ -1,25 +1,18 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
-#include "OtherFunctions.h"
 
-struct EnemyTurret
-{
-	EnemyTurret()
-	{
-		iSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
-		UG::DrawSprite(iSpriteID);	//Draws it
-		UG::SetSpriteLayer(iSpriteID, 10);
-	};
-	int iSpriteID = 0;
-	int iRotDeg = 0;
-};
+#include "OtherFunctions.h"
+#include "Vector3.h"
+#include "Vector2.h"
+struct EnemyTurret;
 
 class Enemy
 {
 public:
 	Enemy() {}
 	~Enemy() {}
-
+	friend class Vector3;
+	friend class Vector2;
 
 	//Function to handle the movement of the tank.
 	int GetTile(int a_iTileWidth, Vector2 a_vPos);
@@ -29,7 +22,7 @@ public:
 	void CreateTank(float a_fX, float a_fY);
 
 	//Function that moves the tank
-	void MoveTank(PlayerTank &a_vPlayer);
+	void MoveTank(float a_fDeg);
 	void GetSurroundingTiles(int a_iTileWidth);
 	void UpdateCollisionMap();
 	void CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards);

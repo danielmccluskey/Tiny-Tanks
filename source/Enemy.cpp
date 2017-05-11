@@ -1,9 +1,21 @@
 #include "Enemy.h"
 #include "OtherFunctions.h"
 #include "Enumerations.h"
+#include "UGFW.h"
 #include "stdlib.h"
 #include <iostream>
 #include <fstream>
+struct EnemyTurret
+{
+	EnemyTurret()
+	{
+		iSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
+		UG::DrawSprite(iSpriteID);	//Draws it
+		UG::SetSpriteLayer(iSpriteID, 10);
+	};
+	int iSpriteID = 0;
+	int iRotDeg = 0;
+};
 void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
 {
 	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite
@@ -15,12 +27,12 @@ void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
 };
 
 //Function to handle the movement of the tank.
-void Enemy::MoveTank(PlayerTank &a_vPlayer)
+void Enemy::MoveTank(float a_fDeg)
 {	
 	UG::MoveSprite(iSpriteID, pos.dX, pos.dY);
 	UG::MoveSprite(sTurret.iSpriteID, pos.dX, pos.dY);
-	DANM::SetRotationDeg(-(iRotDeg)+90, iSpriteID);
-	DANM::SetRotationDeg(-(DANM::GetBearingDeg(pos, a_vPlayer.pos)) + 90, sTurret.iSpriteID);
+	SetRotationDeg(-(iRotDeg)+90, iSpriteID);
+	SetRotationDeg(-a_fDeg, sTurret.iSpriteID);
 
 }
 void Enemy::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards)
@@ -30,11 +42,11 @@ void Enemy::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_
 	{
 		if (UG::IsKeyDown(UG::KEY_W) && a_vForwards.dZ == 0 && pFront.dZ == 0)
 		{
-			pos += DANM::GetForwardVector(iRotDeg);
+			pos += GetForwardVector(iRotDeg);
 		}
 		if (UG::IsKeyDown(UG::KEY_S) && a_vBackwards.dZ == 0)
 		{
-			pos -= DANM::GetForwardVector(iRotDeg);
+			pos -= GetForwardVector(iRotDeg);
 		}
 	}
 }

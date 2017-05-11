@@ -1,9 +1,27 @@
-#include "PlayerTank.h"
-#include "OtherFunctions.h"
-#include "Enumerations.h"
+
 #include "stdlib.h"
 #include <iostream>
 #include <fstream>
+#include "OtherFunctions.h"
+#include "PlayerTank.h"
+#include "Enumerations.h"
+#include "Vector2.h"
+#include "Vector3.h"
+
+#include "MathUtil.h"
+#include "UGFW.h"
+
+struct Turret
+{
+	Turret()
+	{
+		iSpriteID = UG::CreateSprite("./images/Tanks/tank_turret.png", 30, 80, true);//Create the sprite
+		UG::DrawSprite(iSpriteID);	//Draws it
+		UG::SetSpriteLayer(iSpriteID, 10);
+	};
+	int iSpriteID = 0;
+	int iRotDeg = 0;
+};
 void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 {
 	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite
@@ -42,11 +60,11 @@ void PlayerTank::MoveTank()
 		iRotDeg = 359;
 	}
 
-	MousePos = DANM::GetMousePosition();
-	DANM::SetRotationDeg(-(iRotDeg)+90, iSpriteID);
+	MousePos = OtherFunctions::GetMousePosition();
+	OtherFunctions::SetRotationDeg(-(iRotDeg)+90, iSpriteID);
 	UG::MoveSprite(iSpriteID, pos.dX, pos.dY);
 	UG::MoveSprite(sTurret.iSpriteID, pos.dX, pos.dY);
-	DANM::SetRotationDeg(-(DANM::GetBearingDeg(pos, MousePos)- 90), sTurret.iSpriteID);
+	OtherFunctions::SetRotationDeg(-(OtherFunctions::GetBearingDeg(pos, MousePos)- 90), sTurret.iSpriteID);
 	
 }
 void PlayerTank::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards)
@@ -56,11 +74,11 @@ void PlayerTank::CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector
 	{
 		if (UG::IsKeyDown(UG::KEY_W) && a_vForwards.dZ == 0 && pFront.dZ == 0)
 		{
-			pos += DANM::GetForwardVector(iRotDeg);
+			pos += OtherFunctions::GetForwardVector(iRotDeg);
 		}
 		if (UG::IsKeyDown(UG::KEY_S) && a_vBackwards.dZ == 0)
 		{
-			pos -= DANM::GetForwardVector(iRotDeg);
+			pos -= OtherFunctions::GetForwardVector(iRotDeg);
 		}
 	}
 }

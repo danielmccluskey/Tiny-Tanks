@@ -98,6 +98,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>./obj\</IntDir>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\bin\$(Platform)\$(Configuration)\</OutDir>
@@ -126,7 +127,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\s1600056\Downloads\library\DanMMathLibraryStatic\include;$(SolutionDir)../../include;$(SolutionDir)../../deps/tinyxml;$(SolutionDir)../../deps/UoG/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Data-3\Downloads\library\DanMMathLibraryStatic\include;$(SolutionDir)../../include;$(SolutionDir)../../deps/tinyxml;$(SolutionDir)../../deps/UoG/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLM_SWIZZLE;GLM_FORCE_RADIANS;GLM_FORCE_PURE;GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4201;4310;4100;</DisableSpecificWarnings>
     </ClCompile>

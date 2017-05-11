@@ -1,6 +1,7 @@
 #include "Bullet.h"
-#include "UGFW.h"
 #include "OtherFunctions.h"
+#include "CustomEnum.h"
+#include "UGFW.h"
 
 void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget)
 {
@@ -11,8 +12,8 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 			a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
 			UG::DrawSprite(a_pBullet[i].iSpriteID);	//Draws it	
 			UG::SetSpriteLayer(a_pBullet[i].iSpriteID, 9);
-			a_pBullet[i].fAngle = DANM::GetBearingDeg(a_fStart, a_fTarget) + 180;
-			a_pBullet[i].vVelocity = DANM::GetForwardVector(a_pBullet[i].fAngle);
+			a_pBullet[i].fAngle = OtherFunctions::GetBearingDeg(a_fStart, a_fTarget) + 180;
+			a_pBullet[i].vVelocity = OtherFunctions::GetForwardVector(a_pBullet[i].fAngle);
 			a_pBullet[i].vPos = a_fStart;
 			a_pBullet[i].vPos += Vector2(a_pBullet[i].vVelocity.dX * 40, a_pBullet[i].vVelocity.dY * 40);
 			UG::MoveSprite(a_pBullet[i].iSpriteID, a_pBullet[i].vPos.dX, a_pBullet[i].vPos.dY);

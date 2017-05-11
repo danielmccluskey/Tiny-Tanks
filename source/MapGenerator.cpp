@@ -10,8 +10,10 @@
 #include "MapGenerator.h"
 #include "OtherFunctions.h"
 #include "stdlib.h"
+#include "CustomEnum.h"
 #include <iostream>
 #include <fstream>
+#include "UGFW.h"
 
 void MapGenerator::DrawLevelTiles(MapGenerator *a_pPosition)
 {
