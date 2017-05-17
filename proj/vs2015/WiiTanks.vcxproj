@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\Boundaries.cpp" />
     <ClCompile Include="..\..\source\Bullet.cpp" />
     <ClCompile Include="..\..\source\Enemy.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="..\..\source\Turret.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\Boundaries.h" />
     <ClInclude Include="..\..\include\Bullet.h" />
     <ClInclude Include="..\..\include\CustomEnum.h" />
     <ClInclude Include="..\..\include\Enemy.h" />

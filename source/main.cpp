@@ -1,5 +1,4 @@
 #include "Enumerations.h"
-#include "OtherFunctions.h"
 #include "MapGenerator.h"
 #include "PlayerTank.h"
 #include "Enemy.h"
@@ -56,7 +55,7 @@ int main(int argv, char* argc[])
 		PlayerTank newTank;
 		newTank.CreateTank(fCenterX, fCenterY);
 		newTank.fSpeed = fGlobalSpeed;
-		//newTank.UpdateCollisionMap();
+		newTank.UpdateCollisionMap();
 
 		////Enemy Test
 		//Enemy newEnemy;
@@ -69,7 +68,7 @@ int main(int argv, char* argc[])
 
 		do
 		{
-			//newTank.GetSurroundingTiles(MapGen[0].iTileWidth);
+			newTank.CalculateBoundaries();
 			newTank.MoveTank();
 
 			//newEnemy.GetSurroundingTiles(MapGen[0].iTileWidth);

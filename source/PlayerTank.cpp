@@ -3,13 +3,16 @@
 #include "Enumerations.h"
 #include "UGFW.h"
 #include "MathUtil.h"
-#include "Vector2.h"
 #include "Matrix4x4.h"
+#include "Boundaries.h"
+#include <iostream>
+#include <fstream>
 
 
 
 void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 {
+
 	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite
 	UG::DrawSprite(iSpriteID);//Draws it
 	vPos = Vector2(a_fCenterX, a_fCenterY);//Sets the Starting position ########Convert to function arguement input.
@@ -20,11 +23,7 @@ void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 //Function to handle the movement of the tank.
 void PlayerTank::MoveTank()
 {
-	//Function that checks the corner positions of the sprite to see if they are colliding with the map
-	/*CollisionDetection(0, 90, pTopRight, pBotLeft);
-	CollisionDetection(90, 180, pTopLeft, pBotRight);
-	CollisionDetection(180, 270, pBotLeft, pTopRight);
-	CollisionDetection(270, 359, pBotRight, pTopLeft);*/
+	
 
 
 	if (UG::IsKeyDown(UG::KEY_A))//If the A key is down
@@ -54,22 +53,79 @@ void PlayerTank::MoveTank()
 	float fDeltaTime = UG::GetDeltaTime();
 	vVelocity.dX = (vVelocity.dX * fDeltaTime) * fSpeed;
 	vVelocity.dY = (vVelocity.dY * fDeltaTime) * fSpeed;
-	if (UG::IsKeyDown(UG::KEY_W))
-	{
-		vPos += vVelocity;
-	}
-	if (UG::IsKeyDown(UG::KEY_S))
-	{
-		vPos -= vVelocity;
-	}
 
 	
 	RotateSprite(iSpriteID, DegreesToRadians(-iRotDeg));
 	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg)-90));
 
 	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
-	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.dX, vPos.dY);
+	
 
+}
+
+bool PlayerTank::CollisionDetection(Vector3 a_vPos)
+{
+
+	if (a_vPos.dZ <= 0)
+	{
+		int a_iX = (a_vPos.dX / fTileWidth);
+		int a_iY = (a_vPos.dY / fTileWidth);
+
+		if (a_vPos.dX < (a_iX - (fTileWidth / 2)))
+		{
+			return false;
+		}
+			
+		if (a_vPos.dX > (a_iX + (fTileWidth / 2)))
+		{
+			return false;
+		}
+			
+		if (a_vPos.dY < (a_iY - (fTileWidth / 2)))
+		{
+			return false;
+		}
+		
+		if (a_vPos.dY > (a_iY + (fTileWidth / 2)))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+		
+	}
+	
+}
+
+void PlayerTank::CalculateBoundaries()
+{
+	Boundaries AABBCheck;
+	AABBCheck.AABB(iSpriteID, iSpriteHeight, iSpriteWidth, DegreesToRadians((iRotDeg-90)));
+
+	AABBCheck.vTopLeft.dZ = GetTile(fTileWidth, AABBCheck.vTopLeft);
+	AABBCheck.vTopRight.dZ = GetTile(fTileWidth, AABBCheck.vTopRight);
+	AABBCheck.vBotLeft.dZ = GetTile(fTileWidth, AABBCheck.vBotLeft);
+	AABBCheck.vBotRight.dZ = GetTile(fTileWidth, AABBCheck.vBotRight);
+
+	//Function that checks the corner positions of the sprite to see if they are colliding with the map
+	if (((!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg>=271 && iRotDeg <=360)) ||
+		(!(CollisionDetection(AABBCheck.vTopRight)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 0 && iRotDeg <= 90)) ||
+		(!(CollisionDetection(AABBCheck.vBotLeft)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 181 && iRotDeg <= 270)) ||
+		(!(CollisionDetection(AABBCheck.vBotRight)) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg >= 91 && iRotDeg <= 180)))
+	{
+		if (UG::IsKeyDown(UG::KEY_W))
+		{
+			vPos += vVelocity;
+		}
+		if (UG::IsKeyDown(UG::KEY_S))
+		{
+			vPos -= vVelocity;
+		}
+	}
+
+	UG::MoveSprite(sSpriteTurret.iSpriteID, AABBCheck.vTopLeft.dX, AABBCheck.vTopLeft.dY);
 }
 
 void PlayerTank::RotateSprite(int a_iSpriteID, float a_fRad)
@@ -94,4 +150,29 @@ float PlayerTank::GetBearing(Vector2 &a_V1, Vector2 &a_V2)
 	float fXChange = (a_V1.dX - a_V2.dX);
 	float fYChange = (a_V1.dY - a_V2.dY);
 	return atan2(fYChange, fXChange)*(180 / fPI);
+}
+
+void PlayerTank::UpdateCollisionMap()
+{
+	std::ifstream pCollision;//Creates an input fstream member
+	pCollision.open("./maps/currentCollision.txt");//Opens the file.
+	for (int i = 0; i < (iMapHeight*iMapWidth); i++)//Iterates through each tile in the array.
+	{
+		pCollision >> iCollisionMap[i];//Stores current tile type into array.
+	}
+	pCollision.close();
+}
+int PlayerTank::GetTile(int a_iTileWidth, Vector2 a_vPos)
+{
+	int a_iX = (a_vPos.dX / a_iTileWidth);
+	int a_iY = (a_vPos.dY / a_iTileWidth);
+
+	return iCollisionMap[(a_iY * iMapWidth) + a_iX];
+}
+int PlayerTank::GetTile(int a_iTileWidth, Vector3 a_vPos)
+{
+	int a_iX = (a_vPos.dX / a_iTileWidth);
+	int a_iY = (a_vPos.dY / a_iTileWidth);
+
+	return iCollisionMap[(a_iY * iMapWidth) + a_iX];
 }
