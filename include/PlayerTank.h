@@ -1,12 +1,15 @@
 #ifndef _PLAYERTANK_H_
 #define _PLAYERTANK_H_
 #include "Vector2.h"
+#include "Turret.h"
 class PlayerTank
 {
 public:
 	PlayerTank() {}
 	~PlayerTank() {}
 	friend class Vector2;
+	friend class Turret;
+
 	//Function to handle the movement of the tank.
 	int GetTile(int a_iTileWidth, Vector2 a_vPos);
 	//Function to create the tank sprite for the player.
@@ -18,17 +21,23 @@ public:
 	void MoveTank();
 	void GetSurroundingTiles(int a_iTileWidth);
 	void UpdateCollisionMap();
+	void RotateSprite(int a_iSpriteID, float a_fRad);
+	float GetBearing(Vector2 &a_V1, Vector2 &a_V2);
 
+		
 	int iSpriteID;
 	int iRotDeg = 0;
 	int iSpriteWidth = 32;
 	int iSpriteHeight = 32;
+	float fSpeed = 1000.f;
+	
+	Turret sSpriteTurret;
 
 	Vector2 vPos;
 	Vector2 vVelocity;
 	Vector2 vMousePos;
 
-	float fSpriteyMatrix[16];
+	float fUGFrameSpriteMatrix[16];
 
 	
 

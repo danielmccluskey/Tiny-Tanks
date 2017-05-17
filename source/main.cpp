@@ -21,6 +21,9 @@ int iScreenHeight = 512;
 float fCenterX = iScreenWidth*0.5f;
 float fCenterY = iScreenHeight*0.5f;
 
+//Declares the global speed of the tanks.
+float fGlobalSpeed = 80.f;
+
 
 //struct Bullet
 //{
@@ -35,13 +38,6 @@ float fCenterY = iScreenHeight*0.5f;
 //	Vector2 pos;
 //	Vector2 Velocity;
 //};
-
-
-
-int iSpeed = 1;
-PlayerTank RayCastTest;
-
-
 
 int main(int argv, char* argc[])
 {
@@ -59,6 +55,7 @@ int main(int argv, char* argc[])
 		//Creates a new Player sprite.
 		PlayerTank newTank;
 		newTank.CreateTank(fCenterX, fCenterY);
+		newTank.fSpeed = fGlobalSpeed;
 		//newTank.UpdateCollisionMap();
 
 		////Enemy Test
