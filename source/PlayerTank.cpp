@@ -59,6 +59,7 @@ void PlayerTank::MoveTank()
 	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg)-90));
 
 	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
+	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.dX, vPos.dY);
 	
 
 }
@@ -109,23 +110,25 @@ void PlayerTank::CalculateBoundaries()
 	AABBCheck.vBotLeft.dZ = GetTile(fTileWidth, AABBCheck.vBotLeft);
 	AABBCheck.vBotRight.dZ = GetTile(fTileWidth, AABBCheck.vBotRight);
 
-	//Function that checks the corner positions of the sprite to see if they are colliding with the map
-	if (((!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg>=271 && iRotDeg <=360)) ||
-		(!(CollisionDetection(AABBCheck.vTopRight)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 0 && iRotDeg <= 90)) ||
-		(!(CollisionDetection(AABBCheck.vBotLeft)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 181 && iRotDeg <= 270)) ||
-		(!(CollisionDetection(AABBCheck.vBotRight)) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg >= 91 && iRotDeg <= 180)))
+	if (UG::IsKeyDown(UG::KEY_W))
 	{
-		if (UG::IsKeyDown(UG::KEY_W))
+		//Function that checks the corner positions of the sprite to see if they are colliding with the map
+		if (((!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg >= 271 && iRotDeg <= 360)) ||
+			(!(CollisionDetection(AABBCheck.vTopRight)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 0 && iRotDeg <= 90)) ||
+			(!(CollisionDetection(AABBCheck.vBotLeft)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 181 && iRotDeg <= 270)) ||
+			(!(CollisionDetection(AABBCheck.vBotRight)) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg >= 91 && iRotDeg <= 180)))
 		{
+
 			vPos += vVelocity;
 		}
-		if (UG::IsKeyDown(UG::KEY_S))
-		{
-			vPos -= vVelocity;
-		}
 	}
+	if (UG::IsKeyDown(UG::KEY_S))
+	{
+		vPos -= vVelocity;
+	}
+	
 
-	UG::MoveSprite(sSpriteTurret.iSpriteID, AABBCheck.vTopLeft.dX, AABBCheck.vTopLeft.dY);
+	
 }
 
 void PlayerTank::RotateSprite(int a_iSpriteID, float a_fRad)

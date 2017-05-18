@@ -58,16 +58,36 @@ int main(int argv, char* argc[])
 		newTank.UpdateCollisionMap();
 
 		////Enemy Test
-		//Enemy newEnemy;
-		//newEnemy.CreateTank(40, 40);
-		//newEnemy.UpdateCollisionMap();
+		Enemy newEnemy;
+		newEnemy.CreateTank(320, 256);
+
+		newEnemy.UpdateCollisionMap();//
 
 		//Bullet *BulletArray = new Bullet[20];
 
-		
-
+		bool iCurrentMouseState = false;
+		bool iLastMouseState = false;
 		do
 		{
+
+			if (UG::GetMouseButtonDown(0))
+			{
+				iCurrentMouseState = true;
+				
+			}
+			if (UG::GetMouseButtonReleased(0))
+			{
+				iCurrentMouseState = false;
+				iLastMouseState = false;
+			}
+
+			if (iCurrentMouseState == true && iLastMouseState == false)
+			{
+				iLastMouseState = true;
+				newEnemy.StepTank(newEnemy.vPos, newTank.vPos);
+			}
+			
+
 			newTank.CalculateBoundaries();
 			newTank.MoveTank();
 

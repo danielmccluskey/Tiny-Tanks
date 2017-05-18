@@ -28,11 +28,14 @@ public:
 	void UnLoadLevel(MapGenerator *a_pPosition);
 	void DrawLevelTiles(MapGenerator *a_pPosition);//Draws all the sprites
 
+	void GeneratePathFindingNodes();
+
 	MapGenerator& GetMapPosition(MapGenerator *a_pPosition, int a_iX, int a_iY);
 
 private:
 	int iSpriteID = 0;//Sprite ID
 
+	
 	
 	//Variables to hold the current position in the map
 	int	iTileX;

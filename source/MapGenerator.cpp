@@ -99,6 +99,8 @@ void MapGenerator::LoadLevel(char* a_cLevelPath, MapGenerator *a_pPosition)
 	
 	DrawLevelTiles(a_pPosition);
 }
+
+
 void MapGenerator::UnLoadLevel(MapGenerator *a_pPosition)
 {
 	//The following is the code that draws out the tiles from the Array map
@@ -111,4 +113,9 @@ void MapGenerator::UnLoadLevel(MapGenerator *a_pPosition)
 			UG::DestroySprite(pCurrentTile.iSpriteID);//Deletes that tile.
 		}
 	}
+}
+
+void MapGenerator::GeneratePathFindingNodes()
+{
+
 }

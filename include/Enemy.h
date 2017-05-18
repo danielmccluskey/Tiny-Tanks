@@ -1,10 +1,10 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
 
-#include "OtherFunctions.h"
 #include "Vector3.h"
 #include "Vector2.h"
-struct EnemyTurret;
+#include "CustomEnum.h"
+
 
 class Enemy
 {
@@ -24,7 +24,23 @@ public:
 	void GetSurroundingTiles(int a_iTileWidth);
 	void UpdateCollisionMap();
 	void CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards);
+	int PathFindHCalc(Vector2 a_vStart, Vector2 a_vGoal);
+	int PathFindFCalc(Vector2 a_vStart, Vector2 a_vGoal);
+	int PathFindTileCheck(Vector2 a_vStart, Vector2 a_vGoal);
+	void StepTank(Vector2 a_vStart, Vector2 a_vGoal);
 	int iSpriteID;
+
+	int iEnemyCollisionMap[(iMapHeight*iMapWidth)];
+	Vector2 vPos;
+private:
+
+	int iLastDirection;
+	int iSpriteWidth = 32;
+	int iSpriteHeight = 32;
+	int iLeftCost = 0;
+	int iTopCost = 0;
+	int iRightCost = 0;
+	int iBottomCost = 0;
 };
 
 
