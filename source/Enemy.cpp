@@ -124,46 +124,39 @@ int Enemy::PathFindTileCheck(Vector2 a_vStart, Vector2 a_vGoal)
 	(iBottomCost == 0) ? (iBottomCost = PathFindHCalc(vBottomTile, a_vGoal)) : (iBottomCost = 100);
 	
 
-
-	int iNewMin = 0;
-	int iOldMin = 0;
+	int iPriorityArray[4] = { -1,-1,-1,-1 };
 	int iChooseMin = 100;
 	int minArray[4] = { iLeftCost, iRightCost, iBottomCost, iTopCost };
 	for (int i = 0; i < 4; i++)
 	{
 		if (minArray[i] < iChooseMin)
 		{
-			iOldMin = iNewMin;
-			iNewMin = i;
-			iChooseMin = minArray[i];
+			iPriorityArray[3] = iPriorityArray[2];
+			iPriorityArray[2] = iPriorityArray[1];
+			iPriorityArray[1] = iPriorityArray[0];
+			iPriorityArray[0] = i;
 		}
 	}
 
-	return iNewMin;
-	if (iNewMin == 0 && iLastDirection != 1)
+	if (iPriorityArray[0] != -1)
 	{
-		iLastDirection = iNewMin;
-		return iNewMin;
+		return iPriorityArray[0];
 	}
-	else if (iNewMin == 1 && iLastDirection != 0)
+	else if (iPriorityArray[1] != -1)
 	{
-		iLastDirection = iNewMin;
-		return iNewMin;
+		return iPriorityArray[1];
 	}
-	else if (iNewMin == 2 && iLastDirection != 3)
+	else if (iPriorityArray[2] != -1)
 	{
-		iLastDirection = iNewMin;
-		return iNewMin;
+		return iPriorityArray[2];
 	}
-	else if (iNewMin == 3 && iLastDirection != 2)
+	else if (iPriorityArray[3] != -1)
 	{
-		iLastDirection = iNewMin;
-		return iNewMin;
+		return iPriorityArray[3];
 	}
 	else
 	{
-		iLastDirection = iOldMin;
-		return iOldMin;
+		return iPriorityArray[0];
 	}
 
 	
