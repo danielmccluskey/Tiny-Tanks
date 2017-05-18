@@ -86,13 +86,13 @@ int main(int argv, char* argc[])
 				iLastMouseState = true;
 				
 			}
+
 			newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
 
 			newTank.CalculateBoundaries();
 			newTank.MoveTank();
 
-			//newEnemy.GetSurroundingTiles(MapGen[0].iTileWidth);
-			//newEnemy.MoveTank(newTank);
+			
 
 			if (UG::GetMouseButtonDown(0))
 			{				

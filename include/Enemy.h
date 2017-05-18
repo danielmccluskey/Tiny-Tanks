@@ -20,10 +20,7 @@ public:
 	void CreateTank(float a_fX, float a_fY);
 
 	//Function that moves the tank
-	void MoveTank(float a_fDeg);
-	void GetSurroundingTiles(int a_iTileWidth);
 	void UpdateCollisionMap();
-	void CollisionDetection(int a_iLowerBound, int a_iUpperBound, Vector3& a_vForwards, Vector3& a_vBackwards);
 	int PathFindHCalc(Vector2 a_vStart, Vector2 a_vGoal);
 	int PathFindFCalc(Vector2 a_vStart, Vector2 a_vGoal);
 	int PathFindTileCheck(Vector2 a_vStart, Vector2 a_vGoal);
