@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include "UGFW.h"
+#include "MathUtil.h"
+#include "Matrix4x4.h"
 
 void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
 {
@@ -14,27 +16,87 @@ void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
 	vPos = Vector2(a_fCenterX, a_fCenterX);
 	UG::MoveSprite(iSpriteID, a_fCenterX, a_fCenterY);
 	UG::SetSpriteLayer(iSpriteID, 9);
+	bIsRotating = false;
+	bIsTravelling = false;
+
 };
-void Enemy::StepTank(Vector2 a_vStart, Vector2 a_vGoal)
+void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
+{
+	if (!bIsTravelling && !bIsRotating)
+	{
+		GetNextGoal(a_vStart, a_vGoal);
+		bIsRotating = true;
+		fLerpPosition = 0;
+	}
+	if (bIsRotating == true)
+	{
+		if (fLerpPosition == 0)
+		{
+			UG::GetSpriteMatrix(iSpriteID, fUGFrameSpriteMatrix);
+			iStartAngle = acos(fUGFrameSpriteMatrix[0]);
+			iEndAngle = GetNextGoal(a_vStart, a_vGoal);
+			if (iEndAngle == iLastDirection)
+			{
+				bIsRotating = false;
+				fLerpPosition = 1;
+			}
+			vStartPos = vPos;
+			switch (iEndAngle)
+			{
+			case 0:
+				iEndAngle = 270;
+				vEndPos = Vector2(vPos.dX - fTileWidth, vPos.dY);
+				break;
+			case 1:
+				iEndAngle = 90;
+				vEndPos = Vector2(vPos.dX + fTileWidth, vPos.dY);
+				break;
+			case 2:
+				iEndAngle = 180;
+				vEndPos = Vector2(vPos.dX , vPos.dY - fTileWidth);
+				break;
+			case 3:
+				iEndAngle = 0;
+				vEndPos = Vector2(vPos.dX , vPos.dY + fTileWidth);
+				break;
+			}
+		}
+		if (fLerpPosition >= 0 && fLerpPosition <= 1)
+		{
+			RotateSprite(iSpriteID, DegreesToRadians((Lerp(iStartAngle, iEndAngle, fLerpPosition))));
+			fLerpPosition += 0.05f;
+		}
+		if (fLerpPosition >= 1 || iStartAngle == iEndAngle)
+		{
+			RotateSprite(iSpriteID, DegreesToRadians((Lerp(iStartAngle, iEndAngle, 1))));
+			bIsRotating = false;
+			bIsTravelling = true;
+			fLerpPosition = 0;
+		}
+	}
+	if (bIsTravelling == true)
+	{
+		if (fLerpPosition >= 1)
+		{
+			bIsTravelling = false;
+			fLerpPosition = 0;
+			vPos = vEndPos;
+			std::cout << "GOAL" << std::endl;
+		}
+		else if (fLerpPosition >= 0 && fLerpPosition <= 1)
+		{
+			vPos = Vector2(Lerp(vStartPos.dX, vEndPos.dX, fLerpPosition), Lerp(vStartPos.dY, vEndPos.dY, fLerpPosition));
+			fLerpPosition += 0.01f;
+		}
+		UG::MoveSprite(iSpriteID, vPos.dX + (fTileWidth / 2), vPos.dY + (fTileWidth / 2));
+	}
+}
+
+int Enemy::GetNextGoal(Vector2 a_vStart, Vector2 a_vGoal)
 {
 	int iDirection = PathFindTileCheck(a_vStart, a_vGoal);
-	switch (iDirection)
-	{
-	case 0:
-		vPos.dX -= fTileWidth;
-		break;
-	case 1:
-		vPos.dX += fTileWidth;
-		break;
-	case 2:
-		vPos.dY -= fTileWidth;
-		break;
-	case 3:
-		vPos.dY += fTileWidth;
-		break;
-	}
 
-	UG::MoveSprite(iSpriteID, vPos.dX + (iSpriteWidth/2), vPos.dY + (iSpriteHeight/2));
+	return iDirection;
 }
 
 int Enemy::PathFindTileCheck(Vector2 a_vStart, Vector2 a_vGoal)
@@ -62,10 +124,6 @@ int Enemy::PathFindTileCheck(Vector2 a_vStart, Vector2 a_vGoal)
 	(iBottomCost == 0) ? (iBottomCost = PathFindHCalc(vBottomTile, a_vGoal)) : (iBottomCost = 100);
 	
 
-	std::cout << "Left: " << iLeftCost << std::endl;
-	std::cout << "Right: " << iRightCost << std::endl;
-	std::cout << "Top: " << iTopCost << std::endl;
-	std::cout << "Bot: " << iBottomCost << std::endl;
 
 	int iNewMin = 0;
 	int iOldMin = 0;
@@ -170,4 +228,19 @@ int Enemy::GetTile(int a_iTileWidth, Vector2 a_vPos)
 	int a_iY = (a_vPos.dY);
 
 	return iEnemyCollisionMap[(a_iY * iMapWidth) + a_iX];
+}
+void Enemy::RotateSprite(int a_iSpriteID, float a_fRad)
+{
+	UG::GetSpriteMatrix(a_iSpriteID, fUGFrameSpriteMatrix);//Gets the sprite matrix of the given sprite and stores it in a size[16] float array.
+	Matrix4x4 mRotateMatrix(fUGFrameSpriteMatrix);//Creates a 4x4 Matrix with the UG Framework matrix.
+	mRotateMatrix.RotateZ(a_fRad);//Rotates that with the given rotation on the Z Axis.
+
+	//Method Discovered after reading Daniel Budworth-Mead's UGFW++ linked on the Facebook group http://pastebin.com/fHGNgjrL
+	//Sets the newly rotated values to the UGFramework matrix. I tried just multiplying the Matrix together but always ended up with errors.
+	fUGFrameSpriteMatrix[0] = mRotateMatrix.GetMatrixValue(0);//cos
+	fUGFrameSpriteMatrix[1] = mRotateMatrix.GetMatrixValue(1);//-sin
+	fUGFrameSpriteMatrix[4] = mRotateMatrix.GetMatrixValue(4);//sin
+	fUGFrameSpriteMatrix[5] = mRotateMatrix.GetMatrixValue(5);//cos
+
+	UG::SetSpriteMatrix(a_iSpriteID, fUGFrameSpriteMatrix);//Sets the Matrix, rotating the sprite.
 }

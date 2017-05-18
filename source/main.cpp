@@ -84,9 +84,9 @@ int main(int argv, char* argc[])
 			if (iCurrentMouseState == true && iLastMouseState == false)
 			{
 				iLastMouseState = true;
-				newEnemy.StepTank(newEnemy.vPos, newTank.vPos);
+				
 			}
-			
+			newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
 
 			newTank.CalculateBoundaries();
 			newTank.MoveTank();

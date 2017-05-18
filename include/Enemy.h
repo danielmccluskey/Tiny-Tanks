@@ -27,13 +27,23 @@ public:
 	int PathFindHCalc(Vector2 a_vStart, Vector2 a_vGoal);
 	int PathFindFCalc(Vector2 a_vStart, Vector2 a_vGoal);
 	int PathFindTileCheck(Vector2 a_vStart, Vector2 a_vGoal);
-	void StepTank(Vector2 a_vStart, Vector2 a_vGoal);
+	int GetNextGoal(Vector2 a_vStart, Vector2 a_vGoal);
+	void MoveTank(Vector2 a_vStart, Vector2 a_vGoal);
 	int iSpriteID;
+	void RotateSprite(int a_iSpriteID, float a_fRad);
 
 	int iEnemyCollisionMap[(iMapHeight*iMapWidth)];
 	Vector2 vPos;
+
 private:
 
+	Vector2 vStartPos;
+	Vector2 vEndPos;
+	int iStartAngle, iEndAngle;
+	float fUGFrameSpriteMatrix[16];
+	float fLerpPosition = 0;
+	bool bIsTravelling;
+	bool bIsRotating;
 	int iLastDirection;
 	int iSpriteWidth = 32;
 	int iSpriteHeight = 32;

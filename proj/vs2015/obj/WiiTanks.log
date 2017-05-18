@@ -1,28 +1,37 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Enemy.cpp
-c:\users\data-3\downloads\game\source\enemy.cpp(11): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(52): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(53): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(54): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(55): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(131): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(135): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(144): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(148): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(151): warning C4129: 'X': unrecognized character escape sequence
-c:\users\data-3\downloads\game\source\enemy.cpp(169): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(170): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(85): warning C4702: unreachable code
-c:\users\data-3\downloads\game\source\enemy.cpp(87): warning C4702: unreachable code
-c:\users\data-3\downloads\game\source\enemy.cpp(90): warning C4702: unreachable code
-c:\users\data-3\downloads\game\source\enemy.cpp(92): warning C4702: unreachable code
-c:\users\data-3\downloads\game\source\enemy.cpp(95): warning C4702: unreachable code
-c:\users\data-3\downloads\game\source\enemy.cpp(97): warning C4702: unreachable code
-c:\users\data-3\downloads\game\source\enemy.cpp(100): warning C4702: unreachable code
-c:\users\data-3\downloads\game\source\enemy.cpp(102): warning C4702: unreachable code
-c:\users\data-3\downloads\game\source\enemy.cpp(107): warning C4702: unreachable code
-  WiiTanks.vcxproj -> C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
+c:\users\s1600056\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\s1600056\downloads\game\source\enemy.cpp(13): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(88): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(91): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(114): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(115): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(116): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(117): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(189): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(193): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(202): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(206): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(209): warning C4129: 'X': unrecognized character escape sequence
+c:\users\s1600056\downloads\game\source\enemy.cpp(227): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(228): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(240): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(241): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(242): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(243): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\enemy.cpp(143): warning C4702: unreachable code
+c:\users\s1600056\downloads\game\source\enemy.cpp(145): warning C4702: unreachable code
+c:\users\s1600056\downloads\game\source\enemy.cpp(148): warning C4702: unreachable code
+c:\users\s1600056\downloads\game\source\enemy.cpp(150): warning C4702: unreachable code
+c:\users\s1600056\downloads\game\source\enemy.cpp(153): warning C4702: unreachable code
+c:\users\s1600056\downloads\game\source\enemy.cpp(155): warning C4702: unreachable code
+c:\users\s1600056\downloads\game\source\enemy.cpp(158): warning C4702: unreachable code
+c:\users\s1600056\downloads\game\source\enemy.cpp(160): warning C4702: unreachable code
+c:\users\s1600056\downloads\game\source\enemy.cpp(165): warning C4702: unreachable code
+  WiiTanks.vcxproj -> C:\Users\s1600056\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
-  xcopy "C:\Users\Data-3\Downloads\game\scripts\..\resources\"*.* "C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
+  xcopy "C:\Users\s1600056\Downloads\game\scripts\..\resources\"*.* "C:\Users\s1600056\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
   0 File(s) copied
