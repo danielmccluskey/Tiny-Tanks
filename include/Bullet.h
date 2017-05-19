@@ -8,13 +8,13 @@
 //==============================================================================================================================
 #ifndef _BULLET_H_
 #define _BULLET_H_
+#include "Vector2.h"
 class Bullet
 {
 public:
 
-	~Bullet()
-	{
-	}
+	Bullet();
+	~Bullet();
 	int iSpriteID = 0;//Sprite ID
 
 
@@ -33,7 +33,8 @@ public:
 
 private:
 	
-
+	Vector2 vVelocity;
+	Vector2 vPos;
 };
 
 #endif //_BULLET_H_
