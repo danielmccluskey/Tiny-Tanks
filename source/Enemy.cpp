@@ -8,13 +8,14 @@
 #include "MathUtil.h"
 #include "Matrix4x4.h"
 
+
 void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
 {
 	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite
 																									
 	UG::DrawSprite(iSpriteID);	//Draws it
-	vPos = Vector2(a_fCenterX, a_fCenterX);
-	UG::MoveSprite(iSpriteID, a_fCenterX, a_fCenterY);
+	vPos = Vector2(a_fCenterX + (fTileWidth/2), a_fCenterX+(fTileWidth/2));
+	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
 	UG::SetSpriteLayer(iSpriteID, 9);
 	bIsRotating = false;
 	bIsTravelling = false;
@@ -22,15 +23,20 @@ void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
 };
 void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 {
-	if (!bIsTravelling && !bIsRotating)
-	{
-		GetNextGoal(a_vStart, a_vGoal);
-		bIsRotating = true;
-		fLerpPosition = 0;
-	}
 	if (bIsRotating == true)
 	{
-		if (fLerpPosition == 0)
+		oPathFinder.FindPath(Vector3(a_vStart.dX, 0, a_vStart.dY), Vector3(a_vGoal.dX, 0, a_vGoal.dY));
+		//oPathFinder.FindPath(Vector3(a_vStart.dX, 0, a_vStart.dY), Vector3(a_vGoal.dX, 0, a_vGoal.dY));
+		if (oPathFinder.bFoundGoal)
+		{
+			//oPathFinder.DrawDebug();
+			bIsRotating = false;
+			bIsTravelling = true;
+			vDistanceTarget = oPathFinder.NextPathPos(Vector3(vPos.dX, 0, vPos.dY), false);
+			fLerpPosition = 0;
+		}
+
+		/*if (fLerpPosition == 0)
 		{
 			UG::GetSpriteMatrix(iSpriteID, fUGFrameSpriteMatrix);
 			iStartAngle = acos(fUGFrameSpriteMatrix[0]);
@@ -72,11 +78,42 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 			bIsRotating = false;
 			bIsTravelling = true;
 			fLerpPosition = 0;
-		}
+		}*/
 	}
 	if (bIsTravelling == true)
 	{
+		
+		Vector3 vNextSpot = oPathFinder.SecondNextPathPos(vDistanceTarget);
+		if (vNextSpot.dY == -100)
+		{
+			bIsTravelling = false;
+			oPathFinder.bInitialisedStart = false;
+		}
+		
 		if (fLerpPosition >= 1)
+		{
+			vDistanceTarget = oPathFinder.NextPathPos(vNextSpot, true);
+			if (vDistanceTarget.dY == -100)
+			{
+				bIsTravelling = false;
+				oPathFinder.bInitialisedStart = false;
+			}
+			fLerpPosition = 0;
+		}
+		else if (fLerpPosition >= 0 && fLerpPosition <= 1)
+		{
+			vPos = Vector2(Lerp(vDistanceTarget.dX, vNextSpot.dX, fLerpPosition), Lerp(vDistanceTarget.dZ, vNextSpot.dZ, fLerpPosition));
+			fLerpPosition += 0.2f;
+		}
+		
+		
+
+
+		
+		UG::MoveSprite(iSpriteID, vPos.dX + fTileWidth/2, vPos.dY+fTileWidth/2);
+
+
+		/*if (fLerpPosition >= 1)
 		{
 			bIsTravelling = false;
 			fLerpPosition = 0;
@@ -88,7 +125,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 			vPos = Vector2(Lerp(vStartPos.dX, vEndPos.dX, fLerpPosition), Lerp(vStartPos.dY, vEndPos.dY, fLerpPosition));
 			fLerpPosition += 0.01f;
 		}
-		UG::MoveSprite(iSpriteID, vPos.dX + (fTileWidth / 2), vPos.dY + (fTileWidth / 2));
+		UG::MoveSprite(iSpriteID, vPos.dX + (fTileWidth / 2), vPos.dY + (fTileWidth / 2));*/
 	}
 }
 

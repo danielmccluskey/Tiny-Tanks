@@ -24,8 +24,10 @@ public:
 
 	float GetManhattenDistance(SearchCell *a_pNodeEnd)
 	{
-		float fX = (float)(fabs(this->iX - a_pNodeEnd->iX));
-		float fY = (float)(fabs(this->iY - a_pNodeEnd->iY));
+		float fX = (float)(fabs((float)(this->iX - a_pNodeEnd->iX)));
+		float fY = (float)(fabs((float)(this->iY - a_pNodeEnd->iY)));
+
+		return fX + fY;
 	}
 };
 

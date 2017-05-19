@@ -1,66 +1,13 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Enemy.cpp
-c:\users\s1600056\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\s1600056\downloads\game\source\enemy.cpp(13): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(88): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(91): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(114): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(115): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(116): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(117): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(182): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(186): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(195): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(199): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(202): warning C4129: 'X': unrecognized character escape sequence
-c:\users\s1600056\downloads\game\source\enemy.cpp(220): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(221): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(233): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(234): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(235): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\enemy.cpp(236): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-UG Basic Framework.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(stb_image_aug.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(SOIL.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(image_helper.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(image_DXT.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(glew.obj) : warning LNK4099: PDB 'glew_static.pdb' was not found with 'UG Basic Framework.lib(glew.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glew_static.pdb'; linking object as if no debug info
-UG Basic Framework.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(wgl_context.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(winmm_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(winmm_joystick.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_window.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_tls.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_tls.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_time.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_monitor.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(win32_init.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(window.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(monitor.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(input.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(init.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-UG Basic Framework.lib(context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'UG Basic Framework.lib(context.obj)' or at 'C:\Users\s1600056\Downloads\game\bin\x64\Debug\glfw.pdb'; linking object as if no debug info
-  WiiTanks.vcxproj -> C:\Users\s1600056\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
+  Pathfinding.cpp
+c:\users\data-3\downloads\game\include\searchcell.h(18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\pathfinding.cpp(44): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\pathfinding.cpp(45): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\pathfinding.cpp(48): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\pathfinding.cpp(49): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\pathfinding.cpp(106): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\pathfinding.cpp(252): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  WiiTanks.vcxproj -> C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
-  xcopy "C:\Users\s1600056\Downloads\game\scripts\..\resources\"*.* "C:\Users\s1600056\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\appData.xml
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\fonts\arial.fnt
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\fonts\arial_0.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\fonts\invaders.fnt
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\fonts\invaders_0.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\images\maps\box1 - Copy.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\images\maps\box1.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\images\maps\floor1 - Copy.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\images\maps\floor1.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\images\Tanks\tank_body.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\images\Tanks\tank_turret.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\images\Tanks\temp.png
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\maps\currentCollision.txt
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\maps\lvl_1.txt
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\maps\lvl_2.txt
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\maps\lvl_3.txt
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\maps\lvl_4.txt
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\shaders\default.fsh
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\shaders\default.vsh
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\shaders\spriteInstance.fsh
-  C:\Users\s1600056\Downloads\game\scripts\..\resources\shaders\spriteInstance.vsh
-  21 File(s) copied
+  xcopy "C:\Users\Data-3\Downloads\game\scripts\..\resources\"*.* "C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
+  0 File(s) copied

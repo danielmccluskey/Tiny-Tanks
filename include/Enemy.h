@@ -4,6 +4,7 @@
 #include "Vector3.h"
 #include "Vector2.h"
 #include "CustomEnum.h"
+#include "PathFinding.h"
 
 
 class Enemy
@@ -31,8 +32,11 @@ public:
 
 	int iEnemyCollisionMap[(iMapHeight*iMapWidth)];
 	Vector2 vPos;
-
+	bool bIsRotating;
 private:
+
+	PathFinding oPathFinder;
+	Vector3 vDistanceTarget;
 
 	Vector2 vStartPos;
 	Vector2 vEndPos;
@@ -40,7 +44,7 @@ private:
 	float fUGFrameSpriteMatrix[16];
 	float fLerpPosition = 0;
 	bool bIsTravelling;
-	bool bIsRotating;
+	
 	int iLastDirection;
 	int iSpriteWidth = 32;
 	int iSpriteHeight = 32;

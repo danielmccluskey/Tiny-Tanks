@@ -38,6 +38,9 @@ float fGlobalSpeed = 80.f;
 //	Vector2 Velocity;
 //};
 
+//test
+Vector2 vMousePos;
+
 int main(int argv, char* argc[])
 {
 
@@ -59,7 +62,7 @@ int main(int argv, char* argc[])
 
 		////Enemy Test
 		Enemy newEnemy;
-		newEnemy.CreateTank(320, 256);
+		newEnemy.CreateTank(320, 320);
 
 		newEnemy.UpdateCollisionMap();//
 
@@ -85,9 +88,14 @@ int main(int argv, char* argc[])
 			{
 				iLastMouseState = true;
 				
+				UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position and stores it in the class members variable.
+				vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
+				newEnemy.bIsRotating = true;
+				
+				
 			}
 
-			newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
+			newEnemy.MoveTank(newEnemy.vPos, vMousePos);
 
 			newTank.CalculateBoundaries();
 			newTank.MoveTank();
