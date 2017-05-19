@@ -150,42 +150,52 @@ void PathFinding::UpdateCollisionMap()
 
 void PathFinding::ContinuePath()
 {
-	if (vOpenList.empty())
+	for (int i = 0; i < 4; i++)
 	{
-		return;
-	}
-	SearchCell* pCurrentCell = GetNextCell();
-
-	if (pCurrentCell->iID == pGoalCell->iID)
-	{
-		pGoalCell->sParent = pCurrentCell->sParent;
-
-		SearchCell* pGetPath;
-
-		for (pGetPath = pGoalCell; pGetPath != NULL; pGetPath = pGetPath->sParent)
+		if (vOpenList.empty())
 		{
-			vGoalPath.push_back(new Vector3(pGetPath->iX * fTileWidth, 0, pGetPath->iY * fTileWidth));
+			return;
 		}
+		SearchCell* pCurrentCell = GetNextCell();
 
-		bFoundGoal = true;
-		return;
-	}
-	else
-	{
-		PathOpened(pCurrentCell->iX + 1, pCurrentCell->iY, pCurrentCell->fG + 1, pCurrentCell);//Right Side
-		PathOpened(pCurrentCell->iX - 1, pCurrentCell->iY, pCurrentCell->fG + 1, pCurrentCell);//Left Side
-		PathOpened(pCurrentCell->iX, pCurrentCell->iY + 1, pCurrentCell->fG + 1, pCurrentCell);//Top Side
-		PathOpened(pCurrentCell->iX, pCurrentCell->iY - 1, pCurrentCell->fG + 1, pCurrentCell);//Bottom Side
-
-		for (int  i = 0; i < vOpenList.size(); i++)
+		if (pCurrentCell->iID == pGoalCell->iID)
 		{
-			if (pCurrentCell->iID == vOpenList[i]->iID)
+			pGoalCell->sParent = pCurrentCell->sParent;
+
+			SearchCell* pGetPath;
+
+			for (pGetPath = pGoalCell; pGetPath != NULL; pGetPath = pGetPath->sParent)
 			{
-				vOpenList.erase(vOpenList.begin() + i);
-			}
-		}
+				vGoalPath.push_back(new Vector3(pGetPath->iX * fTileWidth, 0, pGetPath->iY * fTileWidth));
 
+				//Debug code to show path.
+				//int iSpriteID = UG::CreateSprite("./images/Tanks/temp3.png", 32, 32, true);//Create the sprite
+
+				//UG::DrawSprite(iSpriteID);	//Draws it
+				//UG::MoveSprite(iSpriteID, pGetPath->iX*fTileWidth, pGetPath->iY*fTileWidth);
+			}
+
+			bFoundGoal = true;
+			return;
+		}
+		else
+		{
+			PathOpened(pCurrentCell->iX + 1, pCurrentCell->iY, pCurrentCell->fG + 1, pCurrentCell);//Right Side
+			PathOpened(pCurrentCell->iX - 1, pCurrentCell->iY, pCurrentCell->fG + 1, pCurrentCell);//Left Side
+			PathOpened(pCurrentCell->iX, pCurrentCell->iY + 1, pCurrentCell->fG + 1, pCurrentCell);//Top Side
+			PathOpened(pCurrentCell->iX, pCurrentCell->iY - 1, pCurrentCell->fG + 1, pCurrentCell);//Bottom Side
+
+			for (int i = 0; i < vOpenList.size(); i++)
+			{
+				if (pCurrentCell->iID == vOpenList[i]->iID)
+				{
+					vOpenList.erase(vOpenList.begin() + i);
+				}
+			}
+
+		}
 	}
+	
 }
 
 Vector3 PathFinding::NextPathPos(Vector3 a_vPos, bool a_bFoundGoal)
@@ -205,9 +215,6 @@ Vector3 PathFinding::NextPathPos(Vector3 a_vPos, bool a_bFoundGoal)
 	Vector3 vNextPosCell;
 	vNextPosCell.dX = vGoalPath[vGoalPath.size() - iIndex]->dX;
 	vNextPosCell.dZ = vGoalPath[vGoalPath.size() - iIndex]->dZ;
-
-	Vector3 vDistance = Vector3(vNextPosCell.dX- a_vPos.dX, 0, vNextPosCell.dZ - a_vPos.dZ);
-
 	
 	return vNextPosCell;
 }
@@ -229,26 +236,19 @@ Vector3 PathFinding::SecondNextPathPos(Vector3 a_vPos)
 
 void PathFinding::DrawDebug()
 {
-	for (int i = 0; i < vOpenList.size(); i++)
-	{
-		int iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 32, 32, true);//Create the sprite
-		UG::DrawSprite(iSpriteID);	//Draws it
-		UG::MoveSprite(iSpriteID, vOpenList[i]->iX*fTileWidth, vOpenList[i]->iY*fTileWidth);
-	}
+	//for (int i = 0; i < vOpenList.size(); i++)
+	//{
+	//	int iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 32, 32, true);//Create the sprite
+	//	UG::DrawSprite(iSpriteID);	//Draws it
+	//	UG::MoveSprite(iSpriteID, vOpenList[i]->iX*fTileWidth, vOpenList[i]->iY*fTileWidth);
+	//}
 
-	for (int i = 0; i < vClosedList.size(); i++)
-	{
-		int iSpriteID = UG::CreateSprite("./images/Tanks/temp2.png", 32, 32, true);//Create the sprite
+	//for (int i = 0; i < vClosedList.size(); i++)
+	//{
+	//	int iSpriteID = UG::CreateSprite("./images/Tanks/temp2.png", 32, 32, true);//Create the sprite
 
-		UG::DrawSprite(iSpriteID);	//Draws it
-		UG::MoveSprite(iSpriteID, vClosedList[i]->iX*fTileWidth, vClosedList[i]->iY*fTileWidth);
-	}
+	//	UG::DrawSprite(iSpriteID);	//Draws it
+	//	UG::MoveSprite(iSpriteID, vClosedList[i]->iX*fTileWidth, vClosedList[i]->iY*fTileWidth);
+	//}
 
-	for (int i = 0; i < vGoalPath.size(); i++)
-	{
-		int iSpriteID = UG::CreateSprite("./images/Tanks/temp3.png", 32, 32, true);//Create the sprite
-
-		UG::DrawSprite(iSpriteID);	//Draws it
-		UG::MoveSprite(iSpriteID, vGoalPath[i]->dX*fTileWidth, vGoalPath[i]->dZ*fTileWidth);
-	}
 }

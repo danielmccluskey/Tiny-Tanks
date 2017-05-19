@@ -29,29 +29,27 @@ public:
 	void MoveTank(Vector2 a_vStart, Vector2 a_vGoal);
 	int iSpriteID;
 	void RotateSprite(int a_iSpriteID, float a_fRad);
+	float GetBearing(Vector2 &a_V1, Vector2 &a_V2);
+	float GetBearing(Vector3 &a_V1, Vector3 &a_V2);
 
 	int iEnemyCollisionMap[(iMapHeight*iMapWidth)];
 	Vector2 vPos;
-	bool bIsRotating;
+	bool bStart;
 private:
 
 	PathFinding oPathFinder;
 	Vector3 vDistanceTarget;
 
-	Vector2 vStartPos;
-	Vector2 vEndPos;
+	Vector3 vNextSpot;
 	int iStartAngle, iEndAngle;
 	float fUGFrameSpriteMatrix[16];
 	float fLerpPosition = 0;
 	bool bIsTravelling;
-	
-	int iLastDirection;
+	bool bIsRotating;
+	float fBearing;
+	float fOldBearing = 0;
 	int iSpriteWidth = 32;
 	int iSpriteHeight = 32;
-	int iLeftCost = 0;
-	int iTopCost = 0;
-	int iRightCost = 0;
-	int iBottomCost = 0;
 };
 
 

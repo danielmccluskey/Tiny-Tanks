@@ -90,12 +90,11 @@ int main(int argv, char* argc[])
 				
 				UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position and stores it in the class members variable.
 				vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
-				newEnemy.bIsRotating = true;
-				
+				newEnemy.bStart = true;				
 				
 			}
 
-			newEnemy.MoveTank(newEnemy.vPos, vMousePos);
+			newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
 
 			newTank.CalculateBoundaries();
 			newTank.MoveTank();
@@ -134,6 +133,11 @@ int main(int argv, char* argc[])
 			{
 				MapGen[0].UnLoadLevel(MapGen);
 				MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
+			}
+			if (UG::IsKeyDown(UG::KEY_5))
+			{
+				MapGen[0].UnLoadLevel(MapGen);
+				MapGen[0].LoadLevel("./maps/lvl_5.txt", MapGen);
 			}
 			
 
