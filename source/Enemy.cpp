@@ -136,3 +136,11 @@ float Enemy::GetBearing(Vector3 &a_V1, Vector3 &a_V2)
 	float fYChange = (a_V1.dZ - a_V2.dZ);
 	return atan2(fYChange, fXChange)*(180 / fPI);
 }
+
+void Enemy::LookToPlayer(Vector2 a_vPlayerPos)
+{
+	sSpriteTurret.iRotDeg = GetBearing(vPos, a_vPlayerPos);
+	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg) - 90));
+
+	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.dX + fTileWidth / 2, vPos.dY + fTileWidth / 2);
+}

@@ -126,9 +126,10 @@ int main(int argv, char* argc[])
 
 			case GAMEPLAY:
 			{
-				newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
 				newTank.CalculateBoundaries();
 				newTank.MoveTank();
+				newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
+				newEnemy.LookToPlayer(newTank.vPos);
 			}
 			break;
 			}

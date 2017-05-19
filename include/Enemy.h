@@ -5,6 +5,7 @@
 #include "Vector2.h"
 #include "CustomEnum.h"
 #include "PathFinding.h"
+#include "Turret.h"
 
 
 class Enemy
@@ -31,12 +32,14 @@ public:
 	void RotateSprite(int a_iSpriteID, float a_fRad);
 	float GetBearing(Vector2 &a_V1, Vector2 &a_V2);
 	float GetBearing(Vector3 &a_V1, Vector3 &a_V2);
+	void LookToPlayer(Vector2 a_vPlayerPos);
 
 	int iEnemyCollisionMap[(iMapHeight*iMapWidth)];
 	Vector2 vPos;
 	bool bStart;
 private:
 
+	Turret sSpriteTurret;
 	PathFinding oPathFinder;
 	Vector3 vDistanceTarget;
 
