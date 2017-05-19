@@ -11,7 +11,7 @@ class Enemy
 {
 public:
 	Enemy() {}
-	~Enemy() {}
+	~Enemy();
 	
 	//Function to handle the movement of the tank.
 	int GetTile(int a_iTileWidth, Vector2 a_vPos);

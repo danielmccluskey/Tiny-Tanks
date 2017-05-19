@@ -19,6 +19,11 @@ void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 	UG::MoveSprite(iSpriteID, a_fCenterX, a_fCenterY);//Moves sprite to starting position.
 	UG::SetSpriteLayer(iSpriteID, 9);//Makes sure the tank is drawn above the map.
 };
+PlayerTank::~PlayerTank()
+{
+	UG::StopDrawingSprite(iSpriteID);
+	UG::DestroySprite(iSpriteID);
+}
 
 //Function to handle the movement of the tank.
 void PlayerTank::MoveTank()

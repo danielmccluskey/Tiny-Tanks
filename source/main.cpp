@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "UGFW.h"
 #include "stdlib.h"
+#include "MenuSprites.h"
 #include <iostream>
 
 
@@ -22,7 +23,26 @@ float fCenterY = iScreenHeight*0.5f;
 
 //Declares the global speed of the tanks.
 float fGlobalSpeed = 80.f;
-
+//if (UG::GetMouseButtonDown(0))
+//{
+//	iCurrentMouseState = true;
+//
+//}
+//if (UG::GetMouseButtonReleased(0))
+//{
+//	iCurrentMouseState = false;
+//	iLastMouseState = false;
+//}
+//
+//if (iCurrentMouseState == true && iLastMouseState == false)
+//{
+//	iLastMouseState = true;
+//
+//	UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position and stores it in the class members variable.
+//	vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
+//	newEnemy.bStart = true;
+//
+//}
 
 //struct Bullet
 //{
@@ -52,7 +72,7 @@ int main(int argv, char* argc[])
 		
 		//Creates a new Map array and Loads a level from a text file.
 		MapGenerator *MapGen = new MapGenerator[384];
-		MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
+		
 
 		//Creates a new Player sprite.
 		PlayerTank newTank;
@@ -64,40 +84,58 @@ int main(int argv, char* argc[])
 		Enemy newEnemy;
 		newEnemy.CreateTank(320, 320);
 
-		newEnemy.UpdateCollisionMap();//
+		newEnemy.UpdateCollisionMap();
+
+
+		MenuSprite oMenuBackground(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth) + 200, (fMapWidth*fTileWidth) + 200), 10, "./Images/menu/background.png");
+		MenuSprite oMenuTitle(Vector2(fCenterX, iScreenHeight*0.78f), Vector2(500, 137), 11, "./Images/menu/title.png");
+		MenuSprite oMenuButtonPlay(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_play.png");
+		MenuSprite oMenuButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png");
 
 		//Bullet *BulletArray = new Bullet[20];
 
 		bool iCurrentMouseState = false;
 		bool iLastMouseState = false;
+
+		int iGameState = MENU;
 		do
 		{
-
-			if (UG::GetMouseButtonDown(0))
+			switch (iGameState)
 			{
-				iCurrentMouseState = true;
-				
-			}
-			if (UG::GetMouseButtonReleased(0))
+			case MENU:
 			{
-				iCurrentMouseState = false;
-				iLastMouseState = false;
-			}
+				oMenuBackground.RotateSprite(0.1f);
+				oMenuTitle.ThrobSprite(0.01f, 0.8f);
 
-			if (iCurrentMouseState == true && iLastMouseState == false)
+				if (oMenuButtonPlay.CheckClick())
+				{
+					MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
+					oMenuBackground.HideSprite();
+					oMenuTitle.HideSprite();
+					oMenuButtonPlay.HideSprite();
+					oMenuButtonQuit.HideSprite();
+					iGameState = GAMEPLAY;
+
+				}
+				if (oMenuButtonQuit.CheckClick())
+				{
+					UG::Close();
+				}
+			}
+			break;
+
+			case GAMEPLAY:
 			{
-				iLastMouseState = true;
-				
-				UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position and stores it in the class members variable.
-				vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
-				newEnemy.bStart = true;				
-				
+				newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
+				newTank.CalculateBoundaries();
+				newTank.MoveTank();
+			}
+			break;
 			}
 
-			newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
+			
 
-			newTank.CalculateBoundaries();
-			newTank.MoveTank();
+			
 
 			
 
@@ -148,6 +186,16 @@ int main(int argv, char* argc[])
 
 		MapGen[0].UnLoadLevel(MapGen);
 		delete[] MapGen;
+
+		newTank.~PlayerTank();
+		newEnemy.~Enemy();
+
+		oMenuBackground.~MenuSprite();
+		oMenuTitle.~MenuSprite();
+		oMenuButtonPlay.~MenuSprite();
+		oMenuButtonQuit.~MenuSprite();
+
+
 		UG::Dispose();
 
 	}

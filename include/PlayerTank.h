@@ -10,7 +10,7 @@ class PlayerTank
 {
 public:
 	PlayerTank() {}
-	~PlayerTank() {}
+	~PlayerTank();
 	friend class Vector2;
 	friend class Turret;
 

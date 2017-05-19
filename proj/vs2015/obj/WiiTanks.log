@@ -4,20 +4,20 @@ c:\users\data-3\downloads\game\include\searchcell.h(18): warning C4244: 'initial
 c:\users\data-3\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\data-3\downloads\game\source\enemy.cpp(14): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\data-3\downloads\game\source\enemy.cpp(18): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(46): warning C4458: declaration of 'vNextSpot' hides class member
+c:\users\data-3\downloads\game\source\enemy.cpp(51): warning C4458: declaration of 'vNextSpot' hides class member
   c:\users\data-3\downloads\game\include\enemy.h(43): note: see declaration of 'Enemy::vNextSpot'
-c:\users\data-3\downloads\game\source\enemy.cpp(69): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(78): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(113): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(114): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(115): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(116): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(124): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(125): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(105): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(106): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(118): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(119): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(120): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(121): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(129): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\data-3\downloads\game\source\enemy.cpp(130): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\enemy.cpp(131): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(135): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(136): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   WiiTanks.vcxproj -> C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
   xcopy "C:\Users\Data-3\Downloads\game\scripts\..\resources\"*.* "C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 

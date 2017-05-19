@@ -21,6 +21,11 @@ void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
 	bIsTravelling = false;
 
 };
+Enemy::~Enemy()
+{
+	UG::StopDrawingSprite(iSpriteID);
+	UG::DestroySprite(iSpriteID);
+}
 void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 {
 	float fDelta = UG::GetDeltaTime();
@@ -68,7 +73,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 		{
 			vPos = Vector2(Lerp(vDistanceTarget.dX, vNextSpot.dX, fLerpPosition), Lerp(vDistanceTarget.dZ, vNextSpot.dZ, fLerpPosition));
 			fBearing = GetBearing(vDistanceTarget, vNextSpot);
-			fLerpPosition += 1.f * fDelta;
+			fLerpPosition += 2.f * fDelta;
 		}
 		
 		
