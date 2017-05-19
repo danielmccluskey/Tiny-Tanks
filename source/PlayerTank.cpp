@@ -23,6 +23,8 @@ PlayerTank::~PlayerTank()
 {
 	UG::StopDrawingSprite(iSpriteID);
 	UG::DestroySprite(iSpriteID);
+	UG::StopDrawingSprite(sSpriteTurret.iSpriteID);
+	UG::DestroySprite(sSpriteTurret.iSpriteID);
 }
 
 

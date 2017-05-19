@@ -30,6 +30,7 @@ public:
 	void DestroyBullets(Bullet& a_pBullet);
 	int GetTile(int a_iCollisionMap[], Vector2 a_vPos);
 	void UpdateBullets(Bullet *a_pBullet, int a_iCollisionMap[]);
+	float GetBearing(Vector2 &a_V1, Vector2 &a_V2);
 
 private:
 	

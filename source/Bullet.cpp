@@ -1,5 +1,8 @@
 #include "Bullet.h"
 #include "UGFW.h"
+#include "CustomEnum.h"
+#include "MathUtil.h"
+#include <cmath>
 void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget)
 {
 	for (int i = 0; i < 10; i++)
@@ -9,8 +12,8 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 			a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
 			UG::DrawSprite(a_pBullet[i].iSpriteID);	//Draws it	
 			UG::SetSpriteLayer(a_pBullet[i].iSpriteID, 9);
-			a_pBullet[i].fAngle = DANM::GetBearingDeg(a_fStart, a_fTarget) + 180;
-			a_pBullet[i].vVelocity = DANM::GetForwardVector(a_pBullet[i].fAngle);
+			a_pBullet[i].fAngle = (GetBearing(a_fStart, a_fTarget) + 180);
+			a_pBullet[i].vVelocity.RotateX(a_pBullet[i].fAngle);
 			a_pBullet[i].vPos = a_fStart;
 			a_pBullet[i].vPos += Vector2(a_pBullet[i].vVelocity.dX * 40, a_pBullet[i].vVelocity.dY * 40);
 			UG::MoveSprite(a_pBullet[i].iSpriteID, a_pBullet[i].vPos.dX, a_pBullet[i].vPos.dY);
@@ -75,4 +78,12 @@ void Bullet::UpdateBullets(Bullet *a_pBullet, int a_iCollisionMap[])
 		}
 
 	}
+}
+//Gets the Angle between two Vector2 co-ordinates. Mainly Used for rotating tank turret.
+//Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
+float Bullet::GetBearing(Vector2 &a_V1, Vector2 &a_V2)
+{
+	float fXChange = (a_V1.dX - a_V2.dX);
+	float fYChange = (a_V1.dY - a_V2.dY);
+	return atan2(fYChange, fXChange)*(180 / fPI);
 }
