@@ -8,11 +8,6 @@
 #include "MenuSprites.h"
 #include <iostream>
 
-
-//#include <iostream>
-//#include <sstream>
-//#include <iomanip>
-
 //Screen sizes
 int iScreenWidth = 768;
 int iScreenHeight = 512;
@@ -21,53 +16,27 @@ int iScreenHeight = 512;
 float fCenterX = iScreenWidth*0.5f;
 float fCenterY = iScreenHeight*0.5f;
 
-//Declares the global speed of the tanks.
+//Declares the global speed of the player tank.
 float fGlobalSpeed = 80.f;
-
-
-//Declares all the level files.
-
-//struct Bullet
-//{
-//	Bullet()
-//	{
-//		iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
-//		UG::DrawSprite(iSpriteID);	//Draws it
-//		pos = Vector2(0, 0);
-//		Velocity = Vector2(0,0);
-//	};
-//	int iSpriteID = 0;
-//	Vector2 pos;
-//	Vector2 Velocity;
-//};
-
-//test
-Vector2 vMousePos;
 
 int main(int argv, char* argc[])
 {
 
 	if (UG::Create(iScreenWidth, iScreenHeight, false, "Wii Tanks", 100, 100))
 	{
-
 		UG::SetBackgroundColor(UG::SColour(0x2A, 0x57, 0x66, 0xFF));
 		UG::AddFont("./fonts/invaders.fnt");
 		
 		//Creates a new Map array and Loads a level from a text file.
 		MapGenerator *MapGen = new MapGenerator[384];
-		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
-		
+		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);		
 
 		//Creates a new Player sprite.
-		PlayerTank oPlayerTank(200, 200, fGlobalSpeed);
-		
-		
+		PlayerTank oPlayerTank(200, 200, fGlobalSpeed);		
 
-		////Enemy Test
+		//Enemy Test
 		Enemy oEnemyTank;
 		oEnemyTank.CreateTank(320, 320);
-
-
 
 		MenuSprite oMenuBackground(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth) + 200, (fMapWidth*fTileWidth) + 200), 10, "./Images/menu/background.png", true);
 		MenuSprite oMenuTitle(Vector2(fCenterX, iScreenHeight*0.78f), Vector2(500, 137), 11, "./Images/menu/title.png", true);
@@ -76,8 +45,6 @@ int main(int argv, char* argc[])
 
 		MenuSprite oNextButtonNext(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_next.png", false);
 		MenuSprite oNextButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", false);
-
-		//
 
 		bool iCurrentMouseState = false;
 		bool iLastMouseState = false;
@@ -195,15 +162,6 @@ int main(int argv, char* argc[])
 			}
 			break;
 			}
-
-			
-
-			
-
-			
-
-			
-
 
 			//Debug
 			if (UG::IsKeyDown(UG::KEY_1))
