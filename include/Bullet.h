@@ -13,8 +13,8 @@ class Bullet
 {
 public:
 
-	Bullet();
-	~Bullet();
+	Bullet() {}
+	~Bullet() {}
 	int iSpriteID = 0;//Sprite ID
 
 

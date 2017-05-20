@@ -92,7 +92,7 @@ int main(int argv, char* argc[])
 		MenuSprite oMenuButtonPlay(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_play.png");
 		MenuSprite oMenuButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png");
 
-		//Bullet *BulletArray = new Bullet[20];
+		//
 
 		bool iCurrentMouseState = false;
 		bool iLastMouseState = false;
@@ -121,6 +121,7 @@ int main(int argv, char* argc[])
 				{
 					UG::Close();
 				}
+
 			}
 			break;
 
@@ -130,6 +131,12 @@ int main(int argv, char* argc[])
 				newTank.MoveTank();
 				newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
 				newEnemy.LookToPlayer(newTank.vPos);
+
+				if (UG::GetMouseButtonDown(0))
+				{
+					newTank.BulletArray[0].CreateBullet(newTank.BulletArray, newTank.vPos, newTank.vMousePos);
+				}
+				newTank.BulletArray[0].UpdateBullets(newTank.BulletArray, newTank.iCollisionMap);
 			}
 			break;
 			}

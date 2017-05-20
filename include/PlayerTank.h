@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include "Turret.h"
 #include "Vector3.h"
+#include "Bullet.h"
 #include "CustomEnum.h"
 
 
@@ -46,11 +47,15 @@ public:
 
 	float fUGFrameSpriteMatrix[16];
 
+	Bullet *BulletArray = new Bullet[20];
+
 	
 
 private:
 	//Vector3's to hold positional and collision values for each corner of the sprite
 	// Vector (XPos, YPos, CurrentTile)
+
+	
 	Vector3 pTopLeft;
 	Vector3 pTopRight;
 	Vector3 pBotLeft;
