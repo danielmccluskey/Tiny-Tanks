@@ -23,26 +23,7 @@ float fCenterY = iScreenHeight*0.5f;
 
 //Declares the global speed of the tanks.
 float fGlobalSpeed = 80.f;
-//if (UG::GetMouseButtonDown(0))
-//{
-//	iCurrentMouseState = true;
-//
-//}
-//if (UG::GetMouseButtonReleased(0))
-//{
-//	iCurrentMouseState = false;
-//	iLastMouseState = false;
-//}
-//
-//if (iCurrentMouseState == true && iLastMouseState == false)
-//{
-//	iLastMouseState = true;
-//
-//	UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position and stores it in the class members variable.
-//	vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
-//	newEnemy.bStart = true;
-//
-//}
+
 
 //struct Bullet
 //{
@@ -100,6 +81,18 @@ int main(int argv, char* argc[])
 		int iGameState = MENU;
 		do
 		{
+
+			if (UG::GetMouseButtonDown(0))
+			{
+				iCurrentMouseState = true;
+			
+			}
+			if (UG::GetMouseButtonReleased(0))
+			{
+				iCurrentMouseState = false;
+				iLastMouseState = false;
+			}
+		
 			switch (iGameState)
 			{
 			case MENU:
@@ -107,7 +100,7 @@ int main(int argv, char* argc[])
 				oMenuBackground.RotateSprite(0.1f);
 				oMenuTitle.ThrobSprite(0.01f, 0.8f);
 
-				if (oMenuButtonPlay.CheckClick())
+				if (oMenuButtonPlay.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
 				{
 					MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
 					oMenuBackground.HideSprite();
@@ -117,7 +110,7 @@ int main(int argv, char* argc[])
 					iGameState = GAMEPLAY;
 
 				}
-				if (oMenuButtonQuit.CheckClick())
+				if (oMenuButtonQuit.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
 				{
 					UG::Close();
 				}
@@ -132,9 +125,13 @@ int main(int argv, char* argc[])
 				newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
 				newEnemy.LookToPlayer(newTank.vPos);
 
-				if (UG::GetMouseButtonDown(0))
+				if ((iCurrentMouseState == true && iLastMouseState == false))
 				{
-					newTank.BulletArray[0].CreateBullet(newTank.BulletArray, newTank.vPos, newTank.vMousePos);
+					newTank.BulletArray[0].CreateBullet(newTank.BulletArray, newTank.vPos, newTank.vMousePos, 0);
+				}
+				if (UG::IsKeyDown(UG::KEY_SPACE))
+				{
+					newTank.BulletArray[0].CreateBullet(newTank.BulletArray, newTank.vPos, newTank.vMousePos, 1);
 				}
 				newTank.BulletArray[0].UpdateBullets(newTank.BulletArray, newTank.iCollisionMap);
 			}
@@ -189,6 +186,14 @@ int main(int argv, char* argc[])
 
 			UG::ClearScreen();
 			UG::SetFont(nullptr);
+
+
+
+			
+			if (iCurrentMouseState == true && iLastMouseState == false)
+			{
+				iLastMouseState = true;
+			}
 
 		} while (UG::Process());
 

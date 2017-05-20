@@ -25,7 +25,7 @@ public:
 	bool bIsActive = false;
 	float fAngle;
 
-	void CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget);
+	void CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget, int a_iBulletType);
 	void MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[]);
 	void DestroyBullets(Bullet& a_pBullet);
 	int GetTile(int a_iCollisionMap[], Vector2 a_vPos);
@@ -34,6 +34,9 @@ public:
 
 private:
 	
+	int iBulletType;
+	Vector2 vMousePos;
+	Vector2 vLastPos;
 	Vector2 vVelocity;
 	Vector2 vPos;
 };
