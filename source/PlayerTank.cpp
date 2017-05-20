@@ -9,10 +9,14 @@
 #include <fstream>
 
 
+int TEMPSPRITEID;
+
 PlayerTank::PlayerTank(float a_fCenterX, float a_fCenterY, float a_fGlobalSpeed)
 {
 	CreateTank(a_fCenterX, a_fCenterY);
 	fSpeed = a_fGlobalSpeed;
+	TEMPSPRITEID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);
+	UG::DrawSprite(TEMPSPRITEID);
 }
 void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 {
@@ -88,29 +92,37 @@ bool PlayerTank::CollisionDetection(Vector3 a_vPos)
 		int a_iY = (a_vPos.dY / fTileWidth);
 		int iTileX = a_iX * fTileWidth;
 		int iTileY = a_iY * fTileWidth;
+		int iCount = 0;
 
 		//Top Collision
 		if ((vLastPos.dY > (iTileY + fTileWidth)) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
 		{
 			vNormalPlane = Vector2(0,1);
+			++iCount;
 		}
 		//Bottom Collision
 		if ((vLastPos.dY < iTileY) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
 		{
 			vNormalPlane = Vector2(0, 1);
+			++iCount;
 		}
 		//Right Collision
 		if ((vLastPos.dX >(iTileX + fTileWidth)) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
 		{
 			vNormalPlane = Vector2(1, 0);
+			++iCount;
 		}
 		//Left Collision
 		if ((vLastPos.dX < iTileX) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
 		{
 			vNormalPlane = Vector2(1, 0);
+			++iCount;
 		}
 
-
+		if (iCount > 1)
+		{
+			vNormalPlane = Vector2(0,0);
+		}
 
 		
 
@@ -153,6 +165,8 @@ void PlayerTank::CalculateBoundaries()
 	AABBCheck.vTopRight.dZ = GetTile(fTileWidth, AABBCheck.vTopRight);
 	AABBCheck.vBotLeft.dZ = GetTile(fTileWidth, AABBCheck.vBotLeft);
 	AABBCheck.vBotRight.dZ = GetTile(fTileWidth, AABBCheck.vBotRight);
+
+	UG::MoveSprite(TEMPSPRITEID, AABBCheck.vFront.dX, AABBCheck.vFront.dY);
 
 	if (UG::IsKeyDown(UG::KEY_W))
 	{

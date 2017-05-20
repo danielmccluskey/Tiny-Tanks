@@ -55,8 +55,8 @@ void Boundaries::AABB(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad
 		0
 	);
 	vFront = Vector3(
-		(vPos.dX + cos(a_fRad - fHALF_PI) * 20),
-		(vPos.dY + sin(a_fRad - fHALF_PI) * 20),
+		(vPos.dX) + cos(-a_fRad - fHALF_PI) * a_iWidth/2,
+		(vPos.dY) + sin(-a_fRad - fHALF_PI) * a_iHeight/2,
 		0
 	);
 

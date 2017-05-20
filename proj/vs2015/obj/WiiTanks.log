@@ -1,38 +1,6 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  PlayerTank.cpp
+  Boundaries.cpp
 c:\users\s1600056\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\s1600056\downloads\game\source\playertank.cpp(20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(64): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(77): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(87): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(88): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(89): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(90): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(150): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(152): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(153): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(154): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(155): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(197): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(198): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(199): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(200): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(208): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(209): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(225): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(226): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(232): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\s1600056\downloads\game\source\playertank.cpp(233): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-c:\users\s1600056\downloads\game\source\playertank.cpp(145): warning C4715: 'PlayerTank::CollisionDetection': not all control paths return a value
-  Compiling...
-  main.cpp
-c:\users\s1600056\downloads\game\include\searchcell.h(18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
   WiiTanks.vcxproj -> C:\Users\s1600056\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
   xcopy "C:\Users\s1600056\Downloads\game\scripts\..\resources\"*.* "C:\Users\s1600056\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
