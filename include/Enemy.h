@@ -5,6 +5,7 @@
 #include "Vector2.h"
 #include "CustomEnum.h"
 #include "PathFinding.h"
+#include "Bullet.h"
 #include "Turret.h"
 
 
@@ -42,7 +43,7 @@ private:
 	Turret sSpriteTurret;
 	PathFinding oPathFinder;
 	Vector3 vDistanceTarget;
-
+	Bullet *BulletArray = new Bullet[20];
 	Vector3 vNextSpot;
 	int iStartAngle, iEndAngle;
 	float fUGFrameSpriteMatrix[16];

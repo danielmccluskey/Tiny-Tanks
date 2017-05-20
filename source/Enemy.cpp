@@ -71,6 +71,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 			}
 			
 			fLerpPosition = 0;
+			BulletArray[0].CreateBullet(BulletArray, vPos, a_vGoal, 0);
 		}
 		else if (fLerpPosition >= 0 && fLerpPosition <= 1)
 		{
@@ -82,7 +83,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 		
 
 
-		
+		BulletArray[0].UpdateBullets(BulletArray, iEnemyCollisionMap);
 		UG::MoveSprite(iSpriteID, vPos.dX + fTileWidth/2, vPos.dY+fTileWidth/2);
 
 	}

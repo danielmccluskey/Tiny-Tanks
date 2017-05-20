@@ -142,11 +142,6 @@ void PlayerTank::CalculateBoundaries()
 			vPos -= vVelocity;
 		}
 	}
-	if (UG::IsKeyDown(UG::KEY_S))
-	{
-		vPos -= vVelocity;
-	}
-	
 
 	
 }

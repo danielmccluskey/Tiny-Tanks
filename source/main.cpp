@@ -32,11 +32,11 @@ int main(int argv, char* argc[])
 		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);		
 
 		//Creates a new Player sprite.
-		PlayerTank oPlayerTank(200, 200, fGlobalSpeed);		
+		PlayerTank oPlayerTank(704, 448, fGlobalSpeed);
 
 		//Enemy Test
 		Enemy oEnemyTank;
-		oEnemyTank.CreateTank(320, 320);
+		oEnemyTank.CreateTank(100, 100);
 
 		MenuSprite oMenuBackground(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth) + 200, (fMapWidth*fTileWidth) + 200), 10, "./Images/menu/background.png", true);
 		MenuSprite oMenuTitle(Vector2(fCenterX, iScreenHeight*0.78f), Vector2(500, 137), 11, "./Images/menu/title.png", true);
