@@ -86,6 +86,33 @@ bool PlayerTank::CollisionDetection(Vector3 a_vPos)
 	{
 		int a_iX = (a_vPos.dX / fTileWidth);
 		int a_iY = (a_vPos.dY / fTileWidth);
+		int iTileX = a_iX * fTileWidth;
+		int iTileY = a_iY * fTileWidth;
+
+		//Top Collision
+		if ((vLastPos.dY > (iTileY + fTileWidth)) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
+		{
+			vNormalPlane = Vector2(0,1);
+		}
+		//Bottom Collision
+		if ((vLastPos.dY < iTileY) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
+		{
+			vNormalPlane = Vector2(0, 1);
+		}
+		//Right Collision
+		if ((vLastPos.dX >(iTileX + fTileWidth)) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
+		{
+			vNormalPlane = Vector2(1, 0);
+		}
+		//Left Collision
+		if ((vLastPos.dX < iTileX) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
+		{
+			vNormalPlane = Vector2(1, 0);
+		}
+
+
+
+		
 
 		if (a_vPos.dX < (a_iX - (fTileWidth / 2)))
 		{
@@ -110,6 +137,8 @@ bool PlayerTank::CollisionDetection(Vector3 a_vPos)
 		{
 			return true;
 		}
+
+		
 		
 	}
 	
@@ -138,10 +167,21 @@ void PlayerTank::CalculateBoundaries()
 		}
 		else
 		{
-			vPos = vLastPos;
-			vPos -= vVelocity;
+			Vector2 temp;
+			temp = vVelocity.CrossProduct(vNormalPlane);
+			vPos += temp;
+			//vPos = vLastPos;
+			//vPos -= vVelocity;
+			std::cout << "X: " << temp.dX << std::endl;
+			std::cout << "Y: " << temp.dY << std::endl << std::endl;
 		}
 	}
+
+	
+
+	
+
+	
 
 	
 }

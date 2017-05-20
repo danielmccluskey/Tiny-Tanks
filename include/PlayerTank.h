@@ -53,6 +53,7 @@ public:
 private:
 	//Vector3's to hold positional and collision values for each corner of the sprite
 	// Vector (XPos, YPos, CurrentTile)
+	Vector2 vNormalPlane;
 
 	Vector2 vLastPos;
 	Turret sSpriteTurret;

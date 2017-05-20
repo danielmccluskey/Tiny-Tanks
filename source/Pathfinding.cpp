@@ -168,7 +168,7 @@ void PathFinding::ContinuePath()
 			{
 				vGoalPath.push_back(new Vector3(pGetPath->iX * fTileWidth, 0, pGetPath->iY * fTileWidth));
 
-				//Debug code to show path.
+				
 				//int iSpriteID = UG::CreateSprite("./images/Tanks/temp3.png", 32, 32, true);//Create the sprite
 
 				//UG::DrawSprite(iSpriteID);	//Draws it
