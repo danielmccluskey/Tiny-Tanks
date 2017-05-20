@@ -12,7 +12,7 @@ MenuSprite::MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a
 	vPos = a_vStartPos;
 	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
 	
-
+	
 	bBeingDrawn = false;
 	bLerpLoop = true;
 	fLerpPosition = 0;

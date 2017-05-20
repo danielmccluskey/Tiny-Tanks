@@ -25,6 +25,8 @@ float fCenterY = iScreenHeight*0.5f;
 float fGlobalSpeed = 80.f;
 
 
+//Declares all the level files.
+
 //struct Bullet
 //{
 //	Bullet()
@@ -102,12 +104,16 @@ int main(int argv, char* argc[])
 
 				if (oMenuButtonPlay.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
 				{
-					MapGen[0].LoadLevel("./maps/lvl_4.txt", MapGen);
-					oMenuBackground.HideSprite();
-					oMenuTitle.HideSprite();
-					oMenuButtonPlay.HideSprite();
-					oMenuButtonQuit.HideSprite();
-					iGameState = GAMEPLAY;
+					bool bLevelLoad = MapGen[0].NextLevel(MapGen);
+					if (bLevelLoad)
+					{
+						oMenuBackground.HideSprite();
+						oMenuTitle.HideSprite();
+						oMenuButtonPlay.HideSprite();
+						oMenuButtonQuit.HideSprite();
+						iGameState = GAMEPLAY;
+					}
+					
 
 				}
 				if (oMenuButtonQuit.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
@@ -132,6 +138,22 @@ int main(int argv, char* argc[])
 				if (UG::IsKeyDown(UG::KEY_SPACE))
 				{
 					newTank.BulletArray[0].CreateBullet(newTank.BulletArray, newTank.vPos, newTank.vMousePos, 1);
+				}
+				if (UG::IsKeyDown(UG::KEY_P))
+				{
+					bool bLevelLoad = MapGen[0].NextLevel(MapGen);
+					if (bLevelLoad)
+					{
+						//Reset positions etc.
+					}
+					else
+					{
+						oMenuBackground.DrawSprite();
+						oMenuTitle.DrawSprite();
+						oMenuButtonPlay.DrawSprite();
+						oMenuButtonQuit.DrawSprite();
+						iGameState = MENU;
+					}
 				}
 				newTank.BulletArray[0].UpdateBullets(newTank.BulletArray, newTank.iCollisionMap);
 			}

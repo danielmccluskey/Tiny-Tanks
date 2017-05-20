@@ -48,22 +48,22 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 		if (iBulletType == 0)
 		{
 			//Top Collision
-			if ((vLastPos.dY > (iTileY + fTileWidth)) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))
+			if ((vLastPos.dY > (iTileY + fTileWidth)) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
 			{
 				vVelocity.dY *= -1;
 			}
 			//Bottom Collision
-			if ((vLastPos.dY < iTileY) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))
+			if ((vLastPos.dY < iTileY) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
 			{
 				vVelocity.dY *= -1;
 			}
 			//Right Collision
-			if ((vLastPos.dX > (iTileX + fTileWidth)) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))
+			if ((vLastPos.dX > (iTileX + fTileWidth)) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
 			{
 				vVelocity.dX *= -1;
 			}
 			//Left Collision
-			if ((vLastPos.dX < iTileX) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))
+			if ((vLastPos.dX < iTileX) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
 			{
 				vVelocity.dX *= -1;
 			}

@@ -126,8 +126,13 @@ void PlayerTank::CalculateBoundaries()
 			(!(CollisionDetection(AABBCheck.vBotLeft)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 181 && iRotDeg <= 270)) ||
 			(!(CollisionDetection(AABBCheck.vBotRight)) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg >= 91 && iRotDeg <= 180)))
 		{
-
+			vLastPos = vPos;
 			vPos += vVelocity;
+		}
+		else
+		{
+			vPos = vLastPos;
+			vPos -= vVelocity;
 		}
 	}
 	if (UG::IsKeyDown(UG::KEY_S))

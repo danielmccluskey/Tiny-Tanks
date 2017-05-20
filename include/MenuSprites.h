@@ -26,6 +26,7 @@ public:
 
 
 private:
+	int iCurrentLevel;
 	int iSpriteID = 0;//Sprite ID
 	Vector2 vPos;
 	bool bBeingDrawn;

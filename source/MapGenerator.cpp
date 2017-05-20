@@ -67,10 +67,10 @@ MapGenerator& MapGenerator::GetMapPosition(MapGenerator *a_pPosition, int a_iX, 
 	return a_pPosition[(a_iY * iMapWidth) + a_iX];//Finds and returns what tile is at X,Y
 }
 
-void MapGenerator::LoadLevel(char* a_cLevelPath, MapGenerator *a_pPosition)
+void MapGenerator::LoadLevel(std::string a_sLevelPath, MapGenerator *a_pPosition)
 {
 	std::ifstream LEVELMAP;//Creates an input fstream member
-	LEVELMAP.open(a_cLevelPath);//Opens the file.
+	LEVELMAP.open(a_sLevelPath);//Opens the file.
 
 	std::ofstream COLLISIONMAP;//Creates an output fstream member
 	COLLISIONMAP.open("./maps/currentCollision.txt", std::ofstream::trunc);//Opens and Removes all of the text inside the file.
@@ -115,7 +115,22 @@ void MapGenerator::UnLoadLevel(MapGenerator *a_pPosition)
 	}
 }
 
-void MapGenerator::GeneratePathFindingNodes()
+bool MapGenerator::NextLevel(MapGenerator *a_pPosition)
 {
+	UnLoadLevel(a_pPosition);
+	iCurrentLevel += 1;
+	std::string ifLevelPath;
+	ifLevelPath += "./maps/lvl_";
+	ifLevelPath += std::to_string(iCurrentLevel);
+	ifLevelPath += ".txt";
+	std::cout << ifLevelPath << std::endl;
+
+	if (std::ifstream(ifLevelPath))
+	{
+		std::cout << "File already exists" << std::endl;
+		LoadLevel(ifLevelPath, a_pPosition);
+		return true;
+	}
+	return false;
 
 }

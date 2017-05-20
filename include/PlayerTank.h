@@ -41,27 +41,25 @@ public:
 	
 	Turret sSpriteTurret;
 
-	Vector2 vPos;
-	Vector2 vVelocity;
-	Vector2 vMousePos;
+	
 
 	float fUGFrameSpriteMatrix[16];
 
 	Bullet *BulletArray = new Bullet[20];
-
+	Vector2 vPos;
+	Vector2 vMousePos;
 	
 
 private:
 	//Vector3's to hold positional and collision values for each corner of the sprite
 	// Vector (XPos, YPos, CurrentTile)
 
+	Vector2 vLastPos;
 	
-	Vector3 pTopLeft;
-	Vector3 pTopRight;
-	Vector3 pBotLeft;
-	Vector3 pBotRight;
-	Vector3 pFront;
-	Vector3 pBack;
+	Vector2 vVelocity;
+
+
+
 	
 
 };
