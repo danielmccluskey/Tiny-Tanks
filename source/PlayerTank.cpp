@@ -9,7 +9,11 @@
 #include <fstream>
 
 
-
+PlayerTank::PlayerTank(float a_fCenterX, float a_fCenterY, float a_fGlobalSpeed)
+{
+	CreateTank(a_fCenterX, a_fCenterY);
+	fSpeed = a_fGlobalSpeed;
+}
 void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 {
 
@@ -18,7 +22,10 @@ void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 	vPos = Vector2(a_fCenterX, a_fCenterY);//Sets the Starting position ########Convert to function arguement input.
 	UG::MoveSprite(iSpriteID, a_fCenterX, a_fCenterY);//Moves sprite to starting position.
 	UG::SetSpriteLayer(iSpriteID, 9);//Makes sure the tank is drawn above the map.
+	UpdateCollisionMap();
 };
+
+
 PlayerTank::~PlayerTank()
 {
 	UG::StopDrawingSprite(iSpriteID);

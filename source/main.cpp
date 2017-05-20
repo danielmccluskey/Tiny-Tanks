@@ -55,25 +55,27 @@ int main(int argv, char* argc[])
 		
 		//Creates a new Map array and Loads a level from a text file.
 		MapGenerator *MapGen = new MapGenerator[384];
+		MapGen[0].LoadLevel("./maps/lvl_1.txt", MapGen);
 		
 
 		//Creates a new Player sprite.
-		PlayerTank newTank;
-		newTank.CreateTank(fCenterX, fCenterY);
-		newTank.fSpeed = fGlobalSpeed;
-		newTank.UpdateCollisionMap();
+		PlayerTank oPlayerTank(200, 200, fGlobalSpeed);
+		
+		
 
 		////Enemy Test
-		Enemy newEnemy;
-		newEnemy.CreateTank(320, 320);
-
-		newEnemy.UpdateCollisionMap();
+		Enemy oEnemyTank;
+		oEnemyTank.CreateTank(320, 320);
 
 
-		MenuSprite oMenuBackground(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth) + 200, (fMapWidth*fTileWidth) + 200), 10, "./Images/menu/background.png");
-		MenuSprite oMenuTitle(Vector2(fCenterX, iScreenHeight*0.78f), Vector2(500, 137), 11, "./Images/menu/title.png");
-		MenuSprite oMenuButtonPlay(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_play.png");
-		MenuSprite oMenuButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png");
+
+		MenuSprite oMenuBackground(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth) + 200, (fMapWidth*fTileWidth) + 200), 10, "./Images/menu/background.png", true);
+		MenuSprite oMenuTitle(Vector2(fCenterX, iScreenHeight*0.78f), Vector2(500, 137), 11, "./Images/menu/title.png", true);
+		MenuSprite oMenuButtonPlay(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_play.png", true);
+		MenuSprite oMenuButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", true);
+
+		MenuSprite oNextButtonNext(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_next.png", false);
+		MenuSprite oNextButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", false);
 
 		//
 
@@ -126,36 +128,70 @@ int main(int argv, char* argc[])
 
 			case GAMEPLAY:
 			{
-				newTank.CalculateBoundaries();
-				newTank.MoveTank();
-				newEnemy.MoveTank(newEnemy.vPos, newTank.vPos);
-				newEnemy.LookToPlayer(newTank.vPos);
+				oPlayerTank.CalculateBoundaries();
+				oPlayerTank.MoveTank();
+				oEnemyTank.MoveTank(oEnemyTank.vPos, oPlayerTank.vPos);
+				oEnemyTank.LookToPlayer(oPlayerTank.vPos);
 
 				if ((iCurrentMouseState == true && iLastMouseState == false))
 				{
-					newTank.BulletArray[0].CreateBullet(newTank.BulletArray, newTank.vPos, newTank.vMousePos, 0);
+					oPlayerTank.BulletArray[0].CreateBullet(oPlayerTank.BulletArray, oPlayerTank.vPos, oPlayerTank.vMousePos, 0);
 				}
 				if (UG::IsKeyDown(UG::KEY_SPACE))
 				{
-					newTank.BulletArray[0].CreateBullet(newTank.BulletArray, newTank.vPos, newTank.vMousePos, 1);
+					oPlayerTank.BulletArray[0].CreateBullet(oPlayerTank.BulletArray, oPlayerTank.vPos, oPlayerTank.vMousePos, 1);
 				}
 				if (UG::IsKeyDown(UG::KEY_P))
+				{
+					iGameState = NEXTLEVEL;
+					oNextButtonNext.DrawSprite();
+					oNextButtonQuit.DrawSprite();
+
+					
+				}
+				oPlayerTank.BulletArray[0].UpdateBullets(oPlayerTank.BulletArray, oPlayerTank.iCollisionMap);
+			}
+			break;
+
+			case NEXTLEVEL:
+			{
+				if (oNextButtonNext.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
 				{
 					bool bLevelLoad = MapGen[0].NextLevel(MapGen);
 					if (bLevelLoad)
 					{
-						//Reset positions etc.
+						oNextButtonNext.HideSprite();
+						oNextButtonQuit.HideSprite();
+						iGameState = GAMEPLAY;
+						oPlayerTank.UpdateCollisionMap();
+						oEnemyTank.UpdateCollisionMap();
 					}
 					else
 					{
+						MapGen[0].Quit(MapGen);
 						oMenuBackground.DrawSprite();
 						oMenuTitle.DrawSprite();
 						oMenuButtonPlay.DrawSprite();
 						oMenuButtonQuit.DrawSprite();
+
+						oNextButtonNext.HideSprite();
+						oNextButtonQuit.HideSprite();
 						iGameState = MENU;
 					}
 				}
-				newTank.BulletArray[0].UpdateBullets(newTank.BulletArray, newTank.iCollisionMap);
+				else if (oNextButtonQuit.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
+				{
+
+					MapGen[0].Quit(MapGen);
+					oMenuBackground.DrawSprite();
+					oMenuTitle.DrawSprite();
+					oMenuButtonPlay.DrawSprite();
+					oMenuButtonQuit.DrawSprite();
+
+					oNextButtonNext.HideSprite();
+					oNextButtonQuit.HideSprite();
+					iGameState = MENU;
+				}
 			}
 			break;
 			}
@@ -166,16 +202,7 @@ int main(int argv, char* argc[])
 
 			
 
-			if (UG::GetMouseButtonDown(0))
-			{				
-				//BulletArray[0].CreateBullet(BulletArray, newTank.pos, newTank.MousePos);
- 			}
-
-			//if (OtherFunctions::RayCast(newEnemy.iSpriteID, newTank.iSpriteID, newTank.iCollisionMap))
-			//{
-			////	BulletArray[0].CreateBullet(BulletArray, newEnemy.pos, newTank.pos);
-			//}
-			//BulletArray[0].UpdateBullets(BulletArray, newTank.iCollisionMap);
+			
 
 
 			//Debug
@@ -222,8 +249,8 @@ int main(int argv, char* argc[])
 		MapGen[0].UnLoadLevel(MapGen);
 		delete[] MapGen;
 
-		newTank.~PlayerTank();
-		newEnemy.~Enemy();
+		oPlayerTank.~PlayerTank();
+		oEnemyTank.~Enemy();
 
 		oMenuBackground.~MenuSprite();
 		oMenuTitle.~MenuSprite();

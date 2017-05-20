@@ -134,3 +134,9 @@ bool MapGenerator::NextLevel(MapGenerator *a_pPosition)
 	return false;
 
 }
+
+void MapGenerator::Quit(MapGenerator *a_pPosition)
+{
+	UnLoadLevel(a_pPosition);
+	iCurrentLevel = 0;
+}

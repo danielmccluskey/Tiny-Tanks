@@ -14,7 +14,7 @@ class MenuSprite
 {
 public:
 
-	MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath);
+	MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath, bool a_bDrawSprite);
 	~MenuSprite();
 	void DrawSprite();
 	void HideSprite();

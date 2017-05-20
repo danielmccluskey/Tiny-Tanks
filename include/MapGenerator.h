@@ -27,6 +27,7 @@ public:
 	void SetTile(char* a_cImagePath, int a_iTileX, int a_iTileY, MapGenerator *a_pCurrentTile);//Sets the tile at the given X,Y Pos to given image by creating a sprite
 	void UnLoadLevel(MapGenerator *a_pPosition);
 	void DrawLevelTiles(MapGenerator *a_pPosition);//Draws all the sprites
+	void Quit(MapGenerator *a_pPosition);
 
 	bool NextLevel(MapGenerator *a_pPosition);
 

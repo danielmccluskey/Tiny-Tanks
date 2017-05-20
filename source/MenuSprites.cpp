@@ -3,7 +3,7 @@
 #include "MathUtil.h"
 #include "CustomEnum.h"
 
-MenuSprite::MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath)
+MenuSprite::MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath, bool a_bDrawSprite)
 {
 	iSpriteHeight = a_vSize.dY;
 	iSpriteWidth = a_vSize.dX;
@@ -16,7 +16,12 @@ MenuSprite::MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a
 	bBeingDrawn = false;
 	bLerpLoop = true;
 	fLerpPosition = 0;
-	DrawSprite();
+
+	if (a_bDrawSprite)
+	{
+		DrawSprite();
+	}
+	
 }
 
 MenuSprite::~MenuSprite()

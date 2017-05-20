@@ -29,6 +29,7 @@ typedef enum GameStates //Enumeration for the different gamestates
 	DIFFICULTY,
 	PAUSE,
 	SCORES,
+	NEXTLEVEL,
 	DEATH
 }GameState;
 

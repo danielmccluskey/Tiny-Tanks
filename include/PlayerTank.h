@@ -10,7 +10,7 @@
 class PlayerTank
 {
 public:
-	PlayerTank() {}
+	PlayerTank(float a_fCenterX, float a_fCenterY, float a_fGlobalSpeed);
 	~PlayerTank();
 	friend class Vector2;
 	friend class Turret;
@@ -39,7 +39,7 @@ public:
 	int iSpriteHeight = 32;
 	float fSpeed = 1000.f;
 	
-	Turret sSpriteTurret;
+	
 
 	
 
@@ -55,7 +55,7 @@ private:
 	// Vector (XPos, YPos, CurrentTile)
 
 	Vector2 vLastPos;
-	
+	Turret sSpriteTurret;
 	Vector2 vVelocity;
 
 

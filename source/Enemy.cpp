@@ -19,6 +19,7 @@ void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
 	UG::SetSpriteLayer(iSpriteID, 9);
 	bIsRotating = true;
 	bIsTravelling = false;
+	UpdateCollisionMap();
 
 };
 Enemy::~Enemy()
