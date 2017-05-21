@@ -14,7 +14,7 @@ class MenuSprite
 {
 public:
 
-	MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath, bool a_bDrawSprite);
+	MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath, float a_fUV[2][4], bool a_bDrawSprite);
 	~MenuSprite();
 	void DrawSprite();
 	void HideSprite();
@@ -34,6 +34,7 @@ private:
 	bool bLerpLoop;
 	int iSpriteHeight;
 	int iSpriteWidth;
+	float fUVCoords[2][4];
 };
 
 #endif //_MENUSPRITES_H_

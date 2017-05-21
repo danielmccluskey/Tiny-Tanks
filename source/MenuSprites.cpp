@@ -3,25 +3,33 @@
 #include "MathUtil.h"
 #include "CustomEnum.h"
 
-MenuSprite::MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath, bool a_bDrawSprite)
+MenuSprite::MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath,float a_fUV[2][4], bool a_bDrawSprite)
 {
 	iSpriteHeight = a_vSize.GetdY();
 	iSpriteWidth = a_vSize.GetdX();
 	iSpriteID = UG::CreateSprite(a_pcImagePath, iSpriteWidth, iSpriteHeight, true);
+	UG::SetSpriteUVCoordinates(iSpriteID, a_fUV[0]);
 	UG::SetSpriteLayer(iSpriteID, iLayer);
 	vPos = a_vStartPos;
-	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
-	
+	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());	
 	
 	bBeingDrawn = false;
 	bLerpLoop = true;
 	fLerpPosition = 0;
 
+
+	for (int y = 0; y < 2; y++)
+	{
+		for (int x = 0; x < 4; x++)
+		{
+			fUVCoords[y][x] = a_fUV[y][x];
+		}
+	}
+
 	if (a_bDrawSprite)
 	{
 		DrawSprite();
-	}
-	
+	}	
 }
 
 MenuSprite::~MenuSprite()
@@ -88,19 +96,21 @@ void MenuSprite::ThrobSprite(float a_fSpeed, float a_fSizeReduction)
 
 bool MenuSprite::CheckClick()
 {
-	if (UG::GetMouseButtonDown(0))
-	{	
-		Vector2 vMousePos;		
-		double iMouseX, iMouseY;
-		UG::GetMousePos(iMouseX, iMouseY);//Gets the mouse position and stores it in the class members variable.
-		vMousePos.SetdX(iMouseX);
-		vMousePos.SetdY((iMapHeight * fTileWidth) - iMouseY);//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
-
-		if (CheckCollision(vMousePos))
+	UG::SetSpriteUVCoordinates(iSpriteID, fUVCoords[0]);
+	Vector2 vMousePos;
+	double iMouseX, iMouseY;
+	UG::GetMousePos(iMouseX, iMouseY);//Gets the mouse position and stores it in the class members variable.
+	vMousePos.SetdX(iMouseX);
+	vMousePos.SetdY((iMapHeight * fTileWidth) - iMouseY);//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
+	if (CheckCollision(vMousePos))
+	{
+		UG::SetSpriteUVCoordinates(iSpriteID, fUVCoords[1]);
+		if (UG::GetMouseButtonDown(0))
 		{
 			return true;
 		}
 	}
+	
 	return false;
 }
 

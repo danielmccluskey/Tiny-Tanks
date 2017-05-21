@@ -1,18 +1,13 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Bullet.cpp
-c:\users\data-3\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\downloads\game\source\bullet.cpp(33): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(45): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(47): warning C4244: '*=': conversion from 'const float' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(48): warning C4244: '*=': conversion from 'const float' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(103): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(104): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(111): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(112): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(146): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\bullet.cpp(147): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  WiiTanks.vcxproj -> C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
+  MenuSprites.cpp
+c:\users\s1600056\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\s1600056\downloads\game\source\menusprites.cpp(8): warning C4244: '=': conversion from 'const double' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\menusprites.cpp(9): warning C4244: '=': conversion from 'const double' to 'int', possible loss of data
+c:\users\s1600056\downloads\game\source\menusprites.cpp(10): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\menusprites.cpp(14): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\menusprites.cpp(92): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\s1600056\downloads\game\source\menusprites.cpp(93): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  WiiTanks.vcxproj -> C:\Users\s1600056\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
-  xcopy "C:\Users\Data-3\Downloads\game\scripts\..\resources\"*.* "C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
+  xcopy "C:\Users\s1600056\Downloads\game\scripts\..\resources\"*.* "C:\Users\s1600056\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
   0 File(s) copied

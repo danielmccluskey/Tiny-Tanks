@@ -19,6 +19,9 @@ float fCenterY = iScreenHeight*0.5f;
 //Declares the global speed of the player tank.
 float fGlobalSpeed = 80.f;
 
+float fButtonUV[2][4] = { { 0.f, 0.5f, 1.f, 1.f },{ 0.f, 0.f, 1.f, 0.5f } };
+float fFullUV[2][4] = { { 0.f, 0.f, 1.f, 1.f },{ 0.f, 0.f, 1.f, 1.f } };
+
 int main(int argv, char* argc[])
 {
 
@@ -38,13 +41,13 @@ int main(int argv, char* argc[])
 		Enemy oEnemyTank;
 		oEnemyTank.CreateTank(100, 100);
 
-		MenuSprite oMenuBackground(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth) + 200, (fMapWidth*fTileWidth) + 200), 10, "./Images/menu/background.png", true);
-		MenuSprite oMenuTitle(Vector2(fCenterX, iScreenHeight*0.78f), Vector2(500, 137), 11, "./Images/menu/title.png", true);
-		MenuSprite oMenuButtonPlay(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_play.png", true);
-		MenuSprite oMenuButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", true);
+		MenuSprite oMenuBackground(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth) + 200, (fMapWidth*fTileWidth) + 200), 10, "./Images/menu/background.png", fFullUV, true);
+		MenuSprite oMenuTitle(Vector2(fCenterX, iScreenHeight*0.78f), Vector2(500, 137), 11, "./Images/menu/title.png", fFullUV, true);
+		MenuSprite oMenuButtonPlay(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_play.png", fButtonUV, true);
+		MenuSprite oMenuButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", fButtonUV, true);
 
-		MenuSprite oNextButtonNext(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_next.png", false);
-		MenuSprite oNextButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", false);
+		MenuSprite oNextButtonNext(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_next.png", fButtonUV, false);
+		MenuSprite oNextButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", fButtonUV, false);
 
 		bool iCurrentMouseState = false;
 		bool iLastMouseState = false;

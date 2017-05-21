@@ -108,8 +108,8 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 
 int Bullet::GetTile(int a_iCollisionMap[], Vector2 a_vPos)
 {
-	int a_iX = (a_vPos.GetdX() / 32);
-	int a_iY = (a_vPos.GetdY() / 32);
+	int a_iX = (a_vPos.GetdX() / fTileWidth);
+	int a_iY = (a_vPos.GetdY() / fTileWidth);
 
 	return a_iCollisionMap[(a_iY * iMapWidth) + a_iX];
 }
