@@ -156,8 +156,8 @@ bool Bullet::SpriteCollide(Bullet* a_pBullet, int a_iSpriteID, int a_iWidth, int
 	{
 		if (a_pBullet[i].bIsActive == true)
 		{
-			if ((a_pBullet[i].vPos.GetdX() < AABBCheck.vTopRight.dX) && (a_pBullet[i].vPos.GetdX() > AABBCheck.vTopLeft.dX) &&
-				(a_pBullet[i].vPos.GetdY() < AABBCheck.vTopRight.dY) && (a_pBullet[i].vPos.GetdY() > AABBCheck.vBotLeft.dY))
+			if ((a_pBullet[i].vPos.GetdX() < AABBCheck.vTopRight.GetdX()) && (a_pBullet[i].vPos.GetdX() > AABBCheck.vTopLeft.GetdX()) &&
+				(a_pBullet[i].vPos.GetdY() < AABBCheck.vTopRight.GetdY()) && (a_pBullet[i].vPos.GetdY() > AABBCheck.vBotLeft.GetdY()))
 			{
 				return true;
 			}

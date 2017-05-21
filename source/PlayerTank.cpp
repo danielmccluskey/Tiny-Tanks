@@ -88,8 +88,8 @@ void PlayerTank::MoveTank()
 bool PlayerTank::CollisionDetection(Vector3 a_vPos)
 {
 
-	int a_iX = (a_vPos.dX / fTileWidth);
-	int a_iY = (a_vPos.dY / fTileWidth);
+	int a_iX = (a_vPos.GetdX() / fTileWidth);
+	int a_iY = (a_vPos.GetdY() / fTileWidth);
 	int iTileX = a_iX * fTileWidth;
 	int iTileY = a_iY * fTileWidth;
 	int iCount = 0;
@@ -123,22 +123,22 @@ bool PlayerTank::CollisionDetection(Vector3 a_vPos)
 
 
 
-	if (a_vPos.dX < (iTileX - (fTileWidth / 2)))
+	if (a_vPos.GetdX() < (iTileX - (fTileWidth / 2)))
 	{
 		return false;
 	}
 
-	if (a_vPos.dX > (iTileX + (fTileWidth / 2)))
+	if (a_vPos.GetdX() > (iTileX + (fTileWidth / 2)))
 	{
 		return false;
 	}
 
-	if (a_vPos.dY < (iTileY - (fTileWidth / 2)))
+	if (a_vPos.GetdY() < (iTileY - (fTileWidth / 2)))
 	{
 		return false;
 	}
 
-	if (a_vPos.dY > (iTileY + (fTileWidth / 2)))
+	if (a_vPos.GetdY() > (iTileY + (fTileWidth / 2)))
 	{
 		return false;
 	}
@@ -158,24 +158,24 @@ void PlayerTank::CalculateBoundaries()
 	Boundaries sSATCheck;
 	sSATCheck.SeparatingAxisTheorem(iSpriteID, iSpriteHeight, iSpriteWidth, DegreesToRadians((iRotDeg-90)));
 
-	sSATCheck.vFrontLeft.dZ = GetTile(fTileWidth, sSATCheck.vFrontLeft);
-	sSATCheck.vFrontRight.dZ = GetTile(fTileWidth, sSATCheck.vFrontRight);
-	sSATCheck.vBackLeft.dZ = GetTile(fTileWidth, sSATCheck.vBackLeft);
-	sSATCheck.vBackRight.dZ = GetTile(fTileWidth, sSATCheck.vBackRight);
+	sSATCheck.vFrontLeft.SetdZ(GetTile(fTileWidth, sSATCheck.vFrontLeft));
+	sSATCheck.vFrontRight.SetdZ(GetTile(fTileWidth, sSATCheck.vFrontRight));
+	sSATCheck.vBackLeft.SetdZ(GetTile(fTileWidth, sSATCheck.vBackLeft));
+	sSATCheck.vBackRight.SetdZ(GetTile(fTileWidth, sSATCheck.vBackRight));
 
 	if (UG::IsKeyDown(UG::KEY_W))
 	{
-		if (sSATCheck.vFrontLeft.dZ == 1 && sSATCheck.vFrontRight.dZ == 1)
+		if (sSATCheck.vFrontLeft.GetdZ() == 1 && sSATCheck.vFrontRight.GetdZ() == 1)
 		{
 			vNormalPlane = Vector2(0, 0);
 			std::cout << "AYYYYY: " << vVelocity.GetdX() << std::endl;
 		}
-		else if (sSATCheck.vFrontLeft.dZ == 1)
+		else if (sSATCheck.vFrontLeft.GetdZ() == 1)
 		{
 			CollisionDetection(sSATCheck.vFrontLeft);
 			vPos += (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
 		}
-		else if (sSATCheck.vFrontRight.dZ == 1)
+		else if (sSATCheck.vFrontRight.GetdZ() == 1)
 		{
 			CollisionDetection(sSATCheck.vFrontRight);
  
@@ -194,16 +194,16 @@ void PlayerTank::CalculateBoundaries()
 
 	if (UG::IsKeyDown(UG::KEY_S))
 	{
-		if (sSATCheck.vFrontLeft.dZ == 1 && sSATCheck.vFrontRight.dZ == 1)
+		if (sSATCheck.vFrontLeft.GetdZ() == 1 && sSATCheck.vFrontRight.GetdZ() == 1)
 		{
 			vNormalPlane = Vector2(0, 0);
 		}
-		else if (sSATCheck.vBackLeft.dZ == 1)
+		else if (sSATCheck.vBackLeft.GetdZ() == 1)
 		{
 			CollisionDetection(sSATCheck.vBackLeft);
 			vPos -= (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
 		}
-		else if (sSATCheck.vBackRight.dZ == 1)
+		else if (sSATCheck.vBackRight.GetdZ() == 1)
 		{
 			CollisionDetection(sSATCheck.vBackRight);
 
@@ -269,8 +269,8 @@ int PlayerTank::GetTile(int a_iTileWidth, Vector2 a_vPos)
 }
 int PlayerTank::GetTile(int a_iTileWidth, Vector3 a_vPos)
 {
-	int a_iX = (a_vPos.dX / a_iTileWidth);
-	int a_iY = (a_vPos.dY / a_iTileWidth);
+	int a_iX = (a_vPos.GetdX() / a_iTileWidth);
+	int a_iY = (a_vPos.GetdY() / a_iTileWidth);
 
 	return iCollisionMap[(a_iY * iMapWidth) + a_iX];
 }

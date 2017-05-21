@@ -57,23 +57,23 @@ void Boundaries::AABB(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad
 	float fWidth = GetSpriteWidth(a_iWidth, a_iHeight, a_fRad);//Gets the width of the rotated sprite.
 	float fHeight = GetSpriteHeight(a_iWidth, a_iHeight, a_fRad);//Gets the height of the rotated sprite.
 	vTopLeft = Vector3(
-		(vPos.dX - (fWidth) / 2),
-		(vPos.dY + (fHeight) / 2),
+		(vPos.GetdX() - (fWidth) / 2),
+		(vPos.GetdY() + (fHeight) / 2),
 		0
 	);//Gets the X + Y of the Top Left corner of the AABB.
 	vTopRight = Vector3(
-		(vPos.dX + (fWidth) / 2),
-		(vPos.dY + (fHeight) / 2),
+		(vPos.GetdX() + (fWidth) / 2),
+		(vPos.GetdY() + (fHeight) / 2),
 		0
 	);//Gets the X + Y of the Top right corner of the AABB.
 	vBotLeft = Vector3(
-		(vPos.dX - (fWidth) / 2),
-		(vPos.dY - (fHeight) / 2),
+		(vPos.GetdX() - (fWidth) / 2),
+		(vPos.GetdY() - (fHeight) / 2),
 		0
 	);//Gets the X + Y of the Bottom Left corner of the AABB.
 	vBotRight = Vector3(
-		(vPos.dX + (fWidth) / 2),
-		(vPos.dY - (fHeight) / 2),
+		(vPos.GetdX() + (fWidth) / 2),
+		(vPos.GetdY() - (fHeight) / 2),
 		0
 	);//Gets the X + Y of the Bottom right corner of the AABB.
 
@@ -88,23 +88,23 @@ void Boundaries::SeparatingAxisTheorem(int a_iSpriteID, int a_iHeight, int a_iWi
 {
 	Vector3 vPos = Vector3(GetSpriteXPos(a_iSpriteID), GetSpriteYPos(a_iSpriteID), 0);//Gets the position of the sprite and stores it.
 	vFrontRight = Vector3(
-		(vPos.dX) + cos(-a_fRad - f2HALF_PI) * a_iWidth / 2,
-		(vPos.dY) + sin(-a_fRad - f2HALF_PI) * a_iHeight / 2,
+		(vPos.GetdX()) + cos(-a_fRad - f2HALF_PI) * a_iWidth / 2,
+		(vPos.GetdY()) + sin(-a_fRad - f2HALF_PI) * a_iHeight / 2,
 		0
 	);//Gets the Front right X+Y position of the given sprite.
 	vFrontLeft = Vector3(
-		(vPos.dX) + cos(-a_fRad + f2HALF_PI) * a_iWidth / 2,
-		(vPos.dY) + sin(-a_fRad + f2HALF_PI) * a_iHeight / 2,
+		(vPos.GetdX()) + cos(-a_fRad + f2HALF_PI) * a_iWidth / 2,
+		(vPos.GetdY()) + sin(-a_fRad + f2HALF_PI) * a_iHeight / 2,
 		0
 	);//Gets the Front Left X+Y position of the given sprite.
 	vBackLeft = Vector3(
-		(vPos.dX) - cos(-a_fRad - f2HALF_PI) * a_iWidth / 2,
-		(vPos.dY) - sin(-a_fRad - f2HALF_PI) * a_iHeight / 2,
+		(vPos.GetdX()) - cos(-a_fRad - f2HALF_PI) * a_iWidth / 2,
+		(vPos.GetdY()) - sin(-a_fRad - f2HALF_PI) * a_iHeight / 2,
 		0
 	);//Gets the Back Left X+Y position of the given sprite.
 	vBackRight = Vector3(
-		(vPos.dX) - cos(-a_fRad + f2HALF_PI) * a_iWidth / 2,
-		(vPos.dY) - sin(-a_fRad + f2HALF_PI) * a_iHeight / 2,
+		(vPos.GetdX()) - cos(-a_fRad + f2HALF_PI) * a_iWidth / 2,
+		(vPos.GetdY()) - sin(-a_fRad + f2HALF_PI) * a_iHeight / 2,
 		0
 	);//Gets the Back right X+Y position of the given sprite.
 
@@ -113,14 +113,14 @@ void Boundaries::SeparatingAxisTheorem(int a_iSpriteID, int a_iHeight, int a_iWi
 //Functions to get the Axis for the Separated Axis therom collision.
 //Boundaries a_sBox1 = Any given Boundaries class member.
 //Boundaries a_sBox2 = Any given Boundaries class member.
-void Boundaries::SATGetAxis(Boundaries a_sBox1, Boundaries a_sBox2)
-{
-	vAxis1.SetdX(a_sBox1.vFrontRight.dX - a_sBox1.vFrontLeft.dX);
-	vAxis1.SetdY(a_sBox1.vFrontRight.dY - a_sBox1.vFrontLeft.dY);
-	vAxis2.SetdX(a_sBox1.vFrontRight.dX - a_sBox1.vBackRight.dX);
-	vAxis2.SetdY(a_sBox1.vFrontRight.dY - a_sBox1.vBackRight.dY);
-	vAxis3.SetdX(a_sBox2.vFrontLeft.dX - a_sBox2.vBackLeft.dX);
-	vAxis3.SetdY(a_sBox2.vFrontLeft.dY - a_sBox2.vBackLeft.dY);
-	vAxis4.SetdX(a_sBox2.vFrontLeft.dX - a_sBox2.vFrontRight.dX);
-	vAxis4.SetdY(a_sBox2.vFrontLeft.dY - a_sBox2.vFrontRight.dY);
-}
+//void Boundaries::SATGetAxis(Boundaries a_sBox1, Boundaries a_sBox2)
+//{
+//	vAxis1.SetdX((a_sBox1.vFrontRight.GetdX() - a_sBox1.vFrontLeft.GetdX()));
+//	vAxis1.SetdY((a_sBox1.vFrontRight.GetdY() - a_sBox1.vFrontLeft.GetdY()));
+//	vAxis2.SetdX((a_sBox1.vFrontRight.GetdX() - a_sBox1.vBackRight.GetdX()));
+//	vAxis2.SetdY((a_sBox1.vFrontRight.GetdY() - a_sBox1.vBackRight.GetdY()));
+//	vAxis3.SetdX((a_sBox2.vFrontLeft.GetdX() - a_sBox2.vBackLeft.GetdX()));
+//	vAxis3.SetdY((a_sBox2.vFrontLeft.GetdY() - a_sBox2.vBackLeft.GetdY()));
+//	vAxis4.SetdX((a_sBox2.vFrontLeft.GetdX() - a_sBox2.vFrontRight.GetdX()));
+//	vAxis4.SetdY((a_sBox2.vFrontLeft.GetdY() - a_sBox2.vFrontRight.GetdY()));
+//}

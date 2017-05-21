@@ -62,12 +62,12 @@ void PathFinding::FindPath(Vector3 a_vCurrentPos, Vector3 a_vTargetPos)
 		vGoalPath.clear();//Clears that.
 
 		SearchCell sStart;//Creates a Search Cell class member for the start pos.
-		sStart.iX = a_vCurrentPos.dX / fTileWidth;//Sets its X pos to the Tile Co-ords.
-		sStart.iY = a_vCurrentPos.dZ / fTileWidth;//Sets its Y pos to the Tile Co-ords.
+		sStart.iX = a_vCurrentPos.GetdX() / fTileWidth;//Sets its X pos to the Tile Co-ords.
+		sStart.iY = a_vCurrentPos.GetdZ() / fTileWidth;//Sets its Y pos to the Tile Co-ords.
 
 		SearchCell sGoal;//Creates a Search Cell class member for the goal.
-		sGoal.iX = a_vTargetPos.dX / fTileWidth;//Sets its X pos to the Tile Co-ords.
-		sGoal.iY = a_vTargetPos.dZ / fTileWidth;//Sets its Y pos to the Tile Co-ords.
+		sGoal.iX = a_vTargetPos.GetdX() / fTileWidth;//Sets its X pos to the Tile Co-ords.
+		sGoal.iY = a_vTargetPos.GetdZ() / fTileWidth;//Sets its Y pos to the Tile Co-ords.
 
 		SetStartAndGoal(sStart, sGoal);//Sets the Start and the goal of the path.
 		bInitialisedStart = true;//Finishes the starting function.
@@ -234,8 +234,8 @@ Vector3 PathFinding::NextPathPos(Vector3 a_vPos, bool a_bFoundGoal)
 	}
 
 	Vector3 vNextPosCell;//Creates Vector3 to store the next position.
-	vNextPosCell.dX = vGoalPath[vGoalPath.size() - iIndex]->dX;//Gets the X Pos.
-	vNextPosCell.dZ = vGoalPath[vGoalPath.size() - iIndex]->dZ;//Gets the Y Pos.
+	vNextPosCell.SetdX(vGoalPath[vGoalPath.size() - iIndex]->GetdX());//Gets the X Pos.
+	vNextPosCell.SetdZ(vGoalPath[vGoalPath.size() - iIndex]->GetdZ());//Gets the Y Pos.
 	
 	return vNextPosCell;
 }
@@ -249,8 +249,8 @@ Vector3 PathFinding::SecondNextPathPos(Vector3 a_vPos)
 
 	}
 	Vector3 vNextPosCell;//Creates Vector3 to store the next position.
-	vNextPosCell.dX = vGoalPath[vGoalPath.size() - iIndex]->dX;//Gets the X Pos.
-	vNextPosCell.dZ = vGoalPath[vGoalPath.size() - iIndex]->dZ;//Gets the Y Pos.
+	vNextPosCell.SetdX(vGoalPath[vGoalPath.size() - iIndex]->GetdX());//Gets the X Pos.
+	vNextPosCell.SetdZ(vGoalPath[vGoalPath.size() - iIndex]->GetdZ());//Gets the Y Pos.
 
 	return vNextPosCell;
 }

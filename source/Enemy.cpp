@@ -63,7 +63,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 		RotateSprite(iSpriteID, DegreesToRadians(-fBearing + 90));//Rotates the sprite to face the direction it is travelling in.
 		Vector3 vNextSpot = oPathFinder.SecondNextPathPos(vDistanceTarget);//Gets the position of the path, 2 positions away from where the sprite is currently.
 		
-		if (vNextSpot.dY == -100)//Checks to see if the path has ended.
+		if (vNextSpot.GetdY() == -100)//Checks to see if the path has ended.
 		{
 			bIsTravelling = false;//Switch to pathfinding part of function.
 			oPathFinder.bInitialisedStart = false;//Restarts the pathfinding function.
@@ -73,7 +73,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 		if (fLerpPosition >= 1)//If the lerp has completed.
 		{
 			vDistanceTarget = oPathFinder.NextPathPos(vNextSpot, true);//Find the next position of the path.
-			if (vDistanceTarget.dY == -100)//Checks to see if the path has ended.
+			if (vDistanceTarget.GetdY() == -100)//Checks to see if the path has ended.
 			{
 				bIsTravelling = false;//Switch to pathfinding part of function.
 				oPathFinder.bInitialisedStart = false;//Restarts the pathfinding function.
@@ -85,7 +85,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 		}
 		else if (fLerpPosition >= 0 && fLerpPosition <= 1)//If the lerp is still in progress.
 		{
-			vPos = Vector2(Lerp(vDistanceTarget.dX, vNextSpot.dX, fLerpPosition), Lerp(vDistanceTarget.dZ, vNextSpot.dZ, fLerpPosition));//Lerps between the Current position and the Next position.
+			vPos = Vector2(Lerp(vDistanceTarget.GetdX(), vNextSpot.GetdX(), fLerpPosition), Lerp(vDistanceTarget.GetdZ(), vNextSpot.GetdZ(), fLerpPosition));//Lerps between the Current position and the Next position.
 			fBearing = GetBearing(vDistanceTarget, vNextSpot);//Gets the bearing/angle between the current position and the next position.
 			fLerpPosition += 2.f * fDelta;//Adds to the lerp.
 		}
@@ -144,8 +144,8 @@ float Enemy::GetBearing(Vector2 &a_V1, Vector2 &a_V2)
 //Vector3 &a_V2 = End position.
 float Enemy::GetBearing(Vector3 &a_V1, Vector3 &a_V2)
 {
-	float fXChange = (a_V1.dX - a_V2.dX);//Change in X.
-	float fYChange = (a_V1.dZ - a_V2.dZ);//Change in Y.
+	float fXChange = (a_V1.GetdX() - a_V2.GetdX());//Change in X.
+	float fYChange = (a_V1.GetdZ() - a_V2.GetdZ());//Change in Y.
 	return atan2(fYChange, fXChange)*(180 / fPI); //Returns the principal value of the arc tangent of y / x, then converted to degrees.
 }
 //Function to make the Turret sprite rotate to look at the player.
