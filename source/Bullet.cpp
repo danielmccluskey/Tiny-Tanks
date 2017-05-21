@@ -29,8 +29,8 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 			a_pBullet[i].vVelocity = a_pBullet[i].vVelocity.RotateX(a_pBullet[i].fAngle);
 			a_pBullet[i].vPos = a_fStart;
 			a_pBullet[i].vLastPos = a_fStart;
-			a_pBullet[i].vPos += Vector2(a_pBullet[i].vVelocity.dX * 40, a_pBullet[i].vVelocity.dY * 40);//40 is a magic number I know, its the value I use to make the bullet spawn at the end of the turret.
-			UG::MoveSprite(a_pBullet[i].iSpriteID, a_pBullet[i].vPos.dX, a_pBullet[i].vPos.dY);
+			a_pBullet[i].vPos += Vector2(a_pBullet[i].vVelocity.GetdX() * 40, a_pBullet[i].vVelocity.GetdY() * 40);//40 is a magic number I know, its the value I use to make the bullet spawn at the end of the turret.
+			UG::MoveSprite(a_pBullet[i].iSpriteID, a_pBullet[i].vPos.GetdX(), a_pBullet[i].vPos.GetdY());
 			a_pBullet[i].iLifeTime = 200;
 			a_pBullet[i].iBulletSpeed = 80;
 			a_pBullet[i].bIsActive = true;
@@ -42,16 +42,16 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 
 void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 {
-	int iTileX = (vPos.dX / fTileWidth);
-	int iTileY = (vPos.dY / fTileWidth);
+	int iTileX = (vPos.GetdX() / fTileWidth);
+	int iTileY = (vPos.GetdY() / fTileWidth);
 	iTileX *= fTileWidth;
 	iTileY *= fTileWidth;
 
-	if (vPos.dX > (fMapWidth * fTileWidth) || vPos.dX < 0)
+	if (vPos.GetdX() > (fMapWidth * fTileWidth) || vPos.GetdX() < 0)
 	{
 		iLifeTime = -2;
 	}
-	else if (vPos.dY >(fMapHeight * fTileWidth) || vPos.dY < 0)
+	else if (vPos.GetdY() >(fMapHeight * fTileWidth) || vPos.GetdY() < 0)
 	{
 		iLifeTime = -2;
 	}
@@ -60,31 +60,31 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 		if (iBulletType == 0)
 		{
 			//Top Collision
-			if ((vLastPos.dY > (iTileY + fTileWidth)) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
+			if ((vLastPos.GetdY() > (iTileY + fTileWidth)) && (vLastPos.GetdX() < (iTileX + fTileWidth)) && (vLastPos.GetdX() > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
 			{
-				vVelocity.dY *= -1;
+				vVelocity.SetdY((vVelocity.GetdY()) * -1);
 			}
 			//Bottom Collision
-			if ((vLastPos.dY < iTileY) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
+			if ((vLastPos.GetdY() < iTileY) && (vLastPos.GetdX() < (iTileX + fTileWidth)) && (vLastPos.GetdX() > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
 			{
-				vVelocity.dY *= -1;
+				vVelocity.SetdY((vVelocity.GetdY()) * -1);
 			}
 			//Right Collision
-			if ((vLastPos.dX > (iTileX + fTileWidth)) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
+			if ((vLastPos.GetdX() > (iTileX + fTileWidth)) && (vLastPos.GetdY() < (iTileY + fTileWidth)) && (vLastPos.GetdY() > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
 			{
-				vVelocity.dX *= -1;
+				vVelocity.SetdX((vVelocity.GetdX()) * -1);
 			}
 			//Left Collision
-			if ((vLastPos.dX < iTileX) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
+			if ((vLastPos.GetdX() < iTileX) && (vLastPos.GetdY() < (iTileY + fTileWidth)) && (vLastPos.GetdY() > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
 			{
-				vVelocity.dX *= -1;
+				vVelocity.SetdX((vVelocity.GetdX()) * -1);
 			}
 		}
 		if (iBulletType == 1)
 		{
 			iLifeTime = -2;
 		}
-		if ((vLastPos.dX > iTileX) && (vLastPos.dX < iTileX + fTileWidth) && (vLastPos.dY > iTileY) && (vLastPos.dY < iTileY + fTileWidth))
+		if ((vLastPos.GetdX() > iTileX) && (vLastPos.GetdX() < iTileX + fTileWidth) && (vLastPos.GetdY() > iTileY) && (vLastPos.GetdY() < iTileY + fTileWidth))
 		{
 			iLifeTime = -2;
 		}
@@ -92,22 +92,24 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 
 	if (iBulletType == 1)
 	{
-		UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position and stores it in the class members variable.
-		vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
+		double iMouseX, iMouseY;
+		UG::GetMousePos(iMouseX, iMouseY);//Gets the mouse position and stores it in the class members variable.
+		vMousePos.SetdX(iMouseX);
+		vMousePos.SetdY((iMapHeight * fTileWidth) - iMouseY);//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
 		vVelocity = vVelocity.RotateX((GetBearing(vPos, vMousePos)-180));
 	}
 	float fDeltaTime = UG::GetDeltaTime();
 	vLastPos = vPos;
 	vPos += (vVelocity *= iBulletSpeed) *= fDeltaTime;
-	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
+	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
 
 	
 }
 
 int Bullet::GetTile(int a_iCollisionMap[], Vector2 a_vPos)
 {
-	int a_iX = (a_vPos.dX / 32);
-	int a_iY = (a_vPos.dY / 32);
+	int a_iX = (a_vPos.GetdX() / 32);
+	int a_iY = (a_vPos.GetdY() / 32);
 
 	return a_iCollisionMap[(a_iY * iMapWidth) + a_iX];
 }
@@ -141,8 +143,8 @@ void Bullet::UpdateBullets(Bullet *a_pBullet, int a_iCollisionMap[])
 //Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
 float Bullet::GetBearing(Vector2 &a_V1, Vector2 &a_V2)
 {
-	float fXChange = (a_V1.dX - a_V2.dX);
-	float fYChange = (a_V1.dY - a_V2.dY);
+	float fXChange = (a_V1.GetdX() - a_V2.GetdX());
+	float fYChange = (a_V1.GetdY() - a_V2.GetdY());
 	return atan2(fYChange, fXChange)*(180 / fPI);
 }
 
@@ -154,8 +156,8 @@ bool Bullet::SpriteCollide(Bullet* a_pBullet, int a_iSpriteID, int a_iWidth, int
 	{
 		if (a_pBullet[i].bIsActive == true)
 		{
-			if ((a_pBullet[i].vPos.dX < AABBCheck.vTopRight.dX) && (a_pBullet[i].vPos.dX > AABBCheck.vTopLeft.dX) &&
-				(a_pBullet[i].vPos.dY < AABBCheck.vTopRight.dY) && (a_pBullet[i].vPos.dY > AABBCheck.vBotLeft.dY))
+			if ((a_pBullet[i].vPos.GetdX() < AABBCheck.vTopRight.dX) && (a_pBullet[i].vPos.GetdX() > AABBCheck.vTopLeft.dX) &&
+				(a_pBullet[i].vPos.GetdY() < AABBCheck.vTopRight.dY) && (a_pBullet[i].vPos.GetdY() > AABBCheck.vBotLeft.dY))
 			{
 				return true;
 			}

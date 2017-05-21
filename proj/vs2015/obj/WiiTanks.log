@@ -1,7 +1,12 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  main.cpp
-c:\users\data-3\downloads\game\include\searchcell.h(18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\main.cpp(121): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MenuSprites.cpp
+c:\users\data-3\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\data-3\downloads\game\source\menusprites.cpp(8): warning C4244: '=': conversion from 'const double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\menusprites.cpp(9): warning C4244: '=': conversion from 'const double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\menusprites.cpp(10): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\menusprites.cpp(13): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\menusprites.cpp(84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\menusprites.cpp(85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   WiiTanks.vcxproj -> C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
   xcopy "C:\Users\Data-3\Downloads\game\scripts\..\resources\"*.* "C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 

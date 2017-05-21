@@ -5,12 +5,12 @@
 
 MenuSprite::MenuSprite(Vector2 a_vStartPos, Vector2 a_vSize, int iLayer, char* a_pcImagePath, bool a_bDrawSprite)
 {
-	iSpriteHeight = a_vSize.dY;
-	iSpriteWidth = a_vSize.dX;
+	iSpriteHeight = a_vSize.GetdY();
+	iSpriteWidth = a_vSize.GetdX();
 	iSpriteID = UG::CreateSprite(a_pcImagePath, iSpriteWidth, iSpriteHeight, true);
 	UG::SetSpriteLayer(iSpriteID, iLayer);
 	vPos = a_vStartPos;
-	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
+	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
 	
 	
 	bBeingDrawn = false;
@@ -90,10 +90,12 @@ bool MenuSprite::CheckClick()
 {
 	if (UG::GetMouseButtonDown(0))
 	{	
-		Vector2 vMousePos;
-		UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position and stores it in the class members variable.
-		vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
-		
+		Vector2 vMousePos;		
+		double iMouseX, iMouseY;
+		UG::GetMousePos(iMouseX, iMouseY);//Gets the mouse position and stores it in the class members variable.
+		vMousePos.SetdX(iMouseX);
+		vMousePos.SetdY((iMapHeight * fTileWidth) - iMouseY);//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
+
 		if (CheckCollision(vMousePos))
 		{
 			return true;
@@ -104,19 +106,19 @@ bool MenuSprite::CheckClick()
 
 bool MenuSprite::CheckCollision(Vector2 a_vMousePos)
 {
-	if (a_vMousePos.dX < (vPos.dX - (iSpriteWidth / 2)))
+	if (a_vMousePos.GetdX()  < (vPos.GetdX() - (iSpriteWidth / 2)))
 	{
 		return false;
 	}
-	else if (a_vMousePos.dX > (vPos.dX + (iSpriteWidth / 2)))
+	else if (a_vMousePos.GetdX()  > (vPos.GetdX() + (iSpriteWidth / 2)))
 	{
 		return false;
 	}
-	else if (a_vMousePos.dY < (vPos.dY - (iSpriteHeight / 2)))
+	else if (a_vMousePos.GetdY() < (vPos.GetdY() - (iSpriteHeight / 2)))
 	{
 		return false;
 	}
-	else if (a_vMousePos.dY > (vPos.dY + (iSpriteHeight / 2)))
+	else if (a_vMousePos.GetdY() > (vPos.GetdY() + (iSpriteHeight / 2)))
 	{
 		return false;
 	}

@@ -24,7 +24,7 @@ void Enemy::CreateTank(float a_fStartXPos, float a_fStartYPos)
 	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite																									
 	UG::DrawSprite(iSpriteID);	//Draws it
 	vPos = Vector2(a_fStartXPos + (fTileWidth/2), a_fStartYPos +(fTileWidth/2));//Sets the position to the middle of the spawning tile.
-	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);//Moves it to the position.
+	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());//Moves it to the position.
 	UG::SetSpriteLayer(iSpriteID, 9);//Sets the layer to above the map tiles.
 	bIsRotating = true;//To start the Pathfinding function.
 	bIsTravelling = false;//For the Pathfinding function.
@@ -46,12 +46,12 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 	float fDelta = UG::GetDeltaTime();//Gets the Delta time.
 	if (bIsRotating == true)
 	{
-		oPathFinder.FindPath(Vector3(a_vStart.dX, 0, a_vStart.dY), Vector3(a_vGoal.dX, 0, a_vGoal.dY));//This is the main pathfinding function that finds a path to a_vGoal from a_vStart. Searches 1 tile per frame so the game doesnt freeze during search.
+		oPathFinder.FindPath(Vector3(a_vStart.GetdX(), 0, a_vStart.GetdY()), Vector3(a_vGoal.GetdX(), 0, a_vGoal.GetdY()));//This is the main pathfinding function that finds a path to a_vGoal from a_vStart. Searches 1 tile per frame so the game doesnt freeze during search.
 		if (oPathFinder.bFoundGoal)//If the goal has been found.
 		{
 			bIsRotating = false;//Switch to movement part of function
 			bIsTravelling = true;//Switch to movement part of function
-			vDistanceTarget = oPathFinder.NextPathPos(Vector3(vPos.dX, 0, vPos.dY), false);//Get the position of the next position on the path.
+			vDistanceTarget = oPathFinder.NextPathPos(Vector3(vPos.GetdX(), 0, vPos.GetdY()), false);//Get the position of the next position on the path.
 			fLerpPosition = 0;//Sets the lerp value to 0.
 			oPathFinder.DrawDebug();//For debug, to draw the search areas so that I could visualise the Pathfinding
 		}
@@ -81,7 +81,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 			}
 			
 			fLerpPosition = 0;//Resets the lerp position.
-			BulletArray[0].CreateBullet(BulletArray, Vector2(vPos.dX + fTileWidth / 2, vPos.dY + fTileWidth / 2), a_vGoal, 0);//Creates a bullet and fires it toward the player.
+			BulletArray[0].CreateBullet(BulletArray, Vector2(vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2), a_vGoal, 0);//Creates a bullet and fires it toward the player.
 		}
 		else if (fLerpPosition >= 0 && fLerpPosition <= 1)//If the lerp is still in progress.
 		{
@@ -90,7 +90,7 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 			fLerpPosition += 2.f * fDelta;//Adds to the lerp.
 		}
 		BulletArray[0].UpdateBullets(BulletArray, iEnemyCollisionMap);//Updates the bullet array (Moves and Destroys bullets)
-		UG::MoveSprite(iSpriteID, vPos.dX + fTileWidth/2, vPos.dY+fTileWidth/2);//Moves the tank to the lerped position.
+		UG::MoveSprite(iSpriteID, vPos.GetdX() + fTileWidth/2, vPos.GetdY() +fTileWidth/2);//Moves the tank to the lerped position.
 
 	}
 }
@@ -134,8 +134,8 @@ void Enemy::RotateSprite(int a_iSpriteID, float a_fRad)
 //Vector2 &a_V2 = End position.
 float Enemy::GetBearing(Vector2 &a_V1, Vector2 &a_V2)
 {
-	float fXChange = (a_V1.dX - a_V2.dX);//Change in X.
-	float fYChange = (a_V1.dY - a_V2.dY);//Change in Y.
+	float fXChange = (a_V1.GetdX() - a_V2.GetdX());//Change in X.
+	float fYChange = (a_V1.GetdY() - a_V2.GetdY());//Change in Y.
 	return atan2(fYChange, fXChange)*(180 / fPI); //Returns the principal value of the arc tangent of y / x, then converted to degrees.
 }
 //Gets the Angle between two Vector3 co-ordinates. Mainly Used for rotating tank turret.
@@ -154,5 +154,5 @@ void Enemy::LookToPlayer(Vector2 a_vPlayerPos)
 {
 	sSpriteTurret.iRotDeg = GetBearing(vPos, a_vPlayerPos);//Gets the bearing/angle between the player and the enemy.
 	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg) - 90));//Rotates the turret to that angle.
-	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.dX + fTileWidth / 2, vPos.dY + fTileWidth / 2);//Moves the turret to the position of the tank.
+	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2);//Moves the turret to the position of the tank.
 }

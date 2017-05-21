@@ -61,23 +61,26 @@ void PlayerTank::MoveTank()
 	{
 		iRotDeg = 359;//Set the rotation back to 359.
 	}
+
+	double iMouseX, iMouseY;
+	UG::GetMousePos(iMouseX, iMouseY);//Gets the mouse position and stores it in the class members variable.
+	vMousePos.SetdX(iMouseX);
+	vMousePos.SetdY((iMapHeight * fTileWidth) - iMouseY);//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
 	
-	UG::GetMousePos(vMousePos.dX, vMousePos.dY);//Gets the mouse position and stores it in the class members variable.
-	vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
-	sSpriteTurret.iRotDeg = GetBearing(vPos, vMousePos);
+	sSpriteTurret.iRotDeg = GetBearing(vPos, vMousePos);//Gets the angle between the mouse and the player.
 
 	vVelocity = vVelocity.RotateX(-iRotDeg + 90);//Calculates the velocity.
 
 	float fDeltaTime = UG::GetDeltaTime();
-	vVelocity.dX = (vVelocity.dX * fDeltaTime) * fSpeed;
-	vVelocity.dY = (vVelocity.dY * fDeltaTime) * fSpeed;
+	vVelocity.SetdX((vVelocity.GetdX() * fDeltaTime) * fSpeed);
+	vVelocity.SetdY((vVelocity.GetdY() * fDeltaTime) * fSpeed);
 
 	
 	RotateSprite(iSpriteID, DegreesToRadians(-iRotDeg));
 	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg)-90));
 
-	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
-	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.dX, vPos.dY);
+	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
+	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.GetdX(), vPos.GetdY());
 	
 
 }
@@ -92,25 +95,25 @@ bool PlayerTank::CollisionDetection(Vector3 a_vPos)
 	int iCount = 0;
 
 	//Top Collision
-	if ((vLastPos.dY > (iTileY + fTileWidth)) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
+	if ((vLastPos.GetdY() > (iTileY + fTileWidth)) && (vLastPos.GetdX() < (iTileX + fTileWidth)) && (vLastPos.GetdX() > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
 	{
 		vNormalPlane = Vector2(0, 1);
 		++iCount;
 	}
 	//Bottom Collision
-	if ((vLastPos.dY < iTileY) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
+	if ((vLastPos.GetdY() < iTileY) && (vLastPos.GetdX() < (iTileX + fTileWidth)) && (vLastPos.GetdX() > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
 	{
 		vNormalPlane = Vector2(0, 1);
 		++iCount;
 	}
 	//Right Collision
-	if ((vLastPos.dX > (iTileX + fTileWidth)) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
+	if ((vLastPos.GetdX() > (iTileX + fTileWidth)) && (vLastPos.GetdY() < (iTileY + fTileWidth)) && (vLastPos.GetdY() > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
 	{
 		vNormalPlane = Vector2(1, 0);
 		++iCount;
 	}
 	//Left Collision
-	if ((vLastPos.dX < iTileX) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
+	if ((vLastPos.GetdX() < iTileX) && (vLastPos.GetdY() < (iTileY + fTileWidth)) && (vLastPos.GetdY() > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
 	{
 		vNormalPlane = Vector2(1, 0);
 		++iCount;
@@ -165,7 +168,7 @@ void PlayerTank::CalculateBoundaries()
 		if (sSATCheck.vFrontLeft.dZ == 1 && sSATCheck.vFrontRight.dZ == 1)
 		{
 			vNormalPlane = Vector2(0, 0);
-			std::cout << "AYYYYY: " << vVelocity.dX << std::endl;
+			std::cout << "AYYYYY: " << vVelocity.GetdX() << std::endl;
 		}
 		else if (sSATCheck.vFrontLeft.dZ == 1)
 		{
@@ -183,8 +186,8 @@ void PlayerTank::CalculateBoundaries()
 			vLastPos = vPos;
 			vPos += vVelocity;
 
-			std::cout << "X: " << vVelocity.dX << std::endl;
-			std::cout << "Y: " << vVelocity.dY << std::endl << std::endl;
+			std::cout << "X: " << vVelocity.GetdX() << std::endl;
+			std::cout << "Y: " << vVelocity.GetdY() << std::endl << std::endl;
 		}
 	
 	}
@@ -242,8 +245,8 @@ void PlayerTank::RotateSprite(int a_iSpriteID, float a_fRad)
 //Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
 float PlayerTank::GetBearing(Vector2 &a_V1, Vector2 &a_V2)
 {
-	float fXChange = (a_V1.dX - a_V2.dX);
-	float fYChange = (a_V1.dY - a_V2.dY);
+	float fXChange = (a_V1.GetdX() - a_V2.GetdX());
+	float fYChange = (a_V1.GetdY() - a_V2.GetdY());
 	return atan2(fYChange, fXChange)*(180 / fPI);
 }
 
@@ -259,8 +262,8 @@ void PlayerTank::UpdateCollisionMap()
 }
 int PlayerTank::GetTile(int a_iTileWidth, Vector2 a_vPos)
 {
-	int a_iX = (a_vPos.dX / a_iTileWidth);
-	int a_iY = (a_vPos.dY / a_iTileWidth);
+	int a_iX = (a_vPos.GetdX() / a_iTileWidth);
+	int a_iY = (a_vPos.GetdY() / a_iTileWidth);
 
 	return iCollisionMap[(a_iY * iMapWidth) + a_iX];
 }

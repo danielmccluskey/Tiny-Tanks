@@ -115,12 +115,12 @@ void Boundaries::SeparatingAxisTheorem(int a_iSpriteID, int a_iHeight, int a_iWi
 //Boundaries a_sBox2 = Any given Boundaries class member.
 void Boundaries::SATGetAxis(Boundaries a_sBox1, Boundaries a_sBox2)
 {
-	vAxis1.dX = a_sBox1.vFrontRight.dX - a_sBox1.vFrontLeft.dX;
-	vAxis1.dY = a_sBox1.vFrontRight.dY - a_sBox1.vFrontLeft.dY;
-	vAxis2.dX = a_sBox1.vFrontRight.dX - a_sBox1.vBackRight.dX;
-	vAxis2.dY = a_sBox1.vFrontRight.dY - a_sBox1.vBackRight.dY;
-	vAxis3.dX = a_sBox2.vFrontLeft.dX - a_sBox2.vBackLeft.dX;
-	vAxis3.dY = a_sBox2.vFrontLeft.dY - a_sBox2.vBackLeft.dY;
-	vAxis4.dX = a_sBox2.vFrontLeft.dX - a_sBox2.vFrontRight.dX;
-	vAxis4.dY = a_sBox2.vFrontLeft.dY - a_sBox2.vFrontRight.dY;
+	vAxis1.SetdX(a_sBox1.vFrontRight.dX - a_sBox1.vFrontLeft.dX);
+	vAxis1.SetdY(a_sBox1.vFrontRight.dY - a_sBox1.vFrontLeft.dY);
+	vAxis2.SetdX(a_sBox1.vFrontRight.dX - a_sBox1.vBackRight.dX);
+	vAxis2.SetdY(a_sBox1.vFrontRight.dY - a_sBox1.vBackRight.dY);
+	vAxis3.SetdX(a_sBox2.vFrontLeft.dX - a_sBox2.vBackLeft.dX);
+	vAxis3.SetdY(a_sBox2.vFrontLeft.dY - a_sBox2.vBackLeft.dY);
+	vAxis4.SetdX(a_sBox2.vFrontLeft.dX - a_sBox2.vFrontRight.dX);
+	vAxis4.SetdY(a_sBox2.vFrontLeft.dY - a_sBox2.vFrontRight.dY);
 }
