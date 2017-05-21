@@ -7,93 +7,95 @@
 #include "UGFW.h"
 #include "MathUtil.h"
 #include "Matrix4x4.h"
+//==============================================================================================================================
+// Project: WiiTanks
+// File: Enemy.h
+// Author: Daniel McCluskey
+// Date Created: 17/01/17
+// Brief: This file controls the Enemy "AI" movement, the bullets for the enemy and the rotation of the enemy.
+// Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
+//==============================================================================================================================
 
-
-void Enemy::CreateTank(float a_fCenterX, float a_fCenterY)
+//Function to create the Enemy tank, Need to convert to a constructor.
+//float a_fStartXPos = The X position to spawn the tank in.
+//float a_fStartYPos = The Y position to spawn the tank in.
+void Enemy::CreateTank(float a_fStartXPos, float a_fStartYPos)
 {
-	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite
-																									
+	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite																									
 	UG::DrawSprite(iSpriteID);	//Draws it
-	vPos = Vector2(a_fCenterX + (fTileWidth/2), a_fCenterX+(fTileWidth/2));
-	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
-	UG::SetSpriteLayer(iSpriteID, 9);
-	bIsRotating = true;
-	bIsTravelling = false;
-	UpdateCollisionMap();
-
+	vPos = Vector2(a_fStartXPos + (fTileWidth/2), a_fStartYPos +(fTileWidth/2));//Sets the position to the middle of the spawning tile.
+	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);//Moves it to the position.
+	UG::SetSpriteLayer(iSpriteID, 9);//Sets the layer to above the map tiles.
+	bIsRotating = true;//To start the Pathfinding function.
+	bIsTravelling = false;//For the Pathfinding function.
+	UpdateCollisionMap();//Updates the collision map for movement.
 };
+//Deconstructor
 Enemy::~Enemy()
 {
-	UG::StopDrawingSprite(iSpriteID);
-	UG::DestroySprite(iSpriteID);
-	UG::StopDrawingSprite(sSpriteTurret.iSpriteID);
-	UG::DestroySprite(sSpriteTurret.iSpriteID);
+	UG::StopDrawingSprite(iSpriteID);//Stops Drawing that.
+	UG::DestroySprite(iSpriteID);//Destroys that.
+	UG::StopDrawingSprite(sSpriteTurret.iSpriteID);//Stops Drawing that.
+	UG::DestroySprite(sSpriteTurret.iSpriteID);//Destroys that.
 }
+//Function to determine a Path to a_vGoal using the A* pathfinding method, then moves the tank along the path.
+//Vector2 a_vStart = The start position of the tank.
+//Vector2 a_vGoal = The end of the path (Currently the Players position.)
 void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 {
-	float fDelta = UG::GetDeltaTime();
+	float fDelta = UG::GetDeltaTime();//Gets the Delta time.
 	if (bIsRotating == true)
 	{
-		oPathFinder.FindPath(Vector3(a_vStart.dX, 0, a_vStart.dY), Vector3(a_vGoal.dX, 0, a_vGoal.dY));
-		//oPathFinder.FindPath(Vector3(a_vStart.dX, 0, a_vStart.dY), Vector3(a_vGoal.dX, 0, a_vGoal.dY));
-		if (oPathFinder.bFoundGoal)
+		oPathFinder.FindPath(Vector3(a_vStart.dX, 0, a_vStart.dY), Vector3(a_vGoal.dX, 0, a_vGoal.dY));//This is the main pathfinding function that finds a path to a_vGoal from a_vStart. Searches 1 tile per frame so the game doesnt freeze during search.
+		if (oPathFinder.bFoundGoal)//If the goal has been found.
 		{
-			bIsRotating = false;
-			bIsTravelling = true;
-			vDistanceTarget = oPathFinder.NextPathPos(Vector3(vPos.dX, 0, vPos.dY), false);
-			fLerpPosition = 0;
-			oPathFinder.DrawDebug();
+			bIsRotating = false;//Switch to movement part of function
+			bIsTravelling = true;//Switch to movement part of function
+			vDistanceTarget = oPathFinder.NextPathPos(Vector3(vPos.dX, 0, vPos.dY), false);//Get the position of the next position on the path.
+			fLerpPosition = 0;//Sets the lerp value to 0.
+			oPathFinder.DrawDebug();//For debug, to draw the search areas so that I could visualise the Pathfinding
 		}
 
 		
 	}
 	if (bIsTravelling == true)
-	{
+	{		
+		RotateSprite(iSpriteID, DegreesToRadians(-fBearing + 90));//Rotates the sprite to face the direction it is travelling in.
+		Vector3 vNextSpot = oPathFinder.SecondNextPathPos(vDistanceTarget);//Gets the position of the path, 2 positions away from where the sprite is currently.
 		
-		RotateSprite(iSpriteID, DegreesToRadians(-fBearing + 90));
-		Vector3 vNextSpot = oPathFinder.SecondNextPathPos(vDistanceTarget);
-		
-		if (vNextSpot.dY == -100)
+		if (vNextSpot.dY == -100)//Checks to see if the path has ended.
 		{
-			bIsTravelling = false;
-			oPathFinder.bInitialisedStart = false;
-			bIsRotating = true;
+			bIsTravelling = false;//Switch to pathfinding part of function.
+			oPathFinder.bInitialisedStart = false;//Restarts the pathfinding function.
+			bIsRotating = true;//Switch to pathfinding part of function.
 		}
 		
-		if (fLerpPosition >= 1)
+		if (fLerpPosition >= 1)//If the lerp has completed.
 		{
-			vDistanceTarget = oPathFinder.NextPathPos(vNextSpot, true);
-			if (vDistanceTarget.dY == -100)
+			vDistanceTarget = oPathFinder.NextPathPos(vNextSpot, true);//Find the next position of the path.
+			if (vDistanceTarget.dY == -100)//Checks to see if the path has ended.
 			{
-				bIsTravelling = false;
-				oPathFinder.bInitialisedStart = false;
-				bIsRotating = true;
+				bIsTravelling = false;//Switch to pathfinding part of function.
+				oPathFinder.bInitialisedStart = false;//Restarts the pathfinding function.
+				bIsRotating = true;//Switch to pathfinding part of function.
 			}
 			
-			fLerpPosition = 0;
-			BulletArray[0].CreateBullet(BulletArray, Vector2(vPos.dX + fTileWidth / 2, vPos.dY + fTileWidth / 2), a_vGoal, 0);
+			fLerpPosition = 0;//Resets the lerp position.
+			BulletArray[0].CreateBullet(BulletArray, Vector2(vPos.dX + fTileWidth / 2, vPos.dY + fTileWidth / 2), a_vGoal, 0);//Creates a bullet and fires it toward the player.
 		}
-		else if (fLerpPosition >= 0 && fLerpPosition <= 1)
+		else if (fLerpPosition >= 0 && fLerpPosition <= 1)//If the lerp is still in progress.
 		{
-			vPos = Vector2(Lerp(vDistanceTarget.dX, vNextSpot.dX, fLerpPosition), Lerp(vDistanceTarget.dZ, vNextSpot.dZ, fLerpPosition));
-			fBearing = GetBearing(vDistanceTarget, vNextSpot);
-			fLerpPosition += 2.f * fDelta;
+			vPos = Vector2(Lerp(vDistanceTarget.dX, vNextSpot.dX, fLerpPosition), Lerp(vDistanceTarget.dZ, vNextSpot.dZ, fLerpPosition));//Lerps between the Current position and the Next position.
+			fBearing = GetBearing(vDistanceTarget, vNextSpot);//Gets the bearing/angle between the current position and the next position.
+			fLerpPosition += 2.f * fDelta;//Adds to the lerp.
 		}
-		
-		
-
-
-		BulletArray[0].UpdateBullets(BulletArray, iEnemyCollisionMap);
-		UG::MoveSprite(iSpriteID, vPos.dX + fTileWidth/2, vPos.dY+fTileWidth/2);
+		BulletArray[0].UpdateBullets(BulletArray, iEnemyCollisionMap);//Updates the bullet array (Moves and Destroys bullets)
+		UG::MoveSprite(iSpriteID, vPos.dX + fTileWidth/2, vPos.dY+fTileWidth/2);//Moves the tank to the lerped position.
 
 	}
 }
-
-
-
-
-
-
+//Function to Update the Enemy tanks Collision map array and the Pathfinding collision map array.
+//Needs to be called for each individual enemy.
 void Enemy::UpdateCollisionMap()
 {
 	std::ifstream pCollision;//Creates an input fstream member
@@ -102,17 +104,15 @@ void Enemy::UpdateCollisionMap()
 	{
 		pCollision >> iEnemyCollisionMap[i];//Stores current tile type into array.
 	}
-	pCollision.close();
+	pCollision.close();//Closes the file.
 
-	oPathFinder.UpdateCollisionMap();
+	oPathFinder.UpdateCollisionMap();//Updates the pathfinding collision map.
 }
-int Enemy::GetTile(int a_iTileWidth, Vector2 a_vPos)
-{
-	int a_iX = (a_vPos.dX);
-	int a_iY = (a_vPos.dY);
 
-	return iEnemyCollisionMap[(a_iY * iMapWidth) + a_iX];
-}
+//Function to rotate a sprite using a combination of the UGSpriteMatrix and a 4x4Matrix.
+//Rotates the sprite to a set angle instead of incrementing the angle.
+//int a_iSpriteID = The SpriteID of the sprite you want to rotate.
+//float a_fRad = The angle in radians that you want to rotate the sprite to.
 void Enemy::RotateSprite(int a_iSpriteID, float a_fRad)
 {
 	UG::GetSpriteMatrix(a_iSpriteID, fUGFrameSpriteMatrix);//Gets the sprite matrix of the given sprite and stores it in a size[16] float array.
@@ -130,23 +130,29 @@ void Enemy::RotateSprite(int a_iSpriteID, float a_fRad)
 }
 //Gets the Angle between two Vector2 co-ordinates. Mainly Used for rotating tank turret.
 //Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
+//Vector2 &a_V1 = Starting Position.
+//Vector2 &a_V2 = End position.
 float Enemy::GetBearing(Vector2 &a_V1, Vector2 &a_V2)
 {
-	float fXChange = (a_V1.dX - a_V2.dX);
-	float fYChange = (a_V1.dY - a_V2.dY);
-	return atan2(fYChange, fXChange)*(180 / fPI);
+	float fXChange = (a_V1.dX - a_V2.dX);//Change in X.
+	float fYChange = (a_V1.dY - a_V2.dY);//Change in Y.
+	return atan2(fYChange, fXChange)*(180 / fPI); //Returns the principal value of the arc tangent of y / x, then converted to degrees.
 }
+//Gets the Angle between two Vector3 co-ordinates. Mainly Used for rotating tank turret.
+//Equation used - http://wikicode.wikidot.com/get-angle-of-line-between-two-points
+//Vector3 &a_V1 = Starting Position.
+//Vector3 &a_V2 = End position.
 float Enemy::GetBearing(Vector3 &a_V1, Vector3 &a_V2)
 {
-	float fXChange = (a_V1.dX - a_V2.dX);
-	float fYChange = (a_V1.dZ - a_V2.dZ);
-	return atan2(fYChange, fXChange)*(180 / fPI);
+	float fXChange = (a_V1.dX - a_V2.dX);//Change in X.
+	float fYChange = (a_V1.dZ - a_V2.dZ);//Change in Y.
+	return atan2(fYChange, fXChange)*(180 / fPI); //Returns the principal value of the arc tangent of y / x, then converted to degrees.
 }
-
+//Function to make the Turret sprite rotate to look at the player.
+//Vector2 a_vPlayerPos = The position of the player.
 void Enemy::LookToPlayer(Vector2 a_vPlayerPos)
 {
-	sSpriteTurret.iRotDeg = GetBearing(vPos, a_vPlayerPos);
-	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg) - 90));
-
-	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.dX + fTileWidth / 2, vPos.dY + fTileWidth / 2);
+	sSpriteTurret.iRotDeg = GetBearing(vPos, a_vPlayerPos);//Gets the bearing/angle between the player and the enemy.
+	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg) - 90));//Rotates the turret to that angle.
+	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.dX + fTileWidth / 2, vPos.dY + fTileWidth / 2);//Moves the turret to the position of the tank.
 }
