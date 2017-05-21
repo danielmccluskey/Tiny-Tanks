@@ -103,6 +103,8 @@ void Enemy::UpdateCollisionMap()
 		pCollision >> iEnemyCollisionMap[i];//Stores current tile type into array.
 	}
 	pCollision.close();
+
+	oPathFinder.UpdateCollisionMap();
 }
 int Enemy::GetTile(int a_iTileWidth, Vector2 a_vPos)
 {

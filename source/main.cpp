@@ -117,6 +117,11 @@ int main(int argv, char* argc[])
 					
 				}
 				oPlayerTank.BulletArray[0].UpdateBullets(oPlayerTank.BulletArray, oPlayerTank.iCollisionMap);
+
+				if (oPlayerTank.BulletArray[0].SpriteCollide(oPlayerTank.BulletArray, oEnemyTank.iSpriteID, oPlayerTank.iSpriteWidth, oPlayerTank.iSpriteHeight, oPlayerTank.vPos, oPlayerTank.iRotDeg))
+				{
+					iGameState = NEXTLEVEL;
+				}
 			}
 			break;
 

@@ -22,7 +22,6 @@ void PathFinding::FindPath(Vector3 a_vCurrentPos, Vector3 a_vTargetPos)
 {
 	if (!bInitialisedStart)
 	{
-		UpdateCollisionMap();
 		for (int i = 0; i < vOpenList.size(); i++)
 		{
 			delete vOpenList[i];

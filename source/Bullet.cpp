@@ -1,11 +1,13 @@
 #include "Bullet.h"
 #include "UGFW.h"
 #include "CustomEnum.h"
+#include "Boundaries.h"
 #include "MathUtil.h"
 #include <cmath>
 void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget, int a_iBulletType)
 {
-	for (int i = 0; i < 10; i++)
+	iBulletCount = 3;
+	for (int i = 0; i < iBulletCount; i++)
 	{
 		if (a_pBullet[i].bIsActive == false)
 		{
@@ -125,7 +127,7 @@ void Bullet::DestroyBullets(Bullet& a_pBullet)
 }
 void Bullet::UpdateBullets(Bullet *a_pBullet, int a_iCollisionMap[])
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < iBulletCount; i++)
 	{
 		if (a_pBullet[i].bIsActive == true)
 		{
@@ -142,4 +144,25 @@ float Bullet::GetBearing(Vector2 &a_V1, Vector2 &a_V2)
 	float fXChange = (a_V1.dX - a_V2.dX);
 	float fYChange = (a_V1.dY - a_V2.dY);
 	return atan2(fYChange, fXChange)*(180 / fPI);
+}
+
+bool Bullet::SpriteCollide(Bullet* a_pBullet, int a_iSpriteID, int a_iWidth, int a_iHeight, Vector2 a_vPos, float a_fRad)
+{
+	Boundaries AABBCheck;
+	AABBCheck.AABB(a_iSpriteID, a_iWidth, a_iHeight, a_fRad);
+	for (int i = 0; i < iBulletCount; i++)
+	{
+		if (a_pBullet[i].bIsActive == true)
+		{
+			if ((a_pBullet[i].vPos.dX < AABBCheck.vTopRight.dX) && (a_pBullet[i].vPos.dX > AABBCheck.vTopLeft.dX) &&
+				(a_pBullet[i].vPos.dY < AABBCheck.vTopRight.dY) && (a_pBullet[i].vPos.dY > AABBCheck.vBotLeft.dY))
+			{
+				return true;
+			}
+		}
+
+	}
+	return false;
+
+
 }

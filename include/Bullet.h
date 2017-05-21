@@ -31,9 +31,10 @@ public:
 	int GetTile(int a_iCollisionMap[], Vector2 a_vPos);
 	void UpdateBullets(Bullet *a_pBullet, int a_iCollisionMap[]);
 	float GetBearing(Vector2 &a_V1, Vector2 &a_V2);
+	bool SpriteCollide(Bullet* a_pBullet, int a_iSpriteID, int a_iWidth, int a_iHeight, Vector2 a_vPos, float a_fRad);
 
 private:
-	
+	int iBulletCount;
 	int iBulletType;
 	int iBulletSpeed;
 	Vector2 vMousePos;

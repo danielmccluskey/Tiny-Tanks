@@ -194,7 +194,6 @@ void PlayerTank::CalculateBoundaries()
 		if (sSATCheck.vFrontLeft.dZ == 1 && sSATCheck.vFrontRight.dZ == 1)
 		{
 			vNormalPlane = Vector2(0, 0);
-			std::cout << "AYYYYY: " << vVelocity.dX << std::endl;
 		}
 		else if (sSATCheck.vBackLeft.dZ == 1)
 		{
@@ -211,9 +210,6 @@ void PlayerTank::CalculateBoundaries()
 		{
 			vLastPos = vPos;
 			vPos -= vVelocity;
-
-			std::cout << "X: " << vVelocity.dX << std::endl;
-			std::cout << "Y: " << vVelocity.dY << std::endl << std::endl;
 		}
 
 	}
