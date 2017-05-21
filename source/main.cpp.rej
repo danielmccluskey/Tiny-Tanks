@@ -1,0 +1,77 @@
+--- source/main.cpp	
++++ source/main.cpp	
+@@ -1,74 +0,0 @@
+-#include "UGFW.h"
+-#include "Enumerations.h"
+-
+-#include <iostream>
+-/*#include <GL/glew.h>
+-#include <GLFW/glfw3.h>
+-#include <glm/ext.hpp>
+-*/
+-
+-int main(int argv, char* argc[])
+-{
+-	if (UG::Create( 1024, 768, false, "Pong", 100, 100 ))
+-	{
+-		UG::SetBackgroundColor(UG::SColour(0x2A, 0x57, 0x66, 0xFF));
+-		UG::AddFont("./fonts/invaders.fnt");
+-		//\Now lets create the sprite for our ball. 
+-		int iBallSprite = UG::CreateSprite("./images/ball.png", 32, 32, true);
+-
+-		int iScreenWidth = 0, iScreenHeight = 0;
+-		UG::GetScreenSize(iScreenWidth, iScreenHeight);
+-		UG::MoveSprite(iBallSprite, iScreenWidth * 0.5f, iScreenHeight * 0.5f);
+-		UG::DrawSprite(iBallSprite);
+-
+-		do 
+-		{
+-			float xPos = 0; float yPos = 0;
+-			UG::GetSpritePosition(iBallSprite, xPos, yPos);
+-
+-			if (UG::IsKeyDown(UG::KEY_RIGHT))
+-			{
+-				UG::MoveSprite(iBallSprite, xPos + 1.f, yPos);
+-			}
+-			if (UG::IsKeyDown(UG::KEY_LEFT))
+-			{
+-				UG::MoveSprite(iBallSprite, xPos - 1.f, yPos);
+-			}
+-			// quit our application when escape is pressed
+-			if (UG::IsKeyDown(UG::KEY_ESCAPE))
+-				UG::Close();
+-
+-			//Draw code for Text and lines follows
+-			UG::ClearScreen();
+-
+-			UG::SetFont("./fonts/invaders.fnt");
+-			UG::DrawString("PONG", (int)(iScreenWidth * 0.47f), iScreenHeight - 2, 1.f);
+-			
+-			//\==============================================================================================================================
+-			//Some simple Line drawing to draw the lines on the court.
+-			//Top and Bottom lines
+-			UG::DrawLine(0, iScreenHeight - 40, iScreenWidth, iScreenHeight - 40, UG::SColour(0xFF, 0xFF, 0xFF, 0xFF));
+-			UG::DrawLine(0, 40, iScreenWidth, 40, UG::SColour(0xFF, 0xFF, 0xFF, 0xFF));
+-			//Vertical court separator
+-			int courtWidth = iScreenHeight - 80;
+-			int lineSegmentLength = courtWidth / 25;
+-			for (int iStart = 40; iStart < iScreenHeight - 40; iStart += (2 * lineSegmentLength))
+-			{
+-				int iEnd = iStart + lineSegmentLength;
+-				UG::DrawLine(iScreenWidth * 0.5f, iStart, iScreenWidth * 0.5f, iEnd, UG::SColour(0xFF, 0xFF, 0xFF, 0xFF));
+-			}
+-			//\==============================================================================================================================
+-
+-			UG::SetFont(nullptr);
+-
+-		} while (UG::Process());
+-
+-		UG::StopDrawingSprite(iBallSprite);
+-		UG::DestroySprite(iBallSprite);
+-		
+-		UG::Dispose();
+-
+-
+-	}
+-	return 0;
+-}

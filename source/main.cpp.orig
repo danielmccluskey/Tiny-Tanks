@@ -1,0 +1,309 @@
+#include "UGFW.h"
+#include "Enumerations.h"
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+
+//\====================================================================================================
+//\ This is a very rudimentary version of the classic game of Pong
+//\ It makes use of a simple 2D Game framework that is written in C++ and to be used for the 1st Year
+//\ Games Programming Students during their Programming & Mathematics Module
+//\====================================================================================================
+
+//\====================================================================================================
+//\ Structure, Function and Constant Declarations
+//\  Due to the procedural layout of this Implementation we will need to make use of Function declarations
+//\  as classes/structs are not being used with their full implementations
+//\  We will place any and all function and structure declarations here
+//\====================================================================================================
+//Global Variables -- remember these are kind of a bad thing
+//\=======================================================================
+//\ The following variables will be used to hold onto the players score
+unsigned int g_P1Score;
+unsigned int g_P2Score;
+
+//constants
+const int BOUNDARY_OFFSET = 40;
+
+//Structures
+struct Ball
+{
+	Ball() {
+		float fBallSize[2] = { 32, 32 };
+		float fBallOrigin[2] = { 0.5f, 0.5f };
+		float fBallUVCoordinates[4] = { 0.5f, 0.5f, 1.f, 1.f };
+		spriteID = UG::CreateSprite("./images/spriteSheet.png", fBallSize, fBallOrigin, fBallUVCoordinates);
+		xDirection = 1;
+		yDirection = 1;
+		fSpeed = 10.f;
+		fRadius = fBallSize[0] * 0.5;
+	}
+
+	int spriteID;
+	float fXPos;
+	float fYPos;
+
+	int xDirection;
+	int yDirection;
+	float fSpeed;
+	float fRadius;
+
+};
+
+struct Paddle
+{
+	Paddle() {
+		float fPaddleSize[2] = { 32, 128 };
+		float fPaddleOrigin[2] = { 0.5f, 0.5f };
+		float fPaddleUVCoordinates[4] = { 0.f, 0.f, 0.25f, 1.f };
+		iSpriteID = UG::CreateSprite("./images/spriteSheet.png", fPaddleSize, fPaddleOrigin, fPaddleUVCoordinates);
+		fWidth = fPaddleSize[0];
+		fHeight = fPaddleSize[1];
+		fSpeed = 10.f;
+		upKey = UG::KEY_W;
+		downKey = UG::KEY_S;
+	}
+
+	void SetControlKeys(unsigned int a_up, unsigned int a_down) {
+		upKey = a_up;
+		downKey = a_down;
+	}
+
+	void Update() {
+		float xPos = 0; float yPos = 0;
+		UG::GetSpritePosition(iSpriteID, xPos, yPos);
+
+		if (UG::IsKeyDown(upKey))
+		{
+			UG::MoveSprite(iSpriteID, xPos, yPos + 1.f);
+		}
+		if (UG::IsKeyDown(downKey))
+		{
+			UG::MoveSprite(iSpriteID, xPos, yPos - 1.f);
+		}
+	}
+	//\==============================================================
+	//\ A function to test to see if the paddle has collided wit a ball
+	//\================================================================
+	bool TestCollision(Ball& a_ball)
+	{
+		float xPos = 0; float yPos = 0;
+		UG::GetSpritePosition(iSpriteID, xPos, yPos);
+
+		//Get the balls position
+		float bx = 0; float by = 0;
+		UG::GetSpritePosition(a_ball.spriteID, bx, by);
+		
+		float paddleMinX = xPos - fWidth * 0.5f;
+		float paddleMaxX = xPos + fWidth * 0.5f;
+		float paddleMinY = yPos - fHeight * 0.5f;
+		float paddleMaxY = yPos + fHeight * 0.5f;
+
+		if ((bx - a_ball.fRadius) < paddleMaxX && (bx + a_ball.fRadius) > paddleMinX)
+		{
+			if ((by - a_ball.fRadius) < paddleMaxY && (by + a_ball.fRadius) > paddleMinY)
+			{
+				a_ball.fXPos -= a_ball.fSpeed * a_ball.xDirection;
+				a_ball.xDirection *= -1;
+				//test to see if we've hit the end of a paddle to change y direction too
+				if (fabsf(by - yPos) > fHeight * 0.4f)
+				{
+					a_ball.fYPos -= a_ball.fSpeed * a_ball.yDirection;
+					a_ball.yDirection *= -1;
+				}
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	int iSpriteID;
+	float fWidth;
+	float fHeight;
+	float fSpeed;
+	unsigned int upKey;
+	unsigned int downKey;
+};
+
+//Functions
+void DrawUI(unsigned int a_p1Score, unsigned int a_p2Score);
+void DrawCourt();
+
+void UpdateBall(float fDeltaTime, Ball& a_ball);
+//\====================================================================================================
+//\ This is the main function of our application/game
+//\ This is the main entry point where code will begin execution, without this function the application
+//\ would not run.  In here is all the code for setting up the background game framework, and handling 
+//\ any rendering and object creation.
+//\ This is also where all logic for flow and control of the game will be placed
+//\====================================================================================================
+int main(int argv, char* argc[])
+{
+	//\=======================================================================
+	//\Create the UG Framework,
+	//\     if this is unsuccessful then we should not continue
+	//\=======================================================================
+	if (UG::Create(1024, 768, false, "Pong", 100, 100))
+	{
+		//\=======================================================================
+		//\Set the background rendering colour to a 'nice' blue
+		UG::SetBackgroundColor(UG::SColour(0x2A, 0x57, 0x66, 0xFF));
+		//\Add a font for us to use (The framework uses simple bitmap fonts
+		UG::AddFont("./fonts/invaders.fnt");
+		
+		int iScreenWidth = 0, iScreenHeight = 0;
+		UG::GetScreenSize(iScreenWidth, iScreenHeight);
+		//\=======================================================================
+		//\This code sets up some of the size, origin and UV coordinates for our 
+		//\ Ball sprite then we use this data to create the sprite through the 
+		//\ Create sprite function the UG framework provides, and we mark the sprite for drawing
+		Ball ball;
+		ball.fXPos = iScreenWidth * 0.5f;
+		ball.fYPos = iScreenHeight * 0.5f;
+		UG::MoveSprite(ball.spriteID, ball.fXPos, ball.fYPos);
+		UG::DrawSprite(ball.spriteID);
+		//\=======================================================================
+		//\The following sets up the data for a player Paddle then creates a sprite
+		//\and marks it for draw
+		//\=======================================================================
+		Paddle leftPaddle;
+		leftPaddle.SetControlKeys(UG::KEY_W, UG::KEY_S);
+		UG::MoveSprite(leftPaddle.iSpriteID, iScreenWidth * 0.05f, iScreenHeight * 0.5f);
+		UG::DrawSprite(leftPaddle.iSpriteID);
+		
+		Paddle rightPaddle;
+		rightPaddle.SetControlKeys(UG::KEY_UP, UG::KEY_DOWN);
+		UG::MoveSprite(rightPaddle.iSpriteID, iScreenWidth * 0.95f, iScreenHeight * 0.5f);
+		UG::DrawSprite(rightPaddle.iSpriteID);
+
+
+		do 
+		{
+			//Delta time is the amount of time that has passed between update frames
+			float fDeltaTime = UG::GetDeltaTime();
+			//\=======================================================================
+			//\ Update The Players Paddles
+			leftPaddle.Update();
+			rightPaddle.Update();
+			//\=======================================================================
+			//\Update the Ball
+			//\=======================================================================
+			UpdateBall(fDeltaTime, ball);
+			//\=======================================================================
+			//\Test for collisions with the bats and balls
+			//========================================================================
+			leftPaddle.TestCollision(ball);
+			rightPaddle.TestCollision(ball);
+			
+			//\=======================================================================
+			// quit our application when escape is pressed
+			if (UG::IsKeyDown(UG::KEY_ESCAPE))
+				UG::Close();
+			//\=======================================================================
+			//Draw code for Text and lines follows
+			// Clear the screen prior to rendering any UI Elements
+			UG::ClearScreen();
+			DrawUI(g_P1Score, g_P2Score);
+			DrawCourt();
+			//\=======================================================================
+			
+			UG::SetFont(nullptr);
+
+		} while (UG::Process());
+		//We need to clean up after ourselves by destroying sprite objects
+		UG::StopDrawingSprite(ball.spriteID);
+		UG::DestroySprite(ball.spriteID);
+		
+		UG::StopDrawingSprite(leftPaddle.iSpriteID);
+		UG::DestroySprite(leftPaddle.iSpriteID);
+		//Tell the UG Framework to shutdown
+		UG::Dispose();
+
+
+	}
+	return 0;
+}
+
+void DrawUI(unsigned int a_p1Score, unsigned int a_p2Score)
+{
+	int iScreenWidth = 0, iScreenHeight = 0;
+	UG::GetScreenSize(iScreenWidth, iScreenHeight);
+
+	UG::SetFont("./fonts/invaders.fnt");
+	UG::DrawString("PONG", (int)(iScreenWidth * 0.47f), iScreenHeight - 2, 1.f);
+	//This is very lazy of me but we haven't programmed in a 'win' condition
+	//so just reset the scores to zero to prevent a buffer overrun error.
+	if (g_P1Score > 99 || g_P2Score > 100)
+	{
+		g_P1Score = g_P2Score = 0;
+	}
+	//As C/C++ is a strongly typed language and to display things to the screen we need
+	//to convert our numerical values into their character/string representations we will
+	//need to make use of some built in C functions to convert between the types
+	char pBuffer[3];
+	memset(pBuffer, 0, sizeof(char) * 3);
+	sprintf(pBuffer, "%i", a_p1Score);
+	UG::DrawString(pBuffer, (int)(iScreenWidth * 0.25f), iScreenHeight - 2, 1.f);
+	//Lets reuse our char buffer to draw player 2's score
+	memset(pBuffer, 0, sizeof(char) * 3);
+	sprintf(pBuffer, "%i", a_p2Score);
+	UG::DrawString(pBuffer, (int)(iScreenWidth * 0.75f), iScreenHeight - 2, 1.f);
+	
+
+
+}
+
+void DrawCourt()
+{
+	int iScreenWidth = 0, iScreenHeight = 0;
+	UG::GetScreenSize(iScreenWidth, iScreenHeight);
+	//\==============================================================================================================================
+	//Some simple Line drawing to draw the lines on the court.
+	//Top and Bottom lines
+	UG::DrawLine(0, iScreenHeight - BOUNDARY_OFFSET, iScreenWidth, iScreenHeight - BOUNDARY_OFFSET, UG::SColour(0xFF, 0xFF, 0xFF, 0xFF));
+	UG::DrawLine(0, BOUNDARY_OFFSET, iScreenWidth, BOUNDARY_OFFSET, UG::SColour(0xFF, 0xFF, 0xFF, 0xFF));
+	//Vertical court separator
+	int courtWidth = iScreenHeight - 80;
+	int lineSegmentLength = courtWidth / 25;
+	for (int iStart = BOUNDARY_OFFSET; iStart < iScreenHeight - BOUNDARY_OFFSET; iStart += (2 * lineSegmentLength))
+	{
+		int iEnd = iStart + lineSegmentLength;
+		UG::DrawLine(iScreenWidth * 0.5f, iStart, iScreenWidth * 0.5f, iEnd, UG::SColour(0xFF, 0xFF, 0xFF, 0xFF));
+	}
+	//\==============================================================================================================================
+}
+
+void UpdateBall(float fDeltaTime, Ball& a_ball)
+{
+	int iScreenWidth = 0, iScreenHeight = 0;
+	UG::GetScreenSize(iScreenWidth, iScreenHeight);
+
+	//Lets moved the ball based off it's speed and direction
+	a_ball.fXPos += a_ball.fSpeed * a_ball.xDirection;
+	a_ball.fYPos += a_ball.fSpeed * a_ball.yDirection;
+	//Tell the framework to move the ball to it's new position
+	UG::MoveSprite(a_ball.spriteID, a_ball.fXPos, a_ball.fYPos);
+	//Lets see if the ball has moved outside of the screens boundaries
+	//if it has we should instruct it to change direction
+	if (a_ball.fXPos < 0 || a_ball.fXPos > iScreenWidth)
+	{
+		//If this is true we are outside of the screen boundaries
+		//multiplying something by -1 will flip the sign of that number
+		a_ball.xDirection *= -1;
+		//If we have gone out of the screen bounds then we should adjust P1 or P2's score
+		if (a_ball.fXPos < 0)
+		{
+			g_P2Score++;
+		}
+		else
+		{
+			g_P1Score++;
+		}
+	}
+	if (a_ball.fYPos < 0 || a_ball.fYPos > iScreenHeight)
+	{
+		a_ball.yDirection *= -1;
+	}
+
+}
