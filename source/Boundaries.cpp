@@ -54,10 +54,44 @@ void Boundaries::AABB(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad
 		(vPos.dY - (fHeight) / 2),
 		0
 	);
-	vFront = Vector3(
-		(vPos.dX) + cos(-a_fRad - fHALF_PI) * a_iWidth/2,
-		(vPos.dY) + sin(-a_fRad - fHALF_PI) * a_iHeight/2,
+
+}
+
+void Boundaries::SeparatingAxisTheorem(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad)
+{
+	Vector3 vPos = Vector3(GetSpriteXPos(a_iSpriteID), GetSpriteYPos(a_iSpriteID), 0);
+	vFrontRight = Vector3(
+		(vPos.dX) + cos(-a_fRad - f2HALF_PI) * a_iWidth / 2,
+		(vPos.dY) + sin(-a_fRad - f2HALF_PI) * a_iHeight / 2,
+		0
+	);
+	vFrontLeft = Vector3(
+		(vPos.dX) + cos(-a_fRad + f2HALF_PI) * a_iWidth / 2,
+		(vPos.dY) + sin(-a_fRad + f2HALF_PI) * a_iHeight / 2,
+		0
+	);
+	vBackLeft = Vector3(
+		(vPos.dX) - cos(-a_fRad - f2HALF_PI) * a_iWidth / 2,
+		(vPos.dY) - sin(-a_fRad - f2HALF_PI) * a_iHeight / 2,
+		0
+	);
+	vBackRight = Vector3(
+		(vPos.dX) - cos(-a_fRad + f2HALF_PI) * a_iWidth / 2,
+		(vPos.dY) - sin(-a_fRad + f2HALF_PI) * a_iHeight / 2,
 		0
 	);
 
+	
+}
+
+void Boundaries::SATGetAxis(Boundaries a_sBox1, Boundaries a_sBox2)
+{
+	vAxis1.dX = a_sBox1.vFrontRight.dX - a_sBox1.vFrontLeft.dX;
+	vAxis1.dY = a_sBox1.vFrontRight.dY - a_sBox1.vFrontLeft.dY;
+	vAxis2.dX = a_sBox1.vFrontRight.dX - a_sBox1.vBackRight.dX;
+	vAxis2.dY = a_sBox1.vFrontRight.dY - a_sBox1.vBackRight.dY;
+	vAxis3.dX = a_sBox2.vFrontLeft.dX - a_sBox2.vBackLeft.dX;
+	vAxis3.dY = a_sBox2.vFrontLeft.dY - a_sBox2.vBackLeft.dY;
+	vAxis4.dX = a_sBox2.vFrontLeft.dX - a_sBox2.vFrontRight.dX;
+	vAxis4.dY = a_sBox2.vFrontLeft.dY - a_sBox2.vFrontRight.dY;
 }

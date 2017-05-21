@@ -29,7 +29,8 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 			a_pBullet[i].vLastPos = a_fStart;
 			a_pBullet[i].vPos += Vector2(a_pBullet[i].vVelocity.dX * 40, a_pBullet[i].vVelocity.dY * 40);//40 is a magic number I know, its the value I use to make the bullet spawn at the end of the turret.
 			UG::MoveSprite(a_pBullet[i].iSpriteID, a_pBullet[i].vPos.dX, a_pBullet[i].vPos.dY);
-			a_pBullet[i].iLifeTime = 6000;
+			a_pBullet[i].iLifeTime = 200;
+			a_pBullet[i].iBulletSpeed = 80;
 			a_pBullet[i].bIsActive = true;
 			
 			break;
@@ -43,6 +44,15 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 	int iTileY = (vPos.dY / fTileWidth);
 	iTileX *= fTileWidth;
 	iTileY *= fTileWidth;
+
+	if (vPos.dX > (fMapWidth * fTileWidth) || vPos.dX < 0)
+	{
+		iLifeTime = -2;
+	}
+	else if (vPos.dY >(fMapHeight * fTileWidth) || vPos.dY < 0)
+	{
+		iLifeTime = -2;
+	}
 	if (GetTile(a_iCollisionMap, a_pBullet.vPos) == 1)
 	{
 		if (iBulletType == 0)
@@ -72,6 +82,10 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 		{
 			iLifeTime = -2;
 		}
+		if ((vLastPos.dX > iTileX) && (vLastPos.dX < iTileX + fTileWidth) && (vLastPos.dY > iTileY) && (vLastPos.dY < iTileY + fTileWidth))
+		{
+			iLifeTime = -2;
+		}
 	}
 
 	if (iBulletType == 1)
@@ -80,10 +94,12 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 		vMousePos.dY = (iMapHeight * fTileWidth) - vMousePos.dY;//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
 		vVelocity = vVelocity.RotateX((GetBearing(vPos, vMousePos)-180));
 	}
+	float fDeltaTime = UG::GetDeltaTime();
 	vLastPos = vPos;
-	vPos += vVelocity;
+	vPos += (vVelocity *= iBulletSpeed) *= fDeltaTime;
 	UG::MoveSprite(iSpriteID, vPos.dX, vPos.dY);
 
+	
 }
 
 int Bullet::GetTile(int a_iCollisionMap[], Vector2 a_vPos)

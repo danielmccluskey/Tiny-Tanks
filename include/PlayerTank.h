@@ -59,6 +59,8 @@ private:
 	Turret sSpriteTurret;
 	Vector2 vVelocity;
 
+	float fWallSlideSlow;
+
 
 
 	

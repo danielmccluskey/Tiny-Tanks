@@ -15,8 +15,6 @@ PlayerTank::PlayerTank(float a_fCenterX, float a_fCenterY, float a_fGlobalSpeed)
 {
 	CreateTank(a_fCenterX, a_fCenterY);
 	fSpeed = a_fGlobalSpeed;
-	TEMPSPRITEID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);
-	UG::DrawSprite(TEMPSPRITEID);
 }
 void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 {
@@ -27,6 +25,7 @@ void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 	UG::MoveSprite(iSpriteID, a_fCenterX, a_fCenterY);//Moves sprite to starting position.
 	UG::SetSpriteLayer(iSpriteID, 9);//Makes sure the tank is drawn above the map.
 	UpdateCollisionMap();
+	fWallSlideSlow = 0.3f;
 };
 
 
@@ -86,109 +85,137 @@ void PlayerTank::MoveTank()
 bool PlayerTank::CollisionDetection(Vector3 a_vPos)
 {
 
-	if (a_vPos.dZ <= 0)
+	int a_iX = (a_vPos.dX / fTileWidth);
+	int a_iY = (a_vPos.dY / fTileWidth);
+	int iTileX = a_iX * fTileWidth;
+	int iTileY = a_iY * fTileWidth;
+	int iCount = 0;
+
+	//Top Collision
+	if ((vLastPos.dY > (iTileY + fTileWidth)) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
 	{
-		int a_iX = (a_vPos.dX / fTileWidth);
-		int a_iY = (a_vPos.dY / fTileWidth);
-		int iTileX = a_iX * fTileWidth;
-		int iTileY = a_iY * fTileWidth;
-		int iCount = 0;
-
-		//Top Collision
-		if ((vLastPos.dY > (iTileY + fTileWidth)) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
-		{
-			vNormalPlane = Vector2(0,1);
-			++iCount;
-		}
-		//Bottom Collision
-		if ((vLastPos.dY < iTileY) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
-		{
-			vNormalPlane = Vector2(0, 1);
-			++iCount;
-		}
-		//Right Collision
-		if ((vLastPos.dX >(iTileX + fTileWidth)) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
-		{
-			vNormalPlane = Vector2(1, 0);
-			++iCount;
-		}
-		//Left Collision
-		if ((vLastPos.dX < iTileX) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
-		{
-			vNormalPlane = Vector2(1, 0);
-			++iCount;
-		}
-
-		if (iCount > 1)
-		{
-			vNormalPlane = Vector2(0,0);
-		}
-
-		
-
-		if (a_vPos.dX < (a_iX - (fTileWidth / 2)))
-		{
-			return false;
-		}
-			
-		if (a_vPos.dX > (a_iX + (fTileWidth / 2)))
-		{
-			return false;
-		}
-			
-		if (a_vPos.dY < (a_iY - (fTileWidth / 2)))
-		{
-			return false;
-		}
-		
-		if (a_vPos.dY > (a_iY + (fTileWidth / 2)))
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-
-		
-		
+		vNormalPlane = Vector2(0, 1);
+		++iCount;
 	}
-	
+	//Bottom Collision
+	if ((vLastPos.dY < iTileY) && (vLastPos.dX < (iTileX + fTileWidth)) && (vLastPos.dX > iTileX))//If the last position of the bullet is BELOW the bottom edge of the tile.
+	{
+		vNormalPlane = Vector2(0, 1);
+		++iCount;
+	}
+	//Right Collision
+	if ((vLastPos.dX > (iTileX + fTileWidth)) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the RIGHT of the Right edge of the tile.
+	{
+		vNormalPlane = Vector2(1, 0);
+		++iCount;
+	}
+	//Left Collision
+	if ((vLastPos.dX < iTileX) && (vLastPos.dY < (iTileY + fTileWidth)) && (vLastPos.dY > iTileY))//If the last position of the bullet is to the Left of the Left edge of the tile.
+	{
+		vNormalPlane = Vector2(1, 0);
+		++iCount;
+	}
+
+
+
+
+
+	if (a_vPos.dX < (iTileX - (fTileWidth / 2)))
+	{
+		return false;
+	}
+
+	if (a_vPos.dX > (iTileX + (fTileWidth / 2)))
+	{
+		return false;
+	}
+
+	if (a_vPos.dY < (iTileY - (fTileWidth / 2)))
+	{
+		return false;
+	}
+
+	if (a_vPos.dY > (iTileY + (fTileWidth / 2)))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+
+
+
+
+
 }
 
 void PlayerTank::CalculateBoundaries()
 {
-	Boundaries AABBCheck;
-	AABBCheck.AABB(iSpriteID, iSpriteHeight, iSpriteWidth, DegreesToRadians((iRotDeg-90)));
+	Boundaries sSATCheck;
+	sSATCheck.SeparatingAxisTheorem(iSpriteID, iSpriteHeight, iSpriteWidth, DegreesToRadians((iRotDeg-90)));
 
-	AABBCheck.vTopLeft.dZ = GetTile(fTileWidth, AABBCheck.vTopLeft);
-	AABBCheck.vTopRight.dZ = GetTile(fTileWidth, AABBCheck.vTopRight);
-	AABBCheck.vBotLeft.dZ = GetTile(fTileWidth, AABBCheck.vBotLeft);
-	AABBCheck.vBotRight.dZ = GetTile(fTileWidth, AABBCheck.vBotRight);
-
-	UG::MoveSprite(TEMPSPRITEID, AABBCheck.vFront.dX, AABBCheck.vFront.dY);
+	sSATCheck.vFrontLeft.dZ = GetTile(fTileWidth, sSATCheck.vFrontLeft);
+	sSATCheck.vFrontRight.dZ = GetTile(fTileWidth, sSATCheck.vFrontRight);
+	sSATCheck.vBackLeft.dZ = GetTile(fTileWidth, sSATCheck.vBackLeft);
+	sSATCheck.vBackRight.dZ = GetTile(fTileWidth, sSATCheck.vBackRight);
 
 	if (UG::IsKeyDown(UG::KEY_W))
 	{
-		//Function that checks the corner positions of the sprite to see if they are colliding with the map
-		if (((!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg >= 271 && iRotDeg <= 360)) ||
-			(!(CollisionDetection(AABBCheck.vTopRight)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 0 && iRotDeg <= 90)) ||
-			(!(CollisionDetection(AABBCheck.vBotLeft)) && (!(CollisionDetection(AABBCheck.vTopLeft))) && (!(CollisionDetection(AABBCheck.vBotRight))) && (iRotDeg >= 181 && iRotDeg <= 270)) ||
-			(!(CollisionDetection(AABBCheck.vBotRight)) && (!(CollisionDetection(AABBCheck.vTopRight))) && (!(CollisionDetection(AABBCheck.vBotLeft))) && (iRotDeg >= 91 && iRotDeg <= 180)))
+		if (sSATCheck.vFrontLeft.dZ == 1 && sSATCheck.vFrontRight.dZ == 1)
 		{
-			vLastPos = vPos;
-			vPos += vVelocity;
+			vNormalPlane = Vector2(0, 0);
+			std::cout << "AYYYYY: " << vVelocity.dX << std::endl;
+		}
+		else if (sSATCheck.vFrontLeft.dZ == 1)
+		{
+			CollisionDetection(sSATCheck.vFrontLeft);
+			vPos += (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
+		}
+		else if (sSATCheck.vFrontRight.dZ == 1)
+		{
+			CollisionDetection(sSATCheck.vFrontRight);
+ 
+			vPos += (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
 		}
 		else
 		{
-			Vector2 temp;
-			temp = vVelocity.CrossProduct(vNormalPlane);
-			vPos += temp;
-			//vPos = vLastPos;
-			//vPos -= vVelocity;
-			std::cout << "X: " << temp.dX << std::endl;
-			std::cout << "Y: " << temp.dY << std::endl << std::endl;
+			vLastPos = vPos;
+			vPos += vVelocity;
+
+			std::cout << "X: " << vVelocity.dX << std::endl;
+			std::cout << "Y: " << vVelocity.dY << std::endl << std::endl;
 		}
+	
+	}
+
+	if (UG::IsKeyDown(UG::KEY_S))
+	{
+		if (sSATCheck.vFrontLeft.dZ == 1 && sSATCheck.vFrontRight.dZ == 1)
+		{
+			vNormalPlane = Vector2(0, 0);
+			std::cout << "AYYYYY: " << vVelocity.dX << std::endl;
+		}
+		else if (sSATCheck.vBackLeft.dZ == 1)
+		{
+			CollisionDetection(sSATCheck.vBackLeft);
+			vPos -= (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
+		}
+		else if (sSATCheck.vBackRight.dZ == 1)
+		{
+			CollisionDetection(sSATCheck.vBackRight);
+
+			vPos -= (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
+		}
+		else
+		{
+			vLastPos = vPos;
+			vPos -= vVelocity;
+
+			std::cout << "X: " << vVelocity.dX << std::endl;
+			std::cout << "Y: " << vVelocity.dY << std::endl << std::endl;
+		}
+
 	}
 
 	

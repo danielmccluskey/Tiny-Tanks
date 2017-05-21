@@ -35,6 +35,7 @@ public:
 private:
 	
 	int iBulletType;
+	int iBulletSpeed;
 	Vector2 vMousePos;
 	Vector2 vLastPos;
 	Vector2 vVelocity;
