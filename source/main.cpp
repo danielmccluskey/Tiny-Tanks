@@ -117,7 +117,13 @@ int main(int argv, char* argc[])
 					oNextButtonNext.DrawSprite();
 					oNextButtonQuit.DrawSprite();
 
+
+				}
+				if (UG::IsKeyDown(UG::KEY_U))
+				{
 					
+
+
 				}
 				oPlayerTank.BulletArray[0].UpdateBullets(oPlayerTank.BulletArray, oPlayerTank.iCollisionMap);
 

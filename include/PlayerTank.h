@@ -5,7 +5,7 @@
 #include "Vector3.h"
 #include "Bullet.h"
 #include "CustomEnum.h"
-
+#include "PowerUps.h"
 
 class PlayerTank
 {
@@ -46,6 +46,7 @@ public:
 	float fUGFrameSpriteMatrix[16];
 
 	Bullet *BulletArray = new Bullet[20];
+	PowerUps *pPowerUpArray = new PowerUps[20];
 	Vector2 vPos;
 	Vector2 vMousePos;
 	

@@ -5,6 +5,7 @@
 #include "SearchCell.h"
 #include "CustomEnum.h"
 
+
 class PathFinding
 {
 public:

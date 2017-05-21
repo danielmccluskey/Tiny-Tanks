@@ -27,6 +27,7 @@
     <ClCompile Include="..\..\source\MenuSprites.cpp" />
     <ClCompile Include="..\..\source\Pathfinding.cpp" />
     <ClCompile Include="..\..\source\PlayerTank.cpp" />
+    <ClCompile Include="..\..\source\PowerUps.cpp" />
     <ClCompile Include="..\..\source\Turret.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +39,7 @@
     <ClInclude Include="..\..\include\MenuSprites.h" />
     <ClInclude Include="..\..\include\PathFinding.h" />
     <ClInclude Include="..\..\include\PlayerTank.h" />
+    <ClInclude Include="..\..\include\PowerUps.h" />
     <ClInclude Include="..\..\include\SearchCell.h" />
     <ClInclude Include="..\..\include\Turret.h" />
   </ItemGroup>

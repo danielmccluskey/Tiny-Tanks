@@ -26,6 +26,7 @@ void PlayerTank::CreateTank(float a_fCenterX, float a_fCenterY)
 	UG::SetSpriteLayer(iSpriteID, 9);//Makes sure the tank is drawn above the map.
 	UpdateCollisionMap();
 	fWallSlideSlow = 0.3f;
+	pPowerUpArray[0].SetTankID(iSpriteID);
 };
 
 
@@ -42,7 +43,8 @@ PlayerTank::~PlayerTank()
 void PlayerTank::MoveTank()
 {
 	
-
+	pPowerUpArray[0].SpawnPowerUps(pPowerUpArray, iSpriteID, iSpriteWidth, iSpriteHeight, iRotDeg);
+	pPowerUpArray[0].DestroyPowerUps(pPowerUpArray, iSpriteID, iSpriteWidth, iSpriteHeight, iRotDeg);
 
 	if (UG::IsKeyDown(UG::KEY_A))//If the A key is down
 	{
@@ -259,6 +261,8 @@ void PlayerTank::UpdateCollisionMap()
 		pCollision >> iCollisionMap[i];//Stores current tile type into array.
 	}
 	pCollision.close();
+
+	pPowerUpArray[0].UpdateCollisionMap();
 }
 int PlayerTank::GetTile(int a_iTileWidth, Vector2 a_vPos)
 {

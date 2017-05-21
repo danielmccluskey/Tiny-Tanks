@@ -165,6 +165,5 @@ bool Bullet::SpriteCollide(Bullet* a_pBullet, int a_iSpriteID, int a_iWidth, int
 
 	}
 	return false;
-
-
 }
+
