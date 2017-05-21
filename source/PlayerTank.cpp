@@ -173,13 +173,13 @@ void PlayerTank::CalculateBoundaries()
 		else if (sSATCheck.vFrontLeft.GetdZ() == 1)
 		{
 			CollisionDetection(sSATCheck.vFrontLeft);
-			vPos += (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
+			vPos += (vVelocity.CrossProduct(vNormalPlane)) * fWallSlideSlow;
 		}
 		else if (sSATCheck.vFrontRight.GetdZ() == 1)
 		{
 			CollisionDetection(sSATCheck.vFrontRight);
  
-			vPos += (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
+			vPos += (vVelocity.CrossProduct(vNormalPlane)) * fWallSlideSlow;
 		}
 		else
 		{
@@ -201,13 +201,13 @@ void PlayerTank::CalculateBoundaries()
 		else if (sSATCheck.vBackLeft.GetdZ() == 1)
 		{
 			CollisionDetection(sSATCheck.vBackLeft);
-			vPos -= (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
+			vPos -= (vVelocity.CrossProduct(vNormalPlane)) * fWallSlideSlow;
 		}
 		else if (sSATCheck.vBackRight.GetdZ() == 1)
 		{
 			CollisionDetection(sSATCheck.vBackRight);
 
-			vPos -= (vVelocity.CrossProduct(vNormalPlane)) *= fWallSlideSlow;
+			vPos -= (vVelocity.CrossProduct(vNormalPlane)) * fWallSlideSlow;
 		}
 		else
 		{

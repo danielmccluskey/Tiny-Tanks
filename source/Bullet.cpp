@@ -100,7 +100,7 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 	}
 	float fDeltaTime = UG::GetDeltaTime();
 	vLastPos = vPos;
-	vPos += (vVelocity *= iBulletSpeed) *= fDeltaTime;
+	vPos += (vVelocity * iBulletSpeed) * fDeltaTime;
 	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
 
 	
