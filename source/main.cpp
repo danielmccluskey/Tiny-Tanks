@@ -48,6 +48,9 @@ int main(int argv, char* argc[])
 		MenuSprite oMenuButtonPlay(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_play.png", fButtonUV, true);
 		MenuSprite oMenuButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", fButtonUV, true);
 
+		MenuSprite oLevelFail (Vector2(fCenterX, iScreenHeight*0.68f), Vector2(300, 82), 11, "./Images/menu/level_failed.png", fFullUV, false);
+		MenuSprite oLevelPass (Vector2(fCenterX, iScreenHeight*0.68f), Vector2(300, 82), 11, "./Images/menu/level_passed.png", fFullUV, false);
+
 		MenuSprite oNextButtonNext(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_next.png", fButtonUV, false);
 		MenuSprite oNextButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", fButtonUV, false);
 		MenuSprite oNextButtonRestart(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_restart.png", fButtonUV, false);
@@ -87,7 +90,11 @@ int main(int argv, char* argc[])
 						oMenuButtonPlay.HideSprite();
 						oMenuButtonQuit.HideSprite();
 
+						oPlayerTank.UpdateCollisionMap();
+						oEnemyTank.UpdateCollisionMap();
+
 						oPlayerTank.Reset(Vector2(704, 448));
+						oEnemyTank.Reset(Vector2(100, 100));
 						iGameState = GAMEPLAY;
 					}
 					
@@ -109,6 +116,7 @@ int main(int argv, char* argc[])
 					iGameState = NEXTLEVEL;
 					oNextButtonNext.DrawSprite();
 					oNextButtonQuit.DrawSprite();
+					oLevelPass.DrawSprite();
 					oPlayerTank.Reset(Vector2(704, 448));
 					oEnemyTank.Reset(Vector2(100,100));
 				}
@@ -118,6 +126,7 @@ int main(int argv, char* argc[])
 					iGameState = DEATH;
 					oNextButtonRestart.DrawSprite();
 					oNextButtonQuit.DrawSprite();
+					oLevelFail.DrawSprite();
 					oPlayerTank.Reset(Vector2(704, 448));
 					oEnemyTank.Reset(Vector2(100, 100));
 				}
@@ -143,6 +152,7 @@ int main(int argv, char* argc[])
 					if (bLevelLoad)
 					{
 						oNextButtonNext.HideSprite();
+						oLevelPass.HideSprite();
 						oNextButtonQuit.HideSprite();
 						iGameState = GAMEPLAY;
 						oPlayerTank.UpdateCollisionMap();
@@ -157,6 +167,7 @@ int main(int argv, char* argc[])
 						oMenuButtonQuit.DrawSprite();
 
 						oNextButtonNext.HideSprite();
+						oLevelPass.HideSprite();
 						oNextButtonQuit.HideSprite();
 						iGameState = MENU;
 					}
@@ -171,6 +182,7 @@ int main(int argv, char* argc[])
 					oMenuButtonQuit.DrawSprite();
 
 					oNextButtonNext.HideSprite();
+					oLevelPass.HideSprite();
 					oNextButtonQuit.HideSprite();
 					iGameState = MENU;
 				}
@@ -182,6 +194,7 @@ int main(int argv, char* argc[])
 				{
 					oNextButtonRestart.HideSprite();
 					oNextButtonQuit.HideSprite();
+					oLevelFail.HideSprite();
 					iGameState = GAMEPLAY;
 				}
 				else if (oNextButtonQuit.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
@@ -194,6 +207,7 @@ int main(int argv, char* argc[])
 
 					oNextButtonRestart.HideSprite();
 					oNextButtonQuit.HideSprite();
+					oLevelFail.HideSprite();
 					iGameState = MENU;
 				}
 			}

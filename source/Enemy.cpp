@@ -21,7 +21,7 @@
 //float a_fStartYPos = The Y position to spawn the tank in.
 void Enemy::CreateTank(float a_fStartXPos, float a_fStartYPos)
 {
-	iSpriteID = UG::CreateSprite("./images/Tanks/tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite																									
+	iSpriteID = UG::CreateSprite("./images/Tanks/enemy_tank_body.png", iSpriteWidth, iSpriteHeight, true);//Create the sprite																									
 	UG::DrawSprite(iSpriteID);	//Draws it
 	vPos = Vector2(a_fStartXPos + (fTileWidth/2), a_fStartYPos +(fTileWidth/2));//Sets the position to the middle of the spawning tile.
 	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());//Moves it to the position.

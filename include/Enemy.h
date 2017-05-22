@@ -12,7 +12,11 @@
 class Enemy
 {
 public:
-	Enemy() {}
+	Enemy()
+		: sSpriteTurret("./images/Tanks/enemy_tank_turret.png")
+	{
+		
+	}
 	~Enemy();
 	
 	//Function to handle the movement of the tank.

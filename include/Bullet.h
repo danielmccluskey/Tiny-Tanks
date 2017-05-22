@@ -37,7 +37,7 @@ private:
 	bool bIsActive = false;
 	float fAngle;
 
-	int iMaxNormalBullets;
+	int iMaxNormalBullets = 3;
 	int iMissileCount = 0;
 	int iBulletCount = 0;
 	int iActiveNormalBullets = 0;

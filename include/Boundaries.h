@@ -25,18 +25,12 @@ public:
 	Vector3 vBackLeft;
 	Vector3 vBackRight;
 
-	Vector2 vAxis1;
-	Vector2 vAxis2;
-	Vector2 vAxis3;
-	Vector2 vAxis4;
-
 	float GetSpriteXPos(int a_iSpriteID);
 	float GetSpriteYPos(int a_iSpriteID);
 	float GetSpriteHeight(int a_iSpriteWidth, int a_iSpriteHeight, float a_fRad);
 	float GetSpriteWidth(int a_iSpriteWidth, int a_iSpriteHeight, float a_fRad);
 	void AABB(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad);
 	void SeparatingAxisTheorem(int a_iSpriteID, int a_iHeight, int a_iWidth, float a_fRad);
-	void SATGetAxis(Boundaries a_sBox1, Boundaries a_sBox2);
 	float fUGSpriteMatrix[16];
 
 

@@ -7,7 +7,7 @@
 #include <cmath>
 void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget, int a_iBulletType)
 {
-	iMaxNormalBullets = 3;
+
 	for (int i = 0; i < iMaxNormalBullets; i++)
 	{
 		if (a_pBullet[i].bIsActive == false)
@@ -17,14 +17,14 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 
 			if (a_pBullet[i].iBulletType == 0 && iMaxNormalBullets - iActiveNormalBullets > 0)
 			{
-				a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp2.png", 10, 10, true);//Create the sprite
+				a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Powerups/powerup_missile.png", 10, 10, true);//Create the sprite
 				iBulletCount--;
 				iActiveNormalBullets++;
 
 			}
 			else if (a_pBullet[i].iBulletType == 1 && iMissileCount > 0)
 			{
-				a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
+				a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Powerups/powerup_missile.png", 20, 20, true);//Create the sprite
 				iMissileCount--;
 				iActiveMissiles++;
 			}

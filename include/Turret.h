@@ -3,7 +3,7 @@
 class Turret
 {
 public:
-	Turret();
+	Turret(char* a_cImagePath);
 	int iSpriteID;
 	int iRotDeg = 0;
 

@@ -19,6 +19,7 @@ int PlayerTank::GetSpriteID()
 }
 
 PlayerTank::PlayerTank(float a_fCenterX, float a_fCenterY, float a_fGlobalSpeed)
+	: sSpriteTurret("./images/Tanks/tank_turret.png")
 {
 	CreateTank(a_fCenterX, a_fCenterY);
 	fSpeed = a_fGlobalSpeed;

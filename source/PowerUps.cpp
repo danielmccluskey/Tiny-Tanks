@@ -9,7 +9,7 @@
 #include "MathUtil.h"
 PowerUps::PowerUps()
 {
-	iMaxPowerUps = 18;
+	iMaxPowerUps = 2;
 	iCurrentActive = 0;
 	bActive = false;
 	fTimer = 10.f;
@@ -71,7 +71,7 @@ void PowerUps::CreatePowerup(Vector2 a_vPos, PowerUps* a_pPowerUpArray)
 		{
 			if (a_pPowerUpArray[i].bActive == false)
 			{
-				a_pPowerUpArray[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 4, 4, true);//Create the sprite
+				a_pPowerUpArray[i].iSpriteID = UG::CreateSprite("./images/Powerups/powerup_missile.png", 32,32, true);//Create the sprite
 				UG::DrawSprite(a_pPowerUpArray[i].iSpriteID);	//Draws it
 				a_pPowerUpArray[i].vPos = a_vPos;
 				UG::SetSpriteLayer(a_pPowerUpArray[i].iSpriteID, 9);
