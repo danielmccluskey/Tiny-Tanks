@@ -1,6 +1,6 @@
 //==============================================================================================================================
 // Project: WiiTanks
-// File: Bullet.h
+// File: PathFinding.h
 // Author: Daniel McCluskey
 // Date Created: 07/01/17
 // Brief: This file contains the code that generates a path from A to B using the A* pathfinding method.

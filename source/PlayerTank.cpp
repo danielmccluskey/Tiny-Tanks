@@ -1,6 +1,6 @@
 //==============================================================================================================================
 // Project: WiiTanks
-// File: Bullet.h
+// File: PlayerTank.cpp
 // Author: Daniel McCluskey
 // Date Created: 07/01/17
 // Brief: This is the file that controls player movement and collision. Bullets and powerups too.

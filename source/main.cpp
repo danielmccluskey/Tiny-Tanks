@@ -1,9 +1,9 @@
 //==============================================================================================================================
 // Project: WiiTanks
-// File: MapCreation.h
+// File: main.cpp
 // Author: Daniel McCluskey
-// Date Created: 17/10/16
-// Brief: This is the header file that contains the code that draws the maps from files and generates the collision map.
+// Date Created: 07/01/17
+// Brief: This is main.cpp, kind of self explanatory, Declares class members and variables. Controls the game using gamestates.
 // Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
 //==============================================================================================================================
 #include "Enumerations.h"

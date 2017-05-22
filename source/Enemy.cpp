@@ -1,3 +1,11 @@
+//==============================================================================================================================
+// Project: WiiTanks
+// File: Enemy.cpp
+// Author: Daniel McCluskey
+// Date Created: 17/01/17
+// Brief: This file controls the Enemy "AI" movement, the bullets for the enemy and the rotation of the enemy.
+// Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
+//==============================================================================================================================
 #include "Vector2.h"
 #include "CustomEnum.h"
 #include "Enemy.h"
@@ -7,14 +15,7 @@
 #include "UGFW.h"
 #include "MathUtil.h"
 #include "Matrix4x4.h"
-//==============================================================================================================================
-// Project: WiiTanks
-// File: Enemy.cpp
-// Author: Daniel McCluskey
-// Date Created: 17/01/17
-// Brief: This file controls the Enemy "AI" movement, the bullets for the enemy and the rotation of the enemy.
-// Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
-//==============================================================================================================================
+
 
 //Function to create the Enemy tank, Need to convert to a constructor.
 //float a_fStartXPos = The X position to spawn the tank in.

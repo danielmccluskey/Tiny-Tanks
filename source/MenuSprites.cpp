@@ -3,7 +3,7 @@
 // File: MenuSprites.cpp
 // Author: Daniel McCluskey
 // Date Created: 07/01/17
-// Brief: This is the file that contains the code that handles the menu sprites.
+// Brief: This file controls how the GUI elements of the game work and are handled.
 // Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
 //==============================================================================================================================
 #include "MenuSprites.h"

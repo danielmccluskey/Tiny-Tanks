@@ -1,9 +1,9 @@
 //==============================================================================================================================
 // Project: WiiTanks
-// File: MapCreation.h
+// File: PowerUps.h
 // Author: Daniel McCluskey
 // Date Created: 17/10/16
-// Brief: This is the header file that contains the code that draws the maps from files and generates the collision map.
+// Brief: This is the header file that contains the code that randomly spawns powerups.
 // Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
 //==============================================================================================================================
 #include "PowerUps.h"
