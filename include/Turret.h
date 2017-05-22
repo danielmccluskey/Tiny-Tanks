@@ -12,8 +12,8 @@ class Turret
 {
 public:
 	Turret(char* a_cImagePath);
-	int iSpriteID;
-	int iRotDeg = 0;
+	int iSpriteID;//Sprite ID
+	int iRotDeg = 0;//Rotation of turret.
 
 };
 
