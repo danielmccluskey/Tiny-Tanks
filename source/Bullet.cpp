@@ -28,6 +28,12 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 				iMissileCount--;
 				iActiveMissiles++;
 			}
+			else if (a_pBullet[i].iBulletType == 2 && iMineCount > 0)
+			{
+				a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Powerups/powerup_mine.png", 20, 20, true);//Create the sprite
+				iMineCount--;
+				iActiveMines++;
+			}
 			else
 			{
 				return;
@@ -59,6 +65,9 @@ void Bullet::AddBullet(int a_iBulletType)
 		break;
 	case 1:
 		iMissileCount += 1;
+		break;
+	case 2:
+		iMineCount += 1;
 		break;
 	}
 }
@@ -121,6 +130,10 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 		{
 			iLifeTime = -2;
 		}
+		if (iBulletType == 2)
+		{
+			iLifeTime = -2;
+		}
 		if ((vLastPos.GetdX() > iTileX) && (vLastPos.GetdX() < iTileX + fTileWidth) && (vLastPos.GetdY() > iTileY) && (vLastPos.GetdY() < iTileY + fTileWidth))
 		{
 			iLifeTime = -2;
@@ -134,6 +147,10 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 		vMousePos.SetdX(iMouseX);
 		vMousePos.SetdY((iMapHeight * fTileWidth) - iMouseY);//Reverses the Y-Value given from UG::GetMousePos since it returns Y=0 at the top instead of the bottom.
 		vVelocity = vVelocity.RotateX((GetBearing(vPos, vMousePos)-180));
+	}
+	if (iBulletType == 2)
+	{
+		vVelocity = vVelocity.Zero();
 	}
 	float fDeltaTime = UG::GetDeltaTime();
 	vLastPos = vPos;
@@ -162,6 +179,10 @@ void Bullet::DestroyBullets(Bullet& a_pBullet)
 		else if (iBulletType == 1)
 		{
 			a_pBullet.iActiveMissiles -= 1;
+		}
+		else if (iBulletType == 2)
+		{
+			a_pBullet.iActiveMines -= 1;
 		}
 		bIsActive = false;
 		iBulletBounce = 0;

@@ -37,6 +37,8 @@ private:
 	bool bIsActive = false;
 	float fAngle;
 
+	int iMineCount = 0;
+	int iActiveMines = 0;
 	int iMaxNormalBullets = 3;
 	int iMissileCount = 0;
 	int iBulletCount = 0;

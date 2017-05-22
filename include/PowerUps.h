@@ -18,20 +18,21 @@ public:
 	{
 	}
 
-	bool SpawnPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad);
+	int SpawnPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad);
 	bool CheckChance();
 	bool CheckSpriteCollision(int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad);
 	int GetTile(int a_iCollisionMap[], Vector2 a_vPos);
 	void UpdateCollisionMap();
 	void CreatePowerup(Vector2 a_vPos, PowerUps* a_pPowerUpArray);
 	void SetTankID(int a_iSpriteID);
-	bool DestroyPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad);
+	int DestroyPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad);
 	void Reset(PowerUps* a_pPowerUpArray);
 
 
 private:
 	int iCollisionMap[384];
 	int iSpriteID;
+	int iSpriteType;
 	int iCurrentActive;
 	int iMaxPowerUps;
 	bool bActive;

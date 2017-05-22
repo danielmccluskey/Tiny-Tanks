@@ -60,18 +60,27 @@ bool PlayerTank::MoveTank(int a_iEnemySpriteID)
 		iTankMouseState = false;
 		iTankLastMouseState = false;
 	}
-	if (pPowerUpArray[0].SpawnPowerUps(pPowerUpArray, iSpriteID, iSpriteWidth, iSpriteHeight, iRotDeg))
+	int iCollidedSprite = pPowerUpArray[0].SpawnPowerUps(pPowerUpArray, iSpriteID, iSpriteWidth, iSpriteHeight, iRotDeg);
+	if (iCollidedSprite == 0)
 	{		
 		BulletArray[0].AddBullet(1);
+	}
+	else if (iCollidedSprite == 1)
+	{
+		BulletArray[0].AddBullet(2);
 	}
 	
 	if ((iTankMouseState == true && iTankLastMouseState == false))
 	{
 		BulletArray[0].CreateBullet(BulletArray, vPos, vMousePos, 0);
 	}
-	if (UG::IsKeyDown(UG::KEY_SPACE))
+	if (UG::IsKeyDown(UG::KEY_1))
 	{
 		BulletArray[0].CreateBullet(BulletArray, vPos, vMousePos, 1);
+	}
+	if (UG::IsKeyDown(UG::KEY_2))
+	{
+		BulletArray[0].CreateBullet(BulletArray, vPos, vMousePos, 2);
 	}
 
 	BulletArray[0].UpdateBullets(BulletArray, iCollisionMap);

@@ -20,11 +20,12 @@ void PowerUps::SetTankID(int a_iSpriteID)
 {
 	iTankSpriteID = a_iSpriteID;
 }
-bool PowerUps::SpawnPowerUps(PowerUps* a_pPowerUpArray,int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad)
+int PowerUps::SpawnPowerUps(PowerUps* a_pPowerUpArray,int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad)
 {
-	if (DestroyPowerUps(a_pPowerUpArray, a_iSpriteID, a_iWidth, a_iHeight, a_fRad))
+	int iCollidedSprite = DestroyPowerUps(a_pPowerUpArray, a_iSpriteID, a_iWidth, a_iHeight, a_fRad);
+	if (iCollidedSprite >= 0)
 	{
-		return true;
+		return iCollidedSprite;
 	}
 	fTimer -= 0.1f;
 	if (CheckChance())
@@ -45,7 +46,7 @@ bool PowerUps::SpawnPowerUps(PowerUps* a_pPowerUpArray,int a_iSpriteID, int a_iW
 		}
 	}
 	
-	return false;
+	return -1;
 }
 bool PowerUps::CheckChance()
 {
@@ -71,7 +72,19 @@ void PowerUps::CreatePowerup(Vector2 a_vPos, PowerUps* a_pPowerUpArray)
 		{
 			if (a_pPowerUpArray[i].bActive == false)
 			{
-				a_pPowerUpArray[i].iSpriteID = UG::CreateSprite("./images/Powerups/powerup_missile.png", 32,32, true);//Create the sprite
+				int iRand = rand() % 2 + 1;
+
+				if (iRand <= 1)
+				{
+					a_pPowerUpArray[i].iSpriteID = UG::CreateSprite("./images/Powerups/powerup_missile.png", 32, 32, true);//Create the sprite
+					a_pPowerUpArray[i].iSpriteType = 0;
+				}
+				else
+				{
+					a_pPowerUpArray[i].iSpriteID = UG::CreateSprite("./images/Powerups/powerup_mine.png", 32, 32, true);//Create the sprite
+					a_pPowerUpArray[i].iSpriteType = 1;
+				}
+				
 				UG::DrawSprite(a_pPowerUpArray[i].iSpriteID);	//Draws it
 				a_pPowerUpArray[i].vPos = a_vPos;
 				UG::SetSpriteLayer(a_pPowerUpArray[i].iSpriteID, 9);
@@ -120,7 +133,7 @@ void PowerUps::UpdateCollisionMap()
 	pCollision.close();
 }
 
-bool PowerUps::DestroyPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad)
+int PowerUps::DestroyPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad)
 {
 	for (int i = 0; i < iMaxPowerUps; i++)
 	{
@@ -133,13 +146,13 @@ bool PowerUps::DestroyPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a
 				UG::DestroySprite(a_pPowerUpArray[i].iSpriteID);
 				--iCurrentActive;
 				a_pPowerUpArray[i].bActive = false;				
-				return true;
+				return a_pPowerUpArray[i].iSpriteType;
 
 			}
 		}
 
 	}
-	return false;
+	return -1;
 }
 
 void PowerUps::Reset(PowerUps* a_pPowerUpArray)
