@@ -50,7 +50,7 @@ int main(int argv, char* argc[])
 
 		//Enemy Test
 		Enemy oEnemyTank;//Constructor not used, need to fix.
-		oEnemyTank.CreateTank(100, 100);//Temp constructor
+		oEnemyTank.CreateTank(64, 64);//Temp constructor
 
 
 		//Below are all the GUI parts of the game being declared. Looks messy I know.
@@ -145,7 +145,7 @@ int main(int argv, char* argc[])
 						oPlayerTank.UpdateCollisionMap();
 						oEnemyTank.UpdateCollisionMap();
 						oPlayerTank.Reset(Vector2(704, 448));
-						oEnemyTank.Reset(Vector2(100, 100));
+						oEnemyTank.Reset(Vector2(64, 64));
 						iGameState = GAMEPLAY;
 					}
 					
@@ -171,7 +171,7 @@ int main(int argv, char* argc[])
 					oNextButtonQuit.DrawSprite();
 					oLevelPass.DrawSprite();
 					oPlayerTank.Reset(Vector2(704, 448));
-					oEnemyTank.Reset(Vector2(100,100));
+					oEnemyTank.Reset(Vector2(64,64));
 				}
 				
 				if (oEnemyTank.MoveTank(oEnemyTank.GetPos(), oPlayerTank.GetPos(), oPlayerTank.GetSpriteID()))//If the player collides with a bullet fired by an enemy.
@@ -183,7 +183,7 @@ int main(int argv, char* argc[])
 					oNextButtonQuit.DrawSprite();
 					oLevelFail.DrawSprite();
 					oPlayerTank.Reset(Vector2(704, 448));
-					oEnemyTank.Reset(Vector2(100, 100));
+					oEnemyTank.Reset(Vector2(64, 64));
 				}
 				oEnemyTank.LookToPlayer(oPlayerTank.GetPos());//Makes the enemy tanks turret look towards the player.
 
