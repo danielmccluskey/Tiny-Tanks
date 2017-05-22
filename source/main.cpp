@@ -55,10 +55,12 @@ int main(int argv, char* argc[])
 		MenuSprite oNextButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", fButtonUV, false);
 		MenuSprite oNextButtonRestart(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_restart.png", fButtonUV, false);
 
+		MenuSprite oControls(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth), (fMapHeight*fTileWidth)), 16, "./Images/menu/controls.png", fFullUV, true);
+
 		bool iCurrentMouseState = false;
 		bool iLastMouseState = false;
 
-		int iGameState = MENU;
+		int iGameState = SPLASH;
 		do
 		{
 
@@ -75,6 +77,15 @@ int main(int argv, char* argc[])
 		
 			switch (iGameState)
 			{
+			case SPLASH:
+			{
+				if (oControls.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
+				{
+					oControls.HideSprite();
+					iGameState = MENU;
+				}
+			}
+			break;
 			case MENU:
 			{
 				oMenuBackground.RotateSprite(0.1f);
