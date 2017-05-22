@@ -1,0 +1,27 @@
+<<<<<<< working copy
+﻿  Vector4.cpp
+c:\users\data-3\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\vector4.cpp(120): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Vector3.cpp
+c:\users\data-3\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Vector2.cpp
+c:\users\data-3\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Matrix4x4.cpp
+  Matrix3x3.cpp
+c:\users\data-3\downloads\library\danmmathlibrarystatic\include\matrix3x3.h(12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\data-3\downloads\library\danmmathlibrarystatic\include\matrix3x3.h(12): error C2143: syntax error: missing ',' before '&'
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\matrix3x3.cpp(65): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\matrix3x3.cpp(66): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\matrix3x3.cpp(67): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\matrix3x3.cpp(77): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\matrix3x3.cpp(78): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\matrix3x3.cpp(79): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\matrix4x4.cpp(258): warning C4715: 'Matrix4x4::GetMatrixValue': not all control paths return a value
+c:\users\data-3\downloads\library\danmmathlibrarystatic\source\matrix4x4.cpp(201): warning C4172: returning address of local variable or temporary: fArray
+=======
+﻿  Matrix4x4.cpp
+c:\users\s1600056\downloads\library\danmmathlibrarystatic\source\matrix4x4.cpp(221): warning C4172: returning address of local variable or temporary: fArray
+c:\users\s1600056\downloads\library\danmmathlibrarystatic\source\matrix4x4.cpp(278): warning C4715: 'Matrix4x4::GetMatrixValue': not all control paths return a value
+  DanMMathLibraryStatic.vcxproj -> C:\Users\s1600056\Downloads\game\proj\vs2015\x64\Debug\DanMMathLibraryStatic.lib
+>>>>>>> destination

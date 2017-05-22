@@ -43,11 +43,6 @@
     <ClInclude Include="..\..\include\SearchCell.h" />
     <ClInclude Include="..\..\include\Turret.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\library\DanMMathLibraryStatic\DanMMathLibraryStatic\DanMMathLibraryStatic.vcxproj">
-      <Project>{68a15960-265d-4a7f-98b9-3ec2b7313f2c}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7CD622AF-69B8-4D7B-9E10-3FC691CEDC98}</ProjectGuid>
     <RootNamespace>WiiTanks</RootNamespace>
@@ -108,7 +103,7 @@
     <OutDir>..\..\bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>./obj\</IntDir>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>C:\Users\s1600056\Downloads\library\DanMMathLibraryStatic\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\deps\DanMMathLibraryStatic\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\bin\$(Platform)\$(Configuration)\</OutDir>
@@ -137,14 +132,14 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Data-3\Downloads\library\DanMMathLibraryStatic\include;$(SolutionDir)../../include;$(SolutionDir)../../deps/tinyxml;$(SolutionDir)../../deps/UoG/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../deps/DanMMathLibraryStatic/include;$(SolutionDir)../../include;$(SolutionDir)../../deps/tinyxml;$(SolutionDir)../../deps/UoG/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLM_SWIZZLE;GLM_FORCE_RADIANS;GLM_FORCE_PURE;GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4201;4310;4100;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)../../lib\vs2015\$(Platform)\$(Configuration);$(SolutionDir)../../deps/UoG/lib/vs2015/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>UG Basic Framework.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\x64\Debug;$(SolutionDir)../../lib\vs2015\$(Platform)\$(Configuration);$(SolutionDir)../../deps/UoG/lib/vs2015/$(Platform)/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>DanMMathLibraryStatic.lib;UG Basic Framework.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>../../scripts\copyResourcesToBuildDirectory.bat "$(ProjectDir)$(Outdir)"</Command>

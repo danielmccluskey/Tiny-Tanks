@@ -1,0 +1,11 @@
+﻿  Vector4.cpp
+  Vector3.cpp
+c:\users\s1600056\downloads\static\danmmathlibrarystatic\include\mathutil.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Vector2.cpp
+c:\users\s1600056\downloads\static\danmmathlibrarystatic\include\mathutil.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Matrix4x4.cpp
+  Matrix3x3.cpp
+  MathUtil.cpp
+c:\users\s1600056\downloads\static\danmmathlibrarystatic\include\mathutil.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
+  DanMMathLibraryStatic.vcxproj -> C:\Users\s1600056\Downloads\static\DanMMathLibraryStatic\Debug\DanMMathLibraryStatic.lib
