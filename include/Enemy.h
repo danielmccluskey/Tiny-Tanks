@@ -59,6 +59,11 @@ public:
 	//Function that just returns the sprite ID of the class member.
 	int GetSpriteID();
 
+	//Function to get the current type of tile at a certain point.
+	//int a_iCollisionMap[] = The collision map to check against.
+	//Vector2 a_vPos = The position to check.
+	int GetTile(int a_iCollisionMap[], Vector2 a_vPos);
+
 	//==============================================================================================================================
 	//Floats
 	//==============================================================================================================================
@@ -84,6 +89,12 @@ public:
 	//Vector2 a_vStart = The start position of the tank.
 	//Vector2 a_vGoal = The end of the path (Currently the Players position.)
 	bool MoveTank(Vector2 a_vStart, Vector2 a_vGoal, int a_iEnemySpriteID);
+
+	//Function to get line of sight between Enemy and player.
+	//int a_iSpriteIDEnemy = The starting sprite ID
+	//int a_iSpriteIDPlayer = The Player Sprite ID
+	//int a_iCollisionMap[] = The collision map
+	bool RayCast(int a_iSpriteIDEnemy, int a_iSpriteIDPlayer, int a_iCollisionMap[]);
 
 	//==============================================================================================================================
 	//Vector2

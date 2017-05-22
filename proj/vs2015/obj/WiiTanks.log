@@ -1,11 +1,32 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  PowerUps.cpp
+  Enemy.cpp
+c:\users\data-3\downloads\game\include\searchcell.h(26): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 c:\users\data-3\downloads\library\danmmathlibrarystatic\include\mathutil.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\data-3\downloads\game\source\powerups.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\data-3\downloads\game\source\powerups.cpp(69): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\powerups.cpp(105): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
-c:\users\data-3\downloads\game\source\powerups.cpp(145): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\data-3\downloads\game\source\powerups.cpp(146): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(27): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(78): warning C4458: declaration of 'vNextSpot' hides class member
+  c:\users\data-3\downloads\game\include\enemy.h(149): note: see declaration of 'Enemy::vNextSpot'
+c:\users\data-3\downloads\game\source\enemy.cpp(107): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(108): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(112): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(116): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(150): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(151): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(152): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(153): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(163): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(164): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(173): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(174): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(181): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(182): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(183): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(193): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(207): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(208): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(231): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\data-3\downloads\game\source\enemy.cpp(232): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   WiiTanks.vcxproj -> C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
   WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
   xcopy "C:\Users\Data-3\Downloads\game\scripts\..\resources\"*.* "C:\Users\Data-3\Downloads\game\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 

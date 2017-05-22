@@ -95,7 +95,12 @@ bool Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal, int a_iEnemySpriteID)
 			}
 			
 			fLerpPosition = 0;//Resets the lerp position.
-			oBulletArray[0].CreateBullet(oBulletArray, Vector2(vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2), a_vGoal, 0);//Creates a bullet and fires it toward the player.
+
+			if (RayCast(iSpriteID, a_iEnemySpriteID, iEnemyCollisionMap))
+			{
+				oBulletArray[0].CreateBullet(oBulletArray, Vector2(vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2), a_vGoal, 0);//Creates a bullet and fires it toward the player.
+			}
+			
 		}
 		else if (fLerpPosition >= 0 && fLerpPosition <= 1)//If the lerp is still in progress.
 		{
@@ -190,4 +195,39 @@ void Enemy::Reset(Vector2 a_fStartPos)
 	bIsRotating = true;//Resets PAthfinding.
 	bIsTravelling = false;//Resets Pathfinding.
 	fLerpPosition = 0;//Resets lerp.
+}
+//Function to get line of sight between Enemy and player.
+//int a_iSpriteIDEnemy = The starting sprite ID
+//int a_iSpriteIDPlayer = The Player Sprite ID
+//int a_iCollisionMap[] = The collision map
+bool Enemy::RayCast(int a_iSpriteIDEnemy, int a_iSpriteIDPlayer, int a_iCollisionMap[])
+{
+	Vector2 vRayPos;
+	UG::GetSpriteMatrix(a_iSpriteIDPlayer, fUGFrameSpriteMatrix);
+	for (float i = 0; i < iMapWidth; i++)
+	{
+		float j = i / iMapWidth;
+		vRayPos.SetdX(Lerp(vPos.GetdX(), fUGFrameSpriteMatrix[12], j));
+		vRayPos.SetdY(Lerp(vPos.GetdY(), fUGFrameSpriteMatrix[13], j));
+
+		
+		int iTileTypes = GetTile(a_iCollisionMap, vRayPos);
+		if (iTileTypes == 1)
+		{
+			return false;
+			break;
+		}
+	}
+	return true;
+}
+
+//Function to get the current type of tile at a certain point.
+//int a_iCollisionMap[] = The collision map to check against.
+//Vector2 a_vPos = The position to check.
+int Enemy::GetTile(int a_iCollisionMap[], Vector2 a_vPos)
+{
+	int a_iX = (a_vPos.GetdX() / fTileWidth);//Converts to Array co-ordinates.
+	int a_iY = (a_vPos.GetdY() / fTileWidth);//Converts to Array co-ordinates.
+
+	return a_iCollisionMap[(a_iY * iMapWidth) + a_iX];//Returns the point in array.
 }
