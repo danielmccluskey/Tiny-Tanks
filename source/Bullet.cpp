@@ -83,6 +83,11 @@ void Bullet::DrawBulletCount()
 	std::string ssMissiles;
 	ssMissiles += std::to_string(iMissileCount);
 	UG::DrawString(ssMissiles.c_str(), (int)(fMapWidth * fTileWidth * 0.5f), (int)(fMapHeight * fTileWidth), 0.8f);
+
+	//Stringstream to draw the current highscore below HIGHSCORES during GAMEPLAY
+	std::string ssMines;
+	ssMines += std::to_string(iMineCount);
+	UG::DrawString(ssMines.c_str(), (int)(fMapWidth * fTileWidth * 0.8f), (int)(fMapHeight * fTileWidth), 0.8f);
 }
 
 void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
@@ -247,4 +252,5 @@ void Bullet::Reset(Bullet* a_pBulletArray)
 
 	}
 	a_pBulletArray[0].iMissileCount = 0;
+	a_pBulletArray[0].iMineCount = 0;
 }

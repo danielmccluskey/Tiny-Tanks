@@ -86,6 +86,25 @@ int main(int argv, char* argc[])
 				}
 			}
 			break;
+
+			case PAUSE:
+			{
+				if (oMenuButtonPlay.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
+				{
+					oMenuButtonPlay.HideSprite();
+					oMenuButtonQuit.HideSprite();
+					iGameState = GAMEPLAY;
+				}
+				else if (oMenuButtonQuit.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
+				{
+					MapGen[0].Quit(MapGen);
+					oMenuBackground.DrawSprite();
+					oMenuTitle.DrawSprite();
+					iGameState = MENU;
+				}
+
+			}
+			break;
 			case MENU:
 			{
 				oMenuBackground.RotateSprite(0.1f);
@@ -143,13 +162,12 @@ int main(int argv, char* argc[])
 				}
 				oEnemyTank.LookToPlayer(oPlayerTank.GetPos());
 
-				if (UG::IsKeyDown(UG::KEY_P))
+				if (UG::IsKeyDown(UG::KEY_ESCAPE))
 				{
-					iGameState = NEXTLEVEL;
-					oNextButtonNext.DrawSprite();
-					oNextButtonQuit.DrawSprite();
+					iGameState = PAUSE;
+					oMenuButtonPlay.DrawSprite();
+					oMenuButtonQuit.DrawSprite();
 				}
-				
 
 				
 			}
