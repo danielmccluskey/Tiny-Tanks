@@ -8,7 +8,6 @@
 // File: Pathfinding.cpp
 // Author: Daniel McCluskey
 // Date Created: 17/01/17
-
 // Brief: This file contains the code that generates a path from A to B using the A* pathfinding method.
 // Brief: My understanding of how it works is quite limited but I get the jist of the process after hearing an explanation from Will.
 // Brief: I have commented the code as best to my knowledge.
@@ -78,6 +77,10 @@ void PathFinding::FindPath(Vector3 a_vCurrentPos, Vector3 a_vTargetPos)
 		ContinuePath();//Continue finding the path.
 	}
 }
+
+//Sets the starting cells and the end cells. Removes parent from starting cell.
+//SearchCell a_sStart == Start cell
+//SearchCell a_sGoal == End Cell
 void PathFinding::SetStartAndGoal(SearchCell a_sStart, SearchCell a_sGoal)
 {
 	pStartCell = new SearchCell(a_sStart.iX, a_sStart.iY, NULL);//Declares the Starting cell, NULL on third parameter since the starting cell does not need a Parent node.
@@ -90,6 +93,7 @@ void PathFinding::SetStartAndGoal(SearchCell a_sStart, SearchCell a_sGoal)
 	vOpenList.push_back(pStartCell);//Pushes the Starting cell to the open list.
 }
 
+//Function to decide which neighboring cell is the fastest to the goal.
 SearchCell* PathFinding::GetNextCell()
 {
 	float fClosestTile = 1000;//Large value to start with so that the minimum value can be determined.
@@ -114,6 +118,11 @@ SearchCell* PathFinding::GetNextCell()
 	return pNextCell;//Returns the found closest cell.
 }
 
+//Function to set the values of a cell, such as what its parent is, where it is and what it would cost to get there.
+//int a_iX = X Co-ordinate
+//int a_iY = y Co-ordinate
+//float a_fCost = Cost to travel to that cell.
+//SearchCell *a_pParent = The parent cell.
 void PathFinding::PathOpened(int a_iX, int a_iY, float a_fCost, SearchCell *a_pParent)
 {
 	int iTile = GetTile(a_iX, a_iY);//Gets the tile type at the XY pos for collision.
@@ -157,6 +166,8 @@ void PathFinding::PathOpened(int a_iX, int a_iY, float a_fCost, SearchCell *a_pP
 	}
 	vOpenList.push_back(pNewChild);//Push the new tile to the open list.
 }
+
+//Updates the collision map for the pathfinder.
 void PathFinding::UpdateCollisionMap()
 {
 	std::ifstream pCollision;//Creates an input fstream member
@@ -168,6 +179,8 @@ void PathFinding::UpdateCollisionMap()
 	pCollision.close();//Closes the file.
 }
 
+//Continues finding the path, this function allows the program to run at runtime meaning
+//that the program will not freeze whilst it is finding a path, instead, it will search one cell per frame.
 void PathFinding::ContinuePath()
 {
 	for (int i = 0; i < 4; i++)//Only runs 4 times since I only have 4 directions.
@@ -190,6 +203,7 @@ void PathFinding::ContinuePath()
 
 				
 				//Uncomment the code below to view the path that the program has found.
+				//I dont delete the sprites after so its for debug only.
 				//int iSpriteID = UG::CreateSprite("./images/Tanks/temp3.png", 32, 32, true);//Create the sprite
 
 				//UG::DrawSprite(iSpriteID);	//Draws it
@@ -219,6 +233,9 @@ void PathFinding::ContinuePath()
 	
 }
 
+//Function to return the next path position
+//Vector3 a_vPos = The position of the enemy tank.
+//bool a_bFoundGoal = If the goal has been found.
 Vector3 PathFinding::NextPathPos(Vector3 a_vPos, bool a_bFoundGoal)
 {
 
@@ -239,6 +256,9 @@ Vector3 PathFinding::NextPathPos(Vector3 a_vPos, bool a_bFoundGoal)
 	
 	return vNextPosCell;
 }
+
+//Function to return the second next path position
+//Vector3 a_vPos = The position of the enemy tank.
 Vector3 PathFinding::SecondNextPathPos(Vector3 a_vPos)
 {
 	int iIndex = 2;//Index for searching the Goal path.
@@ -255,9 +275,12 @@ Vector3 PathFinding::SecondNextPathPos(Vector3 a_vPos)
 	return vNextPosCell;
 }
 
+
+//Function to visualise the search algorithm.
 void PathFinding::DrawDebug()
 {
 	//Uncomment the code below to see the search algorithm visualised.
+	//Sprites are not deleted so for debug only.
 	//for (int i = 0; i < vOpenList.size(); i++)
 	//{
 	//	int iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 32, 32, true);//Create the sprite

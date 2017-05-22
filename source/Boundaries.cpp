@@ -1,6 +1,3 @@
-#include "Boundaries.h"
-#include "UGFW.h"
-#include "MathUtil.h"
 //==============================================================================================================================
 // Project: WiiTanks
 // File: Boundaries.cpp
@@ -10,6 +7,10 @@
 // Brief: This was not included in the Math library since I did not have time to re-do the functions that use the UG Framework.
 // Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
 //==============================================================================================================================
+
+#include "Boundaries.h"
+#include "UGFW.h"
+#include "MathUtil.h"
 
 //Function to return the Width of a given sprite.
 //Equation from Stack overflow - http://stackoverflow.com/a/6657768

@@ -2,7 +2,7 @@
 // Project: Wii Tanks
 // File: MapGenerator.cpp
 // Author: Daniel McCluskey
-// Date Created: 07/02/17
+// Date Created: 07/01/17
 // Brief: This is the file that contains the code that draws the Level and generates the Collision maps from text files.
 // Last Edited by: (See BitBucket Commits: https://bitbucket.org/Danielmclovin/ct4019-wii-tanks-daniel-mccluskey)
 //==============================================================================================================================
@@ -14,6 +14,9 @@
 #include <fstream>
 #include "UGFW.h"
 
+
+//Loops through the tile array, checks what tile type is there and then draws it.
+//MapGenerator *a_pPosition = The Map class array to loop through.
 void MapGenerator::DrawLevelTiles(MapGenerator *a_pPosition)
 {
 
@@ -42,7 +45,11 @@ void MapGenerator::DrawLevelTiles(MapGenerator *a_pPosition)
 	}
 }
 
-
+//Creates a sprite for the class member and draws it at the correct position.
+//char* a_cImagePath = The image that the sprite should be created with.
+//int a_iTileX = The X of the tile array
+//int a_iTileY = The Y of the tile array
+//MapGenerator *a_pCurrentTile = The Map class member.
 void MapGenerator::SetTile(char* a_cImagePath, int a_iTileX, int a_iTileY, MapGenerator *a_pCurrentTile)
 {
 	MapGenerator &pCurrentTile = GetMapPosition(a_pCurrentTile, a_iTileX, a_iTileY);
@@ -57,16 +64,27 @@ void MapGenerator::SetTile(char* a_cImagePath, int a_iTileX, int a_iTileY, MapGe
 	UG::DrawSprite(pCurrentTile.iSpriteID);
 }
 
-
+//Function to get the current type of tile at a certain point.
+//int a_iX = X co-ords of tile array.
+//int a_iY = Y co-ords of tile array.
 int MapGenerator::GetTile(int a_iX, int a_iY)
 {
 	return iLevelMap[(a_iY*iMapWidth) + a_iX];
 }
+
+//Function to get the tile class member at a certain point.
+//MapGenerator *a_pPosition = The Class member to loop through.
+//int a_iX = X co-ords of tile array.
+//int a_iY = Y co-ords of tile array.
 MapGenerator& MapGenerator::GetMapPosition(MapGenerator *a_pPosition, int a_iX, int a_iY)
 {
 	return a_pPosition[(a_iY * iMapWidth) + a_iX];//Finds and returns what tile is at X,Y
 }
 
+
+//Function to Load the level. It opens the level path, stores it in an array, then generates a collision map.
+//std::string a_sLevelPath = The level path given in format "./maps/lvl_X".txt" with X being the level to load.
+//MapGenerator *a_pPosition = The Class member to loop through.
 void MapGenerator::LoadLevel(std::string a_sLevelPath, MapGenerator *a_pPosition)
 {
 	std::ifstream LEVELMAP;//Creates an input fstream member
@@ -100,7 +118,8 @@ void MapGenerator::LoadLevel(std::string a_sLevelPath, MapGenerator *a_pPosition
 	DrawLevelTiles(a_pPosition);
 }
 
-
+//Function to Unload the level.
+//MapGenerator *a_pPosition = The Class member to loop through.
 void MapGenerator::UnLoadLevel(MapGenerator *a_pPosition)
 {
 	//The following is the code that draws out the tiles from the Array map
@@ -115,28 +134,34 @@ void MapGenerator::UnLoadLevel(MapGenerator *a_pPosition)
 	}
 }
 
+//Function to load the next level. Allows for infinite, custom levels. User can add their own.
+//However there is no validation on the files to see if they are actually map files.
+//Returns true if level loads correctly.
+//MapGenerator *a_pPosition = The Map class member to loop through.
 bool MapGenerator::NextLevel(MapGenerator *a_pPosition)
 {
-	UnLoadLevel(a_pPosition);
-	iCurrentLevel += 1;
-	std::string ifLevelPath;
-	ifLevelPath += "./maps/lvl_";
-	ifLevelPath += std::to_string(iCurrentLevel);
-	ifLevelPath += ".txt";
-	std::cout << ifLevelPath << std::endl;
+	UnLoadLevel(a_pPosition);//UnLoads the current level.
+	iCurrentLevel += 1;//Adds to the level count
+	std::string ifLevelPath;//Declares a string to store the level path in.
+	ifLevelPath += "./maps/lvl_";//Adds the prefix to the string.
+	ifLevelPath += std::to_string(iCurrentLevel);//Adds the current level number to the string.
+	ifLevelPath += ".txt";//Adds the suffix to the string.
+	std::cout << ifLevelPath << std::endl;//Debug.
 
-	if (std::ifstream(ifLevelPath))
+	if (std::ifstream(ifLevelPath))//If the file exists.
 	{
-		std::cout << "File already exists" << std::endl;
-		LoadLevel(ifLevelPath, a_pPosition);
+		std::cout << "File already exists" << std::endl;//Debug
+		LoadLevel(ifLevelPath, a_pPosition);//Load the level.
 		return true;
 	}
 	return false;
 
 }
 
+//Function to reset the level count and unload the current map.
+//MapGenerator *a_pPosition = The Map class member to loop through
 void MapGenerator::Quit(MapGenerator *a_pPosition)
 {
-	UnLoadLevel(a_pPosition);
-	iCurrentLevel = 0;
+	UnLoadLevel(a_pPosition);//Unloads the level.
+	iCurrentLevel = 0;//Resets level count.
 }

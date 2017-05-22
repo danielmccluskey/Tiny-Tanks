@@ -9,7 +9,7 @@
 #include "Matrix4x4.h"
 //==============================================================================================================================
 // Project: WiiTanks
-// File: Enemy.h
+// File: Enemy.cpp
 // Author: Daniel McCluskey
 // Date Created: 17/01/17
 // Brief: This file controls the Enemy "AI" movement, the bullets for the enemy and the rotation of the enemy.
@@ -30,22 +30,28 @@ void Enemy::CreateTank(float a_fStartXPos, float a_fStartYPos)
 	bIsTravelling = false;//For the Pathfinding function.
 	UpdateCollisionMap();//Updates the collision map for movement.
 };
+
 //Deconstructor
 Enemy::~Enemy()
 {
 	UG::StopDrawingSprite(iSpriteID);//Stops Drawing that.
 	UG::DestroySprite(iSpriteID);//Destroys that.
-	UG::StopDrawingSprite(sSpriteTurret.iSpriteID);//Stops Drawing that.
-	UG::DestroySprite(sSpriteTurret.iSpriteID);//Destroys that.
+	UG::StopDrawingSprite(oSpriteTurret.iSpriteID);//Stops Drawing that.
+	UG::DestroySprite(oSpriteTurret.iSpriteID);//Destroys that.
 }
+
+//Function that just returns the sprite ID of the class member.
 int Enemy::GetSpriteID()
 {
 	return iSpriteID;
 }
+
+//Function to return the position of the class member as a vector2.
 Vector2 Enemy::GetPos()
 {
 	return vPos;
 }
+
 //Function to determine a Path to a_vGoal using the A* pathfinding method, then moves the tank along the path.
 //Vector2 a_vStart = The start position of the tank.
 //Vector2 a_vGoal = The end of the path (Currently the Players position.)
@@ -68,7 +74,7 @@ bool Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal, int a_iEnemySpriteID)
 	}
 	if (bIsTravelling == true)
 	{		
-		RotateSprite(iSpriteID, DegreesToRadians(-fBearing + 90));//Rotates the sprite to face the direction it is travelling in.
+		RotateSprite(iSpriteID, DegreesToRadians(-iBearing + 90));//Rotates the sprite to face the direction it is travelling in.
 		Vector3 vNextSpot = oPathFinder.SecondNextPathPos(vDistanceTarget);//Gets the position of the path, 2 positions away from where the sprite is currently.
 		
 		if (vNextSpot.GetdY() == -100)//Checks to see if the path has ended.
@@ -89,25 +95,26 @@ bool Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal, int a_iEnemySpriteID)
 			}
 			
 			fLerpPosition = 0;//Resets the lerp position.
-			BulletArray[0].CreateBullet(BulletArray, Vector2(vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2), a_vGoal, 0);//Creates a bullet and fires it toward the player.
+			oBulletArray[0].CreateBullet(oBulletArray, Vector2(vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2), a_vGoal, 0);//Creates a bullet and fires it toward the player.
 		}
 		else if (fLerpPosition >= 0 && fLerpPosition <= 1)//If the lerp is still in progress.
 		{
 			vPos = Vector2(Lerp(vDistanceTarget.GetdX(), vNextSpot.GetdX(), fLerpPosition), Lerp(vDistanceTarget.GetdZ(), vNextSpot.GetdZ(), fLerpPosition));//Lerps between the Current position and the Next position.
-			fBearing = GetBearing(vDistanceTarget, vNextSpot);//Gets the bearing/angle between the current position and the next position.
+			iBearing = GetBearing(vDistanceTarget, vNextSpot);//Gets the bearing/angle between the current position and the next position.
 			fLerpPosition += 1.5f * fDelta;//Adds to the lerp.
 		}
-		BulletArray[0].UpdateBullets(BulletArray, iEnemyCollisionMap);//Updates the bullet array (Moves and Destroys bullets)
+		oBulletArray[0].UpdateBullets(oBulletArray, iEnemyCollisionMap);//Updates the bullet array (Moves and Destroys bullets)
 		UG::MoveSprite(iSpriteID, vPos.GetdX() + fTileWidth/2, vPos.GetdY() +fTileWidth/2);//Moves the tank to the lerped position.
 
 	}
 
-	if (BulletArray[0].SpriteCollide(BulletArray, a_iEnemySpriteID, iSpriteWidth, iSpriteHeight, vPos, fBearing))
+	if (oBulletArray[0].SpriteCollide(oBulletArray, a_iEnemySpriteID, iSpriteWidth, iSpriteHeight, vPos, iBearing))
 	{
 		return true;
 	}
 	return false;
 }
+
 //Function to Update the Enemy tanks Collision map array and the Pathfinding collision map array.
 //Needs to be called for each individual enemy.
 void Enemy::UpdateCollisionMap()
@@ -166,19 +173,21 @@ float Enemy::GetBearing(Vector3 &a_V1, Vector3 &a_V2)
 //Vector2 a_vPlayerPos = The position of the player.
 void Enemy::LookToPlayer(Vector2 a_vPlayerPos)
 {
-	sSpriteTurret.iRotDeg = GetBearing(vPos, a_vPlayerPos);//Gets the bearing/angle between the player and the enemy.
-	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg) - 90));//Rotates the turret to that angle.
-	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2);//Moves the turret to the position of the tank.
+	oSpriteTurret.iRotDeg = GetBearing(vPos, a_vPlayerPos);//Gets the bearing/angle between the player and the enemy.
+	RotateSprite(oSpriteTurret.iSpriteID, DegreesToRadians((oSpriteTurret.iRotDeg) - 90));//Rotates the turret to that angle.
+	UG::MoveSprite(oSpriteTurret.iSpriteID, vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2);//Moves the turret to the position of the tank.
 }
 
+//Function to reset all variables of the class members, kill its bullets, stops pathfinding and then moves back to the starting position.
+//Vector2 a_fStartPos = The position to return to.
 void Enemy::Reset(Vector2 a_fStartPos)
 {
-	BulletArray[0].Reset(BulletArray);
-	BulletArray[0].UpdateBullets(BulletArray, iEnemyCollisionMap);
-	vPos = a_fStartPos;
-	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
-	oPathFinder.bInitialisedStart = false;
-	bIsRotating = true;
-	bIsTravelling = false;
-	fLerpPosition = 0;
+	oBulletArray[0].Reset(oBulletArray);//Resets bullet array
+	oBulletArray[0].UpdateBullets(oBulletArray, iEnemyCollisionMap);//Kills off remaining bullets.
+	vPos = a_fStartPos;//Sets the vpos to the starting position.
+	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());//Moves the tank back to the starting pos.
+	oPathFinder.bInitialisedStart = false;//Resets pathfinding.
+	bIsRotating = true;//Resets PAthfinding.
+	bIsTravelling = false;//Resets Pathfinding.
+	fLerpPosition = 0;//Resets lerp.
 }
