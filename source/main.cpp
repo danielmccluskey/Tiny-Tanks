@@ -15,7 +15,9 @@
 #include "stdlib.h"
 #include "MenuSprites.h"
 #include <iostream>
+#include "windows.h"
 
+#pragma comment(lib, "winmm.lib")//Include PlaySound function
 //Screen sizes
 int iScreenWidth = 768;
 int iScreenHeight = 512;
@@ -163,6 +165,7 @@ int main(int argv, char* argc[])
 				if (oPlayerTank.MoveTank(oEnemyTank.GetSpriteID()))//If the enemy collides with one of the players bullets
 				{
 					//Draw next level screen and reset the Player and enemy.
+					PlaySound(TEXT("./sounds/player_win.wav"), NULL, SND_FILENAME | SND_NOSTOP | SND_ASYNC);//Plays the sound chosen at the start of the function
 					iGameState = NEXTLEVEL;
 					oNextButtonNext.DrawSprite();
 					oNextButtonQuit.DrawSprite();
@@ -173,6 +176,7 @@ int main(int argv, char* argc[])
 				
 				if (oEnemyTank.MoveTank(oEnemyTank.GetPos(), oPlayerTank.GetPos(), oPlayerTank.GetSpriteID()))//If the player collides with a bullet fired by an enemy.
 				{
+					PlaySound(TEXT("./sounds/player_death.wav"), NULL, SND_FILENAME | SND_NOSTOP | SND_ASYNC);//Plays the sound chosen at the start of the function
 					//Draw death screen and reset the player and enemy.
 					iGameState = DEATH;
 					oNextButtonRestart.DrawSprite();

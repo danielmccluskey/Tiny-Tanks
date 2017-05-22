@@ -10,6 +10,9 @@
 #include "UGFW.h"
 #include "MathUtil.h"
 #include "CustomEnum.h"
+#include "windows.h"
+
+#pragma comment(lib, "winmm.lib")
 
 //Constructor for a menu sprite.
 //Vector2 a_vStartPos = The position to place the sprite in.
@@ -132,6 +135,7 @@ bool MenuSprite::CheckClick()
 		UG::SetSpriteUVCoordinates(iSpriteID, fUVCoords[1]);//Set the UV to its hovered state.
 		if (UG::GetMouseButtonDown(0))//If the mouse is being clicked.
 		{
+			PlaySound(TEXT("./sounds/mouse_click.wav"), NULL, SND_FILENAME | SND_NOSTOP | SND_ASYNC);//Plays the sound chosen at the start of the function
 			return true;
 		}
 	}

@@ -13,6 +13,9 @@
 #include <string>
 #include "MathUtil.h"
 #include <cmath>
+#include "windows.h"
+
+#pragma comment(lib, "winmm.lib")
 
 //Function that creates a new bullet when called.
 //Bullet *a_pBullet = The Bullet array pased through so it can be looped through.
@@ -64,7 +67,7 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 			a_pBullet[i].iLifeTime = 500;//Sets its lifetime to 500.
 			a_pBullet[i].iBulletSpeed = 80;//Sets the speed.
 			a_pBullet[i].bIsActive = true;//Sets the bullet to active so it an be operated on.
-
+			PlaySound(TEXT("./sounds/tank_fire.wav"), NULL, SND_FILENAME | SND_ASYNC);//Plays the sound chosen at the start of the function
 			
 			break;
 		}

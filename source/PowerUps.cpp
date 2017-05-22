@@ -15,6 +15,9 @@
 #include <iostream>
 #include <time.h>
 #include "MathUtil.h"
+#include "windows.h"
+
+#pragma comment(lib, "winmm.lib")
 
 //Constructor
 PowerUps::PowerUps()
@@ -187,6 +190,7 @@ int PowerUps::DestroyPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a_
 				UG::DestroySprite(a_pPowerUpArray[i].iSpriteID);//Destroy that
 				--iCurrentActive;//Subtracts from the currently active count
 				a_pPowerUpArray[i].bActive = false;//Sets it to false.
+				PlaySound(TEXT("./sounds/powerup_pickup.wav"), NULL, SND_FILENAME | SND_NOSTOP | SND_ASYNC);//Plays the sound chosen at the start of the function
 				return a_pPowerUpArray[i].iSpriteType;//Returns the sprite type
 
 			}
