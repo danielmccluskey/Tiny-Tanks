@@ -1,75 +1,111 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Generating code
-g:\wii test\deps\danmmathlibrarystatic\source\matrix4x4.cpp(278): warning C4715: 'Matrix4x4::GetMatrixValue': not all control paths return a value
-  All 2091 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-UG Basic Framework.lib(UGFW.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(UGFW.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(SpriteManager.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(SpriteManager.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(FontManager.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(FontManager.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(LineRenderer.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(LineRenderer.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(TextureManager.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(TextureManager.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(Application.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(Application.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(Utilities.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(Utilities.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(BaseSprite.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(BaseSprite.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(Font.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(Font.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(strHandler.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(strHandler.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(Texture.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(Texture.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(SOIL.obj)' or at 'G:\wii test\bin\x64\Release\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(tinyxml.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(tinyxml.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(tinyxmlHelper.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(tinyxmlHelper.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(tinystr.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(tinystr.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(tinyxmlparser.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(tinyxmlparser.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(image_helper.obj)' or at 'G:\wii test\bin\x64\Release\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(stb_image_aug.obj)' or at 'G:\wii test\bin\x64\Release\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'UG Basic Framework.lib(image_DXT.obj)' or at 'G:\wii test\bin\x64\Release\SOIL.pdb'; linking object as if no debug info
-UG Basic Framework.lib(tinyxmlerror.obj) : warning LNK4099: PDB 'UG Basic Framework.pdb' was not found with 'UG Basic Framework.lib(tinyxmlerror.obj)' or at 'G:\wii test\bin\x64\Release\UG Basic Framework.pdb'; linking object as if no debug info
-UG Basic Framework.lib(glew.obj) : warning LNK4099: PDB 'glew_static.pdb' was not found with 'UG Basic Framework.lib(glew.obj)' or at 'G:\wii test\bin\x64\Release\glew_static.pdb'; linking object as if no debug info
-  WiiTanks.vcxproj -> G:\wii test\proj\vs2015\..\..\bin\x64\Release\WiiTanks.exe
-  WiiTanks.vcxproj -> ..\..\bin\x64\Release\WiiTanks.pdb (Full PDB)
-  xcopy "G:\wii test\scripts\..\resources\"*.* "G:\wii test\proj\vs2015\..\..\bin\x64\Release\" /s /y /d /r 
-  G:\wii test\scripts\..\resources\appData.xml
-  G:\wii test\scripts\..\resources\fonts\arial.fnt
-  G:\wii test\scripts\..\resources\fonts\arial_0.png
-  G:\wii test\scripts\..\resources\fonts\invaders.fnt
-  G:\wii test\scripts\..\resources\fonts\invaders_0.png
-  G:\wii test\scripts\..\resources\images\maps\box1 - Copy.png
-  G:\wii test\scripts\..\resources\images\maps\box1.png
-  G:\wii test\scripts\..\resources\images\maps\floor1 - Copy.png
-  G:\wii test\scripts\..\resources\images\maps\floor1.png
-  G:\wii test\scripts\..\resources\images\menu\background.png
-  G:\wii test\scripts\..\resources\images\menu\button_next.png
-  G:\wii test\scripts\..\resources\images\menu\button_play.png
-  G:\wii test\scripts\..\resources\images\menu\button_quit.png
-  G:\wii test\scripts\..\resources\images\menu\button_restart.png
-  G:\wii test\scripts\..\resources\images\menu\controls.png
-  G:\wii test\scripts\..\resources\images\menu\level_failed.png
-  G:\wii test\scripts\..\resources\images\menu\level_passed.png
-  G:\wii test\scripts\..\resources\images\menu\overlay_ammo - Copy.png
-  G:\wii test\scripts\..\resources\images\menu\overlay_ammo.png
-  G:\wii test\scripts\..\resources\images\menu\title.png
-  G:\wii test\scripts\..\resources\images\powerups\powerup_mine.png
-  G:\wii test\scripts\..\resources\images\powerups\powerup_missile.png
-  G:\wii test\scripts\..\resources\images\Tanks\enemy_tank_body.png
-  G:\wii test\scripts\..\resources\images\Tanks\enemy_tank_turret.png
-  G:\wii test\scripts\..\resources\images\Tanks\tank_body.png
-  G:\wii test\scripts\..\resources\images\Tanks\tank_turret.png
-  G:\wii test\scripts\..\resources\images\Tanks\temp.png
-  G:\wii test\scripts\..\resources\images\Tanks\temp2.png
-  G:\wii test\scripts\..\resources\images\Tanks\temp3.png
-  G:\wii test\scripts\..\resources\maps\currentCollision.txt
-  G:\wii test\scripts\..\resources\maps\lvl_1.txt
-  G:\wii test\scripts\..\resources\maps\lvl_2.txt
-  G:\wii test\scripts\..\resources\maps\lvl_3.txt
-  G:\wii test\scripts\..\resources\maps\lvl_4.txt
-  G:\wii test\scripts\..\resources\maps\lvl_5.txt
-  G:\wii test\scripts\..\resources\shaders\default.fsh
-  G:\wii test\scripts\..\resources\shaders\default.vsh
-  G:\wii test\scripts\..\resources\shaders\spriteInstance.fsh
-  G:\wii test\scripts\..\resources\shaders\spriteInstance.vsh
-  G:\wii test\scripts\..\resources\sounds\mouse_click.wav
-  G:\wii test\scripts\..\resources\sounds\player_death.wav
-  G:\wii test\scripts\..\resources\sounds\player_win.wav
-  G:\wii test\scripts\..\resources\sounds\powerup_pickup.wav
-  G:\wii test\scripts\..\resources\sounds\tank_fire.wav
-  44 File(s) copied
+  Turret.cpp
+  PowerUps.cpp
+g:\wii test\deps\danmmathlibrarystatic\include\mathutil.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+g:\wii test\source\powerups.cpp(29): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+g:\wii test\source\powerups.cpp(80): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\powerups.cpp(116): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\powerups.cpp(156): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\powerups.cpp(157): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  PlayerTank.cpp
+g:\wii test\deps\danmmathlibrarystatic\include\mathutil.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+g:\wii test\source\playertank.cpp(47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(133): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(135): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(142): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(143): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(145): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(146): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(153): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(168): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(169): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(170): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(171): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(236): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(238): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(239): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(240): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(241): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(304): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(305): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(306): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(307): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(315): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(316): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(339): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(340): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(350): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(351): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\playertank.cpp(364): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(365): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\playertank.cpp(366): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Pathfinding.cpp
+g:\wii test\include\searchcell.h(26): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+g:\wii test\source\pathfinding.cpp(64): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\pathfinding.cpp(65): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\pathfinding.cpp(68): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\pathfinding.cpp(69): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\pathfinding.cpp(135): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+g:\wii test\source\pathfinding.cpp(223): warning C4456: declaration of 'i' hides previous local declaration
+  g:\wii test\source\pathfinding.cpp(186): note: see declaration of 'i'
+  MenuSprites.cpp
+g:\wii test\deps\danmmathlibrarystatic\include\mathutil.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+g:\wii test\source\menusprites.cpp(26): warning C4244: '=': conversion from 'const double' to 'int', possible loss of data
+g:\wii test\source\menusprites.cpp(27): warning C4244: '=': conversion from 'const double' to 'int', possible loss of data
+g:\wii test\source\menusprites.cpp(28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\menusprites.cpp(32): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\menusprites.cpp(119): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\menusprites.cpp(120): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MapGenerator.cpp
+g:\wii test\source\mapgenerator.cpp(61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\mapgenerator.cpp(63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  main.cpp
+g:\wii test\include\searchcell.h(26): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Enemy.cpp
+g:\wii test\include\searchcell.h(26): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+g:\wii test\deps\danmmathlibrarystatic\include\mathutil.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+g:\wii test\source\enemy.cpp(25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(28): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(79): warning C4458: declaration of 'vNextSpot' hides class member
+  g:\wii test\include\enemy.h(149): note: see declaration of 'Enemy::vNextSpot'
+g:\wii test\source\enemy.cpp(108): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(109): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+g:\wii test\source\enemy.cpp(113): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(151): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(152): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(153): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(154): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(164): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(165): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(174): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(175): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(182): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+g:\wii test\source\enemy.cpp(183): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(184): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(194): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(211): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(212): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\enemy.cpp(230): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\enemy.cpp(231): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Bullet.cpp
+g:\wii test\deps\danmmathlibrarystatic\include\mathutil.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+g:\wii test\source\bullet.cpp(66): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\bullet.cpp(118): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\bullet.cpp(119): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\bullet.cpp(120): warning C4244: '*=': conversion from 'const float' to 'int', possible loss of data
+g:\wii test\source\bullet.cpp(121): warning C4244: '*=': conversion from 'const float' to 'int', possible loss of data
+g:\wii test\source\bullet.cpp(186): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
+g:\wii test\source\bullet.cpp(196): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\bullet.cpp(197): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+g:\wii test\source\bullet.cpp(251): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+g:\wii test\source\bullet.cpp(252): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Boundaries.cpp
+g:\wii test\deps\danmmathlibrarystatic\include\mathutil.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
+  WiiTanks.vcxproj -> G:\wii test\proj\vs2015\..\..\bin\x64\Debug\WiiTanks.exe
+  WiiTanks.vcxproj -> ..\..\bin\x64\Debug\WiiTanks.pdb (Full PDB)
+  xcopy "G:\wii test\scripts\..\resources\"*.* "G:\wii test\proj\vs2015\..\..\bin\x64\Debug\" /s /y /d /r 
+  0 File(s) copied
