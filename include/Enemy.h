@@ -24,22 +24,22 @@ public:
 
 	//Function that moves the tank
 	void UpdateCollisionMap();
-	int PathFindHCalc(Vector2 a_vStart, Vector2 a_vGoal);
-	int PathFindFCalc(Vector2 a_vStart, Vector2 a_vGoal);
-	int PathFindTileCheck(Vector2 a_vStart, Vector2 a_vGoal);
-	int GetNextGoal(Vector2 a_vStart, Vector2 a_vGoal);
-	void MoveTank(Vector2 a_vStart, Vector2 a_vGoal);
-	int iSpriteID;
+	bool MoveTank(Vector2 a_vStart, Vector2 a_vGoal, int a_iEnemySpriteID);
+	
 	void RotateSprite(int a_iSpriteID, float a_fRad);
 	float GetBearing(Vector2 &a_V1, Vector2 &a_V2);
 	float GetBearing(Vector3 &a_V1, Vector3 &a_V2);
 	void LookToPlayer(Vector2 a_vPlayerPos);
+	int GetSpriteID();
+	Vector2 GetPos();
+	void Reset(Vector2 a_fStartPos);
 
+
+	
+private:
 	int iEnemyCollisionMap[(iMapHeight*iMapWidth)];
 	Vector2 vPos;
 	bool bStart;
-private:
-
 	Turret sSpriteTurret;
 	PathFinding oPathFinder;
 	Vector3 vDistanceTarget;
@@ -54,6 +54,7 @@ private:
 	float fOldBearing = 0;
 	int iSpriteWidth = 32;
 	int iSpriteHeight = 32;
+	int iSpriteID;
 };
 
 

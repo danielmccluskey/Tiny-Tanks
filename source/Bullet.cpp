@@ -2,25 +2,35 @@
 #include "UGFW.h"
 #include "CustomEnum.h"
 #include "Boundaries.h"
+#include <string>
 #include "MathUtil.h"
 #include <cmath>
 void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget, int a_iBulletType)
 {
-	iBulletCount = 3;
-	for (int i = 0; i < iBulletCount; i++)
+	iMaxNormalBullets = 3;
+	for (int i = 0; i < iMaxNormalBullets; i++)
 	{
 		if (a_pBullet[i].bIsActive == false)
 		{
 
 			a_pBullet[i].iBulletType = a_iBulletType;
-			switch (a_iBulletType)
+
+			if (a_pBullet[i].iBulletType == 0 && iMaxNormalBullets - iActiveNormalBullets > 0)
 			{
-			case 0:
-				a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
-				break;
-			case 1:
 				a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp2.png", 10, 10, true);//Create the sprite
-				break;
+				iBulletCount--;
+				iActiveNormalBullets++;
+
+			}
+			else if (a_pBullet[i].iBulletType == 1 && iMissileCount > 0)
+			{
+				a_pBullet[i].iSpriteID = UG::CreateSprite("./images/Tanks/temp.png", 10, 10, true);//Create the sprite
+				iMissileCount--;
+				iActiveMissiles++;
+			}
+			else
+			{
+				return;
 			}
 			
 			UG::DrawSprite(a_pBullet[i].iSpriteID);	//Draws it	
@@ -31,13 +41,39 @@ void Bullet::CreateBullet(Bullet *a_pBullet, Vector2 a_fStart, Vector2 a_fTarget
 			a_pBullet[i].vLastPos = a_fStart;
 			a_pBullet[i].vPos += Vector2(a_pBullet[i].vVelocity.GetdX() * 40, a_pBullet[i].vVelocity.GetdY() * 40);//40 is a magic number I know, its the value I use to make the bullet spawn at the end of the turret.
 			UG::MoveSprite(a_pBullet[i].iSpriteID, a_pBullet[i].vPos.GetdX(), a_pBullet[i].vPos.GetdY());
-			a_pBullet[i].iLifeTime = 200;
+			a_pBullet[i].iLifeTime = 500;
 			a_pBullet[i].iBulletSpeed = 80;
 			a_pBullet[i].bIsActive = true;
+
 			
 			break;
 		}
 	}
+}
+
+void Bullet::AddBullet(int a_iBulletType)
+{
+	switch (a_iBulletType)
+	{
+	case 0:
+		break;
+	case 1:
+		iMissileCount += 1;
+		break;
+	}
+}
+void Bullet::DrawBulletCount()
+{
+	UG::ClearScreen();
+	//Stringstream to draw the current highscore below HIGHSCORES during GAMEPLAY
+	std::string ssNormalBullets;
+	ssNormalBullets += std::to_string(iMaxNormalBullets - iActiveNormalBullets);
+	UG::DrawString(ssNormalBullets.c_str(), (int)(fMapWidth * fTileWidth * 0.2f), (int)(fMapHeight * fTileWidth), 0.8f);
+
+	//Stringstream to draw the current highscore below HIGHSCORES during GAMEPLAY
+	std::string ssMissiles;
+	ssMissiles += std::to_string(iMissileCount);
+	UG::DrawString(ssMissiles.c_str(), (int)(fMapWidth * fTileWidth * 0.5f), (int)(fMapHeight * fTileWidth), 0.8f);
 }
 
 void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
@@ -59,6 +95,7 @@ void Bullet::MoveBullet(Bullet& a_pBullet, int a_iCollisionMap[])
 	{
 		if (iBulletType == 0)
 		{
+			++iBulletBounce;
 			//Top Collision
 			if ((vLastPos.GetdY() > (iTileY + fTileWidth)) && (vLastPos.GetdX() < (iTileX + fTileWidth)) && (vLastPos.GetdX() > iTileX))//If the last position of the bullet is ABOVE the top edge of the tile.
 			{
@@ -116,25 +153,35 @@ int Bullet::GetTile(int a_iCollisionMap[], Vector2 a_vPos)
 
 void Bullet::DestroyBullets(Bullet& a_pBullet)
 {
-	if (a_pBullet.iLifeTime < 0)
+	if ((iLifeTime < 0 || iBulletBounce >= 5) && bIsActive == true)
 	{
-		a_pBullet.bIsActive = false;
-		UG::StopDrawingSprite(a_pBullet.iSpriteID);//Stops drawing that.
-		UG::DestroySprite(a_pBullet.iSpriteID);//Destroys that.
+		if (iBulletType == 0)
+		{
+			a_pBullet.iActiveNormalBullets -= 1;
+		}
+		else if (iBulletType == 1)
+		{
+			a_pBullet.iActiveMissiles -= 1;
+		}
+		bIsActive = false;
+		iBulletBounce = 0;
+		UG::StopDrawingSprite(iSpriteID);//Stops drawing that.
+		UG::DestroySprite(iSpriteID);//Destroys that.
 	}
 	else
 	{
-		a_pBullet.iLifeTime -= 1;
+		iLifeTime -= 1;
 	}
 }
 void Bullet::UpdateBullets(Bullet *a_pBullet, int a_iCollisionMap[])
 {
-	for (int i = 0; i < iBulletCount; i++)
+	
+	for (int i = 0; i < iMaxNormalBullets + iActiveMissiles; i++)
 	{
 		if (a_pBullet[i].bIsActive == true)
 		{
 			a_pBullet[i].MoveBullet(a_pBullet[i], a_iCollisionMap);
-			a_pBullet[i].DestroyBullets(a_pBullet[i]);
+			a_pBullet[i].DestroyBullets(a_pBullet[0]);
 		}
 
 	}
@@ -152,7 +199,7 @@ bool Bullet::SpriteCollide(Bullet* a_pBullet, int a_iSpriteID, int a_iWidth, int
 {
 	Boundaries AABBCheck;
 	AABBCheck.AABB(a_iSpriteID, a_iWidth, a_iHeight, a_fRad);
-	for (int i = 0; i < iBulletCount; i++)
+	for (int i = 0; i < iMaxNormalBullets + iActiveMissiles; i++)
 	{
 		if (a_pBullet[i].bIsActive == true)
 		{
@@ -167,3 +214,16 @@ bool Bullet::SpriteCollide(Bullet* a_pBullet, int a_iSpriteID, int a_iWidth, int
 	return false;
 }
 
+void Bullet::Reset(Bullet* a_pBulletArray)
+{
+	for (int i = 0; i < iMaxNormalBullets + iActiveMissiles; i++)
+	{
+		if (a_pBulletArray[i].bIsActive == true)
+		{
+			a_pBulletArray[i].iLifeTime = -2;
+			a_pBulletArray[0].DestroyBullets(a_pBulletArray[0]);
+		}
+
+	}
+	a_pBulletArray[0].iMissileCount = 0;
+}

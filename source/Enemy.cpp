@@ -38,10 +38,18 @@ Enemy::~Enemy()
 	UG::StopDrawingSprite(sSpriteTurret.iSpriteID);//Stops Drawing that.
 	UG::DestroySprite(sSpriteTurret.iSpriteID);//Destroys that.
 }
+int Enemy::GetSpriteID()
+{
+	return iSpriteID;
+}
+Vector2 Enemy::GetPos()
+{
+	return vPos;
+}
 //Function to determine a Path to a_vGoal using the A* pathfinding method, then moves the tank along the path.
 //Vector2 a_vStart = The start position of the tank.
 //Vector2 a_vGoal = The end of the path (Currently the Players position.)
-void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
+bool Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal, int a_iEnemySpriteID)
 {
 	float fDelta = UG::GetDeltaTime();//Gets the Delta time.
 	if (bIsRotating == true)
@@ -87,12 +95,18 @@ void Enemy::MoveTank(Vector2 a_vStart, Vector2 a_vGoal)
 		{
 			vPos = Vector2(Lerp(vDistanceTarget.GetdX(), vNextSpot.GetdX(), fLerpPosition), Lerp(vDistanceTarget.GetdZ(), vNextSpot.GetdZ(), fLerpPosition));//Lerps between the Current position and the Next position.
 			fBearing = GetBearing(vDistanceTarget, vNextSpot);//Gets the bearing/angle between the current position and the next position.
-			fLerpPosition += 2.f * fDelta;//Adds to the lerp.
+			fLerpPosition += 1.5f * fDelta;//Adds to the lerp.
 		}
 		BulletArray[0].UpdateBullets(BulletArray, iEnemyCollisionMap);//Updates the bullet array (Moves and Destroys bullets)
 		UG::MoveSprite(iSpriteID, vPos.GetdX() + fTileWidth/2, vPos.GetdY() +fTileWidth/2);//Moves the tank to the lerped position.
 
 	}
+
+	if (BulletArray[0].SpriteCollide(BulletArray, a_iEnemySpriteID, iSpriteWidth, iSpriteHeight, vPos, fBearing))
+	{
+		return true;
+	}
+	return false;
 }
 //Function to Update the Enemy tanks Collision map array and the Pathfinding collision map array.
 //Needs to be called for each individual enemy.
@@ -155,4 +169,16 @@ void Enemy::LookToPlayer(Vector2 a_vPlayerPos)
 	sSpriteTurret.iRotDeg = GetBearing(vPos, a_vPlayerPos);//Gets the bearing/angle between the player and the enemy.
 	RotateSprite(sSpriteTurret.iSpriteID, DegreesToRadians((sSpriteTurret.iRotDeg) - 90));//Rotates the turret to that angle.
 	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.GetdX() + fTileWidth / 2, vPos.GetdY() + fTileWidth / 2);//Moves the turret to the position of the tank.
+}
+
+void Enemy::Reset(Vector2 a_fStartPos)
+{
+	BulletArray[0].Reset(BulletArray);
+	BulletArray[0].UpdateBullets(BulletArray, iEnemyCollisionMap);
+	vPos = a_fStartPos;
+	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
+	oPathFinder.bInitialisedStart = false;
+	bIsRotating = true;
+	bIsTravelling = false;
+	fLerpPosition = 0;
 }

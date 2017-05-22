@@ -9,7 +9,14 @@
 #include <fstream>
 
 
-int TEMPSPRITEID;
+Vector2 PlayerTank::GetPos()
+{
+	return vPos;
+}
+int PlayerTank::GetSpriteID()
+{
+	return iSpriteID;
+}
 
 PlayerTank::PlayerTank(float a_fCenterX, float a_fCenterY, float a_fGlobalSpeed)
 {
@@ -40,11 +47,35 @@ PlayerTank::~PlayerTank()
 
 
 //Function to handle the movement of the tank.
-void PlayerTank::MoveTank()
+bool PlayerTank::MoveTank(int a_iEnemySpriteID)
 {
+	if (UG::GetMouseButtonDown(0))
+	{
+		iTankMouseState = true;
+
+	}
+	if (UG::GetMouseButtonReleased(0))
+	{
+		iTankMouseState = false;
+		iTankLastMouseState = false;
+	}
+	if (pPowerUpArray[0].SpawnPowerUps(pPowerUpArray, iSpriteID, iSpriteWidth, iSpriteHeight, iRotDeg))
+	{		
+		BulletArray[0].AddBullet(1);
+	}
 	
-	pPowerUpArray[0].SpawnPowerUps(pPowerUpArray, iSpriteID, iSpriteWidth, iSpriteHeight, iRotDeg);
-	pPowerUpArray[0].DestroyPowerUps(pPowerUpArray, iSpriteID, iSpriteWidth, iSpriteHeight, iRotDeg);
+	if ((iTankMouseState == true && iTankLastMouseState == false))
+	{
+		BulletArray[0].CreateBullet(BulletArray, vPos, vMousePos, 0);
+	}
+	if (UG::IsKeyDown(UG::KEY_SPACE))
+	{
+		BulletArray[0].CreateBullet(BulletArray, vPos, vMousePos, 1);
+	}
+
+	BulletArray[0].UpdateBullets(BulletArray, iCollisionMap);
+
+
 
 	if (UG::IsKeyDown(UG::KEY_A))//If the A key is down
 	{
@@ -83,8 +114,18 @@ void PlayerTank::MoveTank()
 
 	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
 	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.GetdX(), vPos.GetdY());
-	
 
+	if (iTankMouseState == true && iTankLastMouseState == false)
+	{
+		iTankLastMouseState = true;
+	}
+	
+	if (BulletArray[0].SpriteCollide(BulletArray, a_iEnemySpriteID, iSpriteWidth, iSpriteHeight, vPos, iRotDeg))
+	{
+		return true;
+	}
+	BulletArray[0].DrawBulletCount();
+	return false;
 }
 
 bool PlayerTank::CollisionDetection(Vector3 a_vPos)
@@ -277,4 +318,15 @@ int PlayerTank::GetTile(int a_iTileWidth, Vector3 a_vPos)
 	int a_iY = (a_vPos.GetdY() / a_iTileWidth);
 
 	return iCollisionMap[(a_iY * iMapWidth) + a_iX];
+}
+
+void PlayerTank::Reset(Vector2 a_vStartPos)
+{
+	BulletArray[0].Reset(BulletArray);
+	pPowerUpArray[0].Reset(pPowerUpArray);
+	vPos = a_vStartPos;
+	iRotDeg = 200;
+	RotateSprite(iSpriteID, DegreesToRadians(iRotDeg));
+	UG::MoveSprite(iSpriteID, vPos.GetdX(), vPos.GetdY());
+	UG::MoveSprite(sSpriteTurret.iSpriteID, vPos.GetdX() + fTileWidth/2, vPos.GetdY()+fTileWidth/2);
 }

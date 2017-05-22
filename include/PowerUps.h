@@ -26,7 +26,7 @@ public:
 	void CreatePowerup(Vector2 a_vPos, PowerUps* a_pPowerUpArray);
 	void SetTankID(int a_iSpriteID);
 	bool DestroyPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad);
-
+	void Reset(PowerUps* a_pPowerUpArray);
 
 
 private:

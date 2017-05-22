@@ -22,7 +22,10 @@ void PowerUps::SetTankID(int a_iSpriteID)
 }
 bool PowerUps::SpawnPowerUps(PowerUps* a_pPowerUpArray,int a_iSpriteID, int a_iWidth, int a_iHeight, float a_fRad)
 {
-	bool bDestroyed = DestroyPowerUps(a_pPowerUpArray, a_iSpriteID, a_iWidth, a_iHeight, a_fRad);
+	if (DestroyPowerUps(a_pPowerUpArray, a_iSpriteID, a_iWidth, a_iHeight, a_fRad))
+	{
+		return true;
+	}
 	fTimer -= 0.1f;
 	if (CheckChance())
 	{
@@ -42,7 +45,7 @@ bool PowerUps::SpawnPowerUps(PowerUps* a_pPowerUpArray,int a_iSpriteID, int a_iW
 		}
 	}
 	
-	return bDestroyed;
+	return false;
 }
 bool PowerUps::CheckChance()
 {
@@ -123,19 +126,33 @@ bool PowerUps::DestroyPowerUps(PowerUps* a_pPowerUpArray, int a_iSpriteID, int a
 	{
 		if (a_pPowerUpArray[i].bActive == true)
 		{
-			std::cout << "x: " << a_pPowerUpArray[i].vPos.GetdX() << std::endl;
-			std::cout << "y: " << a_pPowerUpArray[i].vPos.GetdY() << std::endl;
-			std::cout << iCurrentActive << std::endl;
+			
 			if (a_pPowerUpArray[i].CheckSpriteCollision(a_iSpriteID, a_iWidth, a_iHeight, DegreesToRadians( a_fRad)))
 			{
 				UG::StopDrawingSprite(a_pPowerUpArray[i].iSpriteID);
 				UG::DestroySprite(a_pPowerUpArray[i].iSpriteID);
 				--iCurrentActive;
-				a_pPowerUpArray[i].bActive = false;
+				a_pPowerUpArray[i].bActive = false;				
 				return true;
+
 			}
 		}
 
 	}
 	return false;
+}
+
+void PowerUps::Reset(PowerUps* a_pPowerUpArray)
+{
+	for (int i = 0; i < iMaxPowerUps; i++)
+	{
+		if (a_pPowerUpArray[i].bActive == true)
+		{
+			UG::StopDrawingSprite(a_pPowerUpArray[i].iSpriteID);
+			UG::DestroySprite(a_pPowerUpArray[i].iSpriteID);
+			--iCurrentActive;
+			a_pPowerUpArray[i].bActive = false;
+
+		}
+	}
 }

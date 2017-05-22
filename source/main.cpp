@@ -41,6 +41,8 @@ int main(int argv, char* argc[])
 		Enemy oEnemyTank;
 		oEnemyTank.CreateTank(100, 100);
 
+		MenuSprite oAmmoOverlay(Vector2(fCenterX, iScreenHeight - fTileWidth/2), Vector2(iScreenWidth, fTileWidth), 10, "./Images/menu/overlay_ammo.png", fFullUV, true);
+
 		MenuSprite oMenuBackground(Vector2(fCenterX, fCenterY), Vector2((fMapWidth*fTileWidth) + 200, (fMapWidth*fTileWidth) + 200), 10, "./Images/menu/background.png", fFullUV, true);
 		MenuSprite oMenuTitle(Vector2(fCenterX, iScreenHeight*0.78f), Vector2(500, 137), 11, "./Images/menu/title.png", fFullUV, true);
 		MenuSprite oMenuButtonPlay(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_play.png", fButtonUV, true);
@@ -48,6 +50,7 @@ int main(int argv, char* argc[])
 
 		MenuSprite oNextButtonNext(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_next.png", fButtonUV, false);
 		MenuSprite oNextButtonQuit(Vector2(fCenterX, iScreenHeight*0.28f), Vector2(300, 82), 11, "./Images/menu/button_quit.png", fButtonUV, false);
+		MenuSprite oNextButtonRestart(Vector2(fCenterX, iScreenHeight*0.48f), Vector2(300, 82), 11, "./Images/menu/button_restart.png", fButtonUV, false);
 
 		bool iCurrentMouseState = false;
 		bool iLastMouseState = false;
@@ -83,6 +86,8 @@ int main(int argv, char* argc[])
 						oMenuTitle.HideSprite();
 						oMenuButtonPlay.HideSprite();
 						oMenuButtonQuit.HideSprite();
+
+						oPlayerTank.Reset(Vector2(704, 448));
 						iGameState = GAMEPLAY;
 					}
 					
@@ -99,38 +104,34 @@ int main(int argv, char* argc[])
 			case GAMEPLAY:
 			{
 				oPlayerTank.CalculateBoundaries();
-				oPlayerTank.MoveTank();
-				oEnemyTank.MoveTank(oEnemyTank.vPos, oPlayerTank.vPos);
-				oEnemyTank.LookToPlayer(oPlayerTank.vPos);
+				if (oPlayerTank.MoveTank(oEnemyTank.GetSpriteID()))
+				{
+					iGameState = NEXTLEVEL;
+					oNextButtonNext.DrawSprite();
+					oNextButtonQuit.DrawSprite();
+					oPlayerTank.Reset(Vector2(704, 448));
+					oEnemyTank.Reset(Vector2(100,100));
+				}
+				
+				if (oEnemyTank.MoveTank(oEnemyTank.GetPos(), oPlayerTank.GetPos(), oPlayerTank.GetSpriteID()))
+				{
+					iGameState = DEATH;
+					oNextButtonRestart.DrawSprite();
+					oNextButtonQuit.DrawSprite();
+					oPlayerTank.Reset(Vector2(704, 448));
+					oEnemyTank.Reset(Vector2(100, 100));
+				}
+				oEnemyTank.LookToPlayer(oPlayerTank.GetPos());
 
-				if ((iCurrentMouseState == true && iLastMouseState == false))
-				{
-					oPlayerTank.BulletArray[0].CreateBullet(oPlayerTank.BulletArray, oPlayerTank.vPos, oPlayerTank.vMousePos, 0);
-				}
-				if (UG::IsKeyDown(UG::KEY_SPACE))
-				{
-					oPlayerTank.BulletArray[0].CreateBullet(oPlayerTank.BulletArray, oPlayerTank.vPos, oPlayerTank.vMousePos, 1);
-				}
 				if (UG::IsKeyDown(UG::KEY_P))
 				{
 					iGameState = NEXTLEVEL;
 					oNextButtonNext.DrawSprite();
 					oNextButtonQuit.DrawSprite();
-
-
 				}
-				if (UG::IsKeyDown(UG::KEY_U))
-				{
-					
+				
 
-
-				}
-				oPlayerTank.BulletArray[0].UpdateBullets(oPlayerTank.BulletArray, oPlayerTank.iCollisionMap);
-
-				if (oPlayerTank.BulletArray[0].SpriteCollide(oPlayerTank.BulletArray, oEnemyTank.iSpriteID, oPlayerTank.iSpriteWidth, oPlayerTank.iSpriteHeight, oPlayerTank.vPos, oPlayerTank.iRotDeg))
-				{
-					iGameState = NEXTLEVEL;
-				}
+				
 			}
 			break;
 
@@ -170,6 +171,28 @@ int main(int argv, char* argc[])
 					oMenuButtonQuit.DrawSprite();
 
 					oNextButtonNext.HideSprite();
+					oNextButtonQuit.HideSprite();
+					iGameState = MENU;
+				}
+			}
+			break;
+			case DEATH:
+			{
+				if (oNextButtonRestart.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
+				{
+					oNextButtonRestart.HideSprite();
+					oNextButtonQuit.HideSprite();
+					iGameState = GAMEPLAY;
+				}
+				else if (oNextButtonQuit.CheckClick() && (iCurrentMouseState == true && iLastMouseState == false))
+				{
+					MapGen[0].Quit(MapGen);
+					oMenuBackground.DrawSprite();
+					oMenuTitle.DrawSprite();
+					oMenuButtonPlay.DrawSprite();
+					oMenuButtonQuit.DrawSprite();
+
+					oNextButtonRestart.HideSprite();
 					oNextButtonQuit.HideSprite();
 					iGameState = MENU;
 				}

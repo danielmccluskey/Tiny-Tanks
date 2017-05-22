@@ -24,20 +24,16 @@ public:
 	void CreateTank(float a_fX, float a_fY);
 
 	//Function that moves the tank
-	void MoveTank();
+	bool MoveTank(int a_iEnemySpriteID);
 	void GetSurroundingTiles(int a_iTileWidth);
 	void UpdateCollisionMap();
 	void RotateSprite(int a_iSpriteID, float a_fRad);
 	float GetBearing(Vector2 &a_V1, Vector2 &a_V2);
 	void CalculateBoundaries();
 	bool CollisionDetection(Vector3 a_vPos);
-
-	int iCollisionMap[(iMapHeight*iMapWidth)];
-	int iSpriteID;
-	int iRotDeg = 0;
-	int iSpriteWidth = 32;
-	int iSpriteHeight = 32;
-	float fSpeed = 1000.f;
+	void Reset(Vector2 a_vStartPos);
+	Vector2 GetPos();
+	int GetSpriteID();
 	
 	
 
@@ -45,22 +41,35 @@ public:
 
 	float fUGFrameSpriteMatrix[16];
 
-	Bullet *BulletArray = new Bullet[20];
-	PowerUps *pPowerUpArray = new PowerUps[20];
-	Vector2 vPos;
-	Vector2 vMousePos;
+	
 	
 
 private:
 	//Vector3's to hold positional and collision values for each corner of the sprite
 	// Vector (XPos, YPos, CurrentTile)
 	Vector2 vNormalPlane;
-
-	Vector2 vLastPos;
-	Turret sSpriteTurret;
+	Vector2 vPos;
+	Vector2 vMousePos;
+	Vector2 vLastPos;	
 	Vector2 vVelocity;
 
+	Bullet *BulletArray = new Bullet[20];
+	PowerUps *pPowerUpArray = new PowerUps[20];
+	Turret sSpriteTurret;
+
 	float fWallSlideSlow;
+	float fSpeed = 1000.f;
+
+	int iCollisionMap[(iMapHeight*iMapWidth)];
+	int iSpriteID;
+	int iRotDeg = 0;
+	int iSpriteWidth = 32;
+	int iSpriteHeight = 32;
+
+	bool iTankMouseState;
+	bool iTankLastMouseState;
+	bool bHitPowerUp;
+	
 
 
 
