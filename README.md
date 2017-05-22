@@ -12,7 +12,11 @@ The game will continue until there are no more text files.
 # Controls: #
 
 W,A,S,D  = Movement
+
 Left Click = Shoot Normal Bullet/Navigate Menus
+
 1 Key - Shoot Missile
+
 2 Key - Drop Mine
+
 Esc Key - Pause
