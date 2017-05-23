@@ -14,22 +14,38 @@
 struct SearchCell
 {
 public:
-	int iX;
-	int iY;
-	int iID;
-	SearchCell *sParent;
-	float fG;
-	float fH;
-
-	SearchCell() : sParent(0) {}
+	SearchCell() : sParent(0) {}//Constructor to set the parent cell to null.
 	SearchCell(int a_iX, int a_iY, SearchCell *a_pParent = 0) : iX(a_iX), iY(a_iY), sParent(a_pParent),
-		iID(iY * (fMapWidth * fMapHeight) + iX), fG(0), fH(0) {};
+		iID(iY * (fMapWidth * fMapHeight) + iX), fG(0), fH(0) {};//Constructor.
 
+	//==============================================================================================================================
+	//Ints
+	//==============================================================================================================================
+
+	int iX;//X Pos of the cell
+	int iY;//Y Pos of the cell
+	int iID;//The ID of the cell
+
+	//==============================================================================================================================
+	//Structs
+	//==============================================================================================================================
+
+	SearchCell *sParent;//A pointer to the cells parent
+
+	//==============================================================================================================================
+	//Floats
+	//==============================================================================================================================
+
+	float fG;//The movement cost of the cell
+	float fH;//The Hueristic	
+	
+	//Function to get the cost of moving to the next cell.
 	float GetF() 
 	{
 		return fG + fH;
 	}
 
+	//Function to get the Hueristic value from A to the goal.
 	float GetManhattenDistance(SearchCell *a_pNodeEnd)
 	{
 		float fX = (float)(fabs((float)(this->iX - a_pNodeEnd->iX)));

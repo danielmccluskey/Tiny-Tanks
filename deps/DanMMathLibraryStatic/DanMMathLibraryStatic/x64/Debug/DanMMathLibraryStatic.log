@@ -1,4 +1,1 @@
-﻿  Vector4.cpp
-g:\wii test\deps\danmmathlibrarystatic\include\mathutil.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
-g:\wii test\deps\danmmathlibrarystatic\source\vector4.cpp(120): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  DanMMathLibraryStatic.vcxproj -> G:\wii test\proj\vs2015\x64\Debug\DanMMathLibraryStatic.lib
+﻿  DanMMathLibraryStatic.vcxproj -> G:\Users\Data2\wii tannnn\proj\vs2015\x64\Debug\DanMMathLibraryStatic.lib
